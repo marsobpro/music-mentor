@@ -1,5 +1,16 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Navbar from "./components/Navbar";
+
 function App() {
-  return <div className="text-red-600">App</div>;
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route></Route>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
