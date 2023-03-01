@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Header />
       <Routes>
-        <Route></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
