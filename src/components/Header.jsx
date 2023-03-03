@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiMusicalScore } from "react-icons/gi";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Header() {
   let Links = [
-    { name: "HOME", link: "/" },
-    { name: "SERVICE", link: "/" },
-    { name: "ABOUT", link: "/" },
-    { name: "BLOG'S", link: "/" },
-    { name: "CONTACT", link: "/" },
+    { name: "LESSONS", link: "/lessons" },
+    // { name: "BECOME A TEACHER", link: "" },
+    { name: "ABOUT US", link: "/about-us" },
+    { name: "CONTACT", link: "/contact" },
   ];
   let [open, setOpen] = useState(false);
+
+  function isCurrentRoute(route) {
+    if (route === location.pathname) {
+      return true;
+    }
+  }
+
+  useEffect(() => {
+    console.log("in header");
+  }, [location.pathname]);
+
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white border-b fixed w-full max-w-[1600px] top-0 z-40 left-0 right-0 m-auto shadow-sm ">
-      <div className="w-full m-auto md:flex items-center justify-between bg-white py-4 md:px-10 px-7 ">
+      <div className="w-full m-auto md:flex items-center  bg-white py-4 md:px-10 px-7 ">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
         >
           <GiMusicalScore className="text-black" size={60} />
-        </div>
-
-        <div
-          onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
-        >
-          {open ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
 
         <ul
@@ -34,16 +40,33 @@ export default function Header() {
           }`}
         >
           {Links.map((link) => (
-            <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-              <a
-                href={link.link}
-                className="text-gray-800 hover:text-gray-400 duration-500"
+            <li key={link.name} className="md:ml-8 text-[1rem] md:my-0 my-7">
+              <Link
+                to={link.link}
+                className={`text-gray-700 hover:text-gray-400 duration-500 whitespace-nowrap ${
+                  isCurrentRoute(link.link) && "underline underline-offset-8 "
+                }`}
               >
-                {link.name}
-              </a>
+                {link.name.toUpperCase()}
+              </Link>
             </li>
           ))}
         </ul>
+      </div>
+      <div
+        onClick={() => setOpen(!open)}
+        className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+      >
+        {open ? <AiOutlineClose /> : <AiOutlineMenu />}
+      </div>
+      <div className="absolute right-20 top-8">
+        <NavLink
+          to="/sign-in"
+          className="text-gray-800 hover:text-gray-400 duration-500 whitespace-nowrap cursor-pointer border border-gray-300 rounded px-4 py-2"
+          // onClick={() => setOpen(!open)}
+        >
+          SIGN IN
+        </NavLink>
       </div>
     </div>
   );
