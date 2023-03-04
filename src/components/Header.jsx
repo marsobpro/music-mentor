@@ -18,20 +18,20 @@ export default function Header() {
     }
   }
 
-  useEffect(() => {
-    console.log("in header");
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   console.log("in header");
+  // }, [location.pathname]);
 
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white border-b fixed w-full max-w-[1600px] top-0 z-40 left-0 right-0 m-auto shadow-sm ">
+    <div className="bg-white border-b fixed w-full max-w-[1600px] top-0 z-40 left-0 right-0 m-auto shadow-md ">
       <div className="w-full m-auto md:flex items-center  bg-white py-4 md:px-10 px-7 ">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
         >
-          <GiMusicalScore className="text-black" size={60} />
+          <GiMusicalScore className="text-black" size={50} />
         </div>
 
         <ul
