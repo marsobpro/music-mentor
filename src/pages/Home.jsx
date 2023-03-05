@@ -41,7 +41,7 @@ export default function Home() {
           <h1>Do you want to play the instrument?</h1>
           <h3>Find your Music Mentor</h3>
         </div>
-        <div className="h-[200px] border border-gray-500 flex justify-center items-center">
+        <div className="h-[200px] border bg-green-500 rounded-2xl flex justify-center items-center">
           <form
             onSubmit={onSubmitHandler}
             className="xs:space-y-4 md:flex space-x-5 space-y-0"

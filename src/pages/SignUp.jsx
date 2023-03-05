@@ -1,14 +1,16 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase";
 
 export default function SignUp() {
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   const navigate = useNavigate();
 
-  const [loginFormData, setLoginFormData] = useState({
+  const [signUpFormData, setSignUpFormData] = useState({
     name: "",
     lastName: "",
     email: "",
@@ -16,7 +18,7 @@ export default function SignUp() {
   });
 
   function handleChange(e) {
-    setLoginFormData((prevState) => ({
+    setSignUpFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
@@ -25,21 +27,37 @@ export default function SignUp() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      if (userCredential.user) {
-        navigate("/");
-      }
+
+      updateProfile(auth.currentUser, {
+        firsName: name,
+        lastName: lastName,
+      });
+
+      const user = userCredential.user;
+      const signUpFormDataCopy = { ...signUpFormData };
+      delete signUpFormDataCopy.password;
+      signUpFormDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), signUpFormDataCopy);
+      toast.success("Sign up was succesfull");
+      navigate("/");
+
+      console.log(auth.currentUser.name, auth.currentUser.lastName);
+
+      // if (userCredential.user) {
+      //   navigate("/");
+      // }
     } catch (error) {
       toast.error("Something went wrong");
     }
   }
 
-  const { name, lastName, email, password } = loginFormData;
+  const { name, lastName, email, password } = signUpFormData;
   return (
     <section>
       <h1 className="text-center font-bold text-4xl mt-28">Sign Up</h1>

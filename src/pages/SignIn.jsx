@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
+import { auth } from "../firebase";
 
 export default function SignIn() {
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
@@ -23,7 +24,6 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,

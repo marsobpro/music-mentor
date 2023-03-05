@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { GiMusicalScore } from "react-icons/gi";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import toast from "react-hot-toast";
 
 export default function Header() {
   let Links = [
     { name: "LESSONS", link: "/lessons" },
-    // { name: "BECOME A TEACHER", link: "" },
     { name: "ABOUT US", link: "/about-us" },
     { name: "CONTACT", link: "/contact" },
   ];
+
   let [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function isCurrentRoute(route) {
     if (route === location.pathname) {
@@ -18,9 +22,21 @@ export default function Header() {
     }
   }
 
-  // useEffect(() => {
-  //   console.log("in header");
-  // }, [location.pathname]);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    });
+  }, [auth]);
+
+  function handleLogout() {
+    try {
+      signOut(auth);
+      toast.success("You are signed out. We hope to see you soon! 🤩");
+      navigate("/");
+    } catch (error) {
+      toast.error("Sorry, something went wrong :( Try again!");
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -31,9 +47,12 @@ export default function Header() {
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
         >
-          <GiMusicalScore className="text-black" size={50} />
+          <GiMusicalScore
+            className="text-black"
+            size={50}
+            onClick={() => navigate("/")}
+          />
         </div>
-
         <ul
           className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             open ? "top-20 " : "top-[-490px]"
@@ -60,13 +79,16 @@ export default function Header() {
         {open ? <AiOutlineClose /> : <AiOutlineMenu />}
       </div>
       <div className="absolute right-20 top-8">
-        <NavLink
-          to="/sign-in"
-          className="text-gray-800 hover:text-gray-400 duration-500 whitespace-nowrap cursor-pointer border border-gray-300 rounded px-4 py-2"
-          // onClick={() => setOpen(!open)}
-        >
-          SIGN IN
-        </NavLink>
+        {isLoggedIn ? (
+          <button onClick={handleLogout}>Sign out </button>
+        ) : (
+          <NavLink
+            to="/sign-in"
+            className="text-gray-800 hover:text-gray-400 duration-500 whitespace-nowrap cursor-pointer border border-gray-300 rounded px-4 py-2"
+          >
+            SIGN IN
+          </NavLink>
+        )}
       </div>
     </div>
   );
