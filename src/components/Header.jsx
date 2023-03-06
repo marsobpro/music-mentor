@@ -63,7 +63,7 @@ export default function Header() {
               <Link
                 to={link.link}
                 className={`text-gray-700 hover:text-gray-400 duration-500 whitespace-nowrap ${
-                  isCurrentRoute(link.link) && "underline underline-offset-8 "
+                  isCurrentRoute(link.link) && "underline  underline-offset-8"
                 }`}
               >
                 {link.name.toUpperCase()}
@@ -80,7 +80,17 @@ export default function Header() {
       </div>
       <div className="absolute right-20 top-8">
         {isLoggedIn ? (
-          <button onClick={handleLogout}>Sign out </button>
+          <div>
+            <NavLink
+              to="/profile"
+              className="text-gray-800 mr-2 hover:text-gray-400 duration-500 whitespace-nowrap cursor-pointer border border-gray-300 rounded px-4 py-2"
+            >
+              Profile
+            </NavLink>
+            <button onClick={handleLogout} className="text-red-500 text-sm">
+              Sign out
+            </button>
+          </div>
         ) : (
           <NavLink
             to="/sign-in"

@@ -42,7 +42,7 @@ export default function SignIn() {
     <section>
       <h1 className="text-center font-bold text-4xl mt-28">Sign In</h1>
 
-      <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto  bg-white shadow-2xl rounded-2xl">
+      <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto bg-white shadow-2xl rounded-2xl">
         <form onSubmit={handleSubmit}>
           <input
             type="email"
