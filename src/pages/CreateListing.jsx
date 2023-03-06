@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Loading from "../components/Loading";
 import { AppContext } from "../App";
+// ZROB CHECKBOXY -> VALUE, ONCHANGE ORAZ ZMIEN HANDLECHANGE
 
 export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,9 +10,9 @@ export default function CreateListing() {
     subject: "",
     lessonTime: 0,
     price: 0,
-    atStudentsPlace: false,
-    atMentorsPlace: false,
     online: false,
+    atMentorsPlace: false,
+    atStudentsPlace: false,
     shortDescription: "",
     fullDescription: "",
     videoLink: "",
@@ -21,17 +22,39 @@ export default function CreateListing() {
   });
 
   function handleChange(e) {
+    if (e.target.type === "checkbox") {
+      if (e.target.checked) {
+        setAddLessonFormData((prevState) => ({
+          ...prevState,
+          [e.target.id]: true,
+        }));
+        // console.log(addLessonFormData);
+        return;
+      }
+      if (!e.target.checked) {
+        setAddLessonFormData((prevState) => ({
+          ...prevState,
+          [e.target.id]: false,
+        }));
+        // console.log(addLessonFormData);
+        return;
+      }
+    }
     setAddLessonFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+    // console.log(e.target.id, e.target.checked);
+    // console.log(addLessonFormData);
   }
 
   const {
     subject,
     lessonTime,
     price,
-
+    online,
+    atStudentsPlace,
+    atMentorsPlace,
     shortDescription,
     fullDescription,
     videoLink,
@@ -46,10 +69,11 @@ export default function CreateListing() {
 
   return (
     <main className="max-w-[1200px] mt-32 m-auto ">
-      <div className="sm:w-[400px] md:w-[700px] px-8 py-2 bg-pink-300 m-auto">
+      <div className="md:w-[700px] px-8 py-2 bg-pink-300 m-auto">
         {" "}
         <h1 className="font-semibold text-5xl text-center mb-12 font-mono">
-          Add a lesson
+          {/* {`Online: ${online}, atMentor: ${atMentorsPlace}, atStudents: ${atStudentsPlace}`} */}
+          Create a lesson
         </h1>
         <form>
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -59,7 +83,7 @@ export default function CreateListing() {
             <select
               id="subject"
               name="subject"
-              className=" h-10 rounded"
+              className="h-10 rounded"
               value={subject}
               onChange={handleChange}
               required
@@ -94,7 +118,7 @@ export default function CreateListing() {
             </span>
           </div>
           {/*  */}
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="grid grid-cols-2 items-center justify-center mb-8">
             <label htmlFor="lessonTime" className="text-xl text-center">
               Lesson time
             </label>
@@ -113,6 +137,7 @@ export default function CreateListing() {
               />
             </span>
           </div>
+          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="lessonLocation" className="text-xl text-center">
               Lesson location
@@ -124,10 +149,10 @@ export default function CreateListing() {
                   type="checkbox"
                   id="atMentorsPlace"
                   name="atMentorsPlace"
-                  value="Bike"
                   className="rounded"
+                  onChange={handleChange}
                 />
-                <label for="vehicle1">At Mentors' place</label>
+                <label htmlFor="atMentorsPlace">At Mentors' place</label>
               </div>
               <div className="flex space-x-2 items-center">
                 {" "}
@@ -135,10 +160,10 @@ export default function CreateListing() {
                   type="checkbox"
                   id="atStudentsPlace"
                   name="atStudentsPlace"
-                  value="Bike"
                   className="rounded"
+                  onChange={handleChange}
                 />
-                <label for="vehicle1">At students' place</label>
+                <label htmlFor="atStudentsPlace">At students' place</label>
               </div>
               <div className="flex space-x-2 items-center">
                 {" "}
@@ -146,10 +171,99 @@ export default function CreateListing() {
                   type="checkbox"
                   id="online"
                   name="online"
-                  value="online"
                   className="rounded"
+                  onChange={handleChange}
                 />
-                <label for="vehicle1">Online</label>
+                <label htmlFor="online">Online</label>
+              </div>
+            </div>
+          </div>
+          {/*  */}
+          <div className="grid grid-cols-2 items-center justify-center mb-4">
+            <label htmlFor="shortDescription" className="text-xl text-center">
+              Abbreviated description
+            </label>
+            <textarea
+              minLength="10"
+              maxLength="100"
+              rows="4"
+              id="shortDescription"
+              name="shortDescription"
+              value={shortDescription}
+              onChange={handleChange}
+              className="w-[100%] h-20 rounded"
+            />
+          </div>
+          {/*  */}
+          <div className="grid grid-cols-2 items-center justify-center mb-4">
+            <label htmlFor="fullDescription" className="text-xl text-center">
+              Full description
+            </label>
+            <textarea
+              minLength="10"
+              maxLength="100"
+              rows="4"
+              id="fullDescription"
+              name="fullDescription"
+              value={fullDescription}
+              onChange={handleChange}
+              className="w-[100%] h-40 rounded"
+            />
+          </div>
+          {/*  */}
+          <div className="grid grid-cols-2 items-center justify-center mb-8">
+            <label className="text-xl text-center" htmlFor="videoLink">
+              Enter an https:// URL:
+            </label>
+            <input
+              type="url"
+              name="videoLink"
+              id="videoLink"
+              value={videoLink}
+              onChange={handleChange}
+              placeholder="https://example.com"
+              pattern="https://.*"
+              size="30"
+            />
+          </div>
+          {/*  */}
+          <div className="grid grid-cols-2 items-center justify-center mb-4">
+            <label htmlFor="teachingLevels" className="text-xl text-center">
+              Teaching levels
+            </label>
+            <div className="flex flex-col space-y-2">
+              <div className="flex space-x-2 items-center">
+                {" "}
+                <input
+                  type="checkbox"
+                  id="atMentorsPlace"
+                  name="atMentorsPlace"
+                  className="rounded"
+                  onChange={handleChange}
+                />
+                <label htmlFor="atMentorsPlace">At Mentors' place</label>
+              </div>
+              <div className="flex space-x-2 items-center">
+                {" "}
+                <input
+                  type="checkbox"
+                  id="atStudentsPlace"
+                  name="atStudentsPlace"
+                  className="rounded"
+                  onChange={handleChange}
+                />
+                <label htmlFor="atStudentsPlace">At students' place</label>
+              </div>
+              <div className="flex space-x-2 items-center">
+                {" "}
+                <input
+                  type="checkbox"
+                  id="online"
+                  name="online"
+                  className="rounded"
+                  onChange={handleChange}
+                />
+                <label htmlFor="online">Online</label>
               </div>
             </div>
           </div>
