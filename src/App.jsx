@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import CreateListing from "./pages/CreateListing";
 import Profile from "./pages/Profile";
+import SingleListing from "./pages/SingleListing";
 
 const subjectOptions = [
   { label: "Piano", value: "piano" },
@@ -37,12 +38,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/lessons">
-            <Route index element={<Lessons />} />
-            <Route path=":subject" element={<Lessons />}>
-              <Route path=":city" element={<Lessons />} />
-            </Route>
-          </Route>
+          <Route path="/lessons" element={<Lessons />} />
+          <Route path="/lessons/:subject/:city" element={<Lessons />} />
+          <Route
+            path="/lessons/:subject/:city/:id"
+            element={<SingleListing />}
+          />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
