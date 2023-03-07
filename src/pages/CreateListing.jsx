@@ -243,7 +243,7 @@ export default function CreateListing() {
                   className="rounded"
                   onChange={handleChange}
                 />
-                <label htmlFor="atStudentsPlace">At students' place</label>
+                <label htmlFor="atStudentsPlace">At Students' place</label>
               </div>
               <div className="flex space-x-2 items-center">
                 {" "}
