@@ -30,6 +30,8 @@ export default function SignIn() {
         password
       );
       if (userCredential.user) {
+        toast.success("Welcome! Let's find you a mentor...🕵🏼‍♀️");
+
         navigate("/");
       }
     } catch (error) {

@@ -14,6 +14,8 @@ export default function CreateListing() {
   const { subjectOptions, cityOptions } = useContext(AppContext);
   const navigate = useNavigate();
   const [addLessonFormData, setAddLessonFormData] = useState({
+    firstName: "",
+    lastName: "",
     subject: "",
     lessonTime: 0,
     price: 0,
@@ -124,6 +126,8 @@ export default function CreateListing() {
     phoneNumber,
     emailAddress,
     image,
+    firstName,
+    lastName,
   } = addLessonFormData;
 
   if (isLoading) {
@@ -132,14 +136,44 @@ export default function CreateListing() {
 
   return (
     <main className="max-w-[1200px] mt-32 m-auto ">
-      <div className="md:w-[700px] m-auto px-8 py-6 bg-green-300 shadow-md rounded-2xl ">
+      <div className="md:w-[700px] m-auto px-8 py-6 bg-green-200 shadow-md rounded-2xl text-left sm:text-justify ">
         {" "}
         <h1 className="font-semibold text-5xl text-center mb-12 font-mono">
           Add lesson
         </h1>
         <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-2 items-center justify-center mb-4 ">
+            <label htmlFor="firstName" className="text-xl ">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              maxLength="50"
+              onChange={handleChange}
+              className="w-[100%] h-10 rounded"
+            />
+          </div>
+          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="subject" className="text-xl text-center">
+            <label htmlFor="lastName" className="text-xl ">
+              Last name:
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              maxLength="50"
+              onChange={handleChange}
+              className="w-[100%] h-10 rounded"
+            />
+          </div>
+          {/*  */}
+          <div className="grid grid-cols-2 items-center justify-center mb-4">
+            <label htmlFor="subject" className="text-xl ">
               Subject
             </label>
             <select
@@ -161,7 +195,7 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="city" className="text-xl text-center">
+            <label htmlFor="city" className="text-xl">
               City
             </label>
             <select
@@ -183,7 +217,7 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="price" className="text-xl text-center">
+            <label htmlFor="price" className="text-xl ">
               Price
             </label>
             <span className="after:content-['__PLN']">
@@ -201,7 +235,7 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-8">
-            <label htmlFor="lessonTime" className="text-xl text-center">
+            <label htmlFor="lessonTime" className="text-xl ">
               Lesson time
             </label>
             <span className="after:content-['__minutes']">
@@ -219,7 +253,7 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="lessonLocation" className="text-xl text-center">
+            <label htmlFor="lessonLocation" className="text-xl">
               Lesson location
             </label>
             <div className="flex flex-col space-y-2">
@@ -245,6 +279,7 @@ export default function CreateListing() {
                 />
                 <label htmlFor="atStudentsPlace">At Students' place</label>
               </div>
+
               <div className="flex space-x-2 items-center">
                 {" "}
                 <input
@@ -260,12 +295,15 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="shortDescription" className="text-xl text-center">
-              Abbreviated description
+            <label htmlFor="shortDescription" className="text-xl mr-4">
+              Short description{" "}
+              <span className="text-xs font-normal whitespace-nowrap">
+                (50 - 250 letters)
+              </span>
             </label>
             <textarea
-              minLength="10"
-              maxLength="100"
+              minLength="50"
+              maxLength="250"
               rows="4"
               id="shortDescription"
               name="shortDescription"
@@ -276,12 +314,15 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="fullDescription" className="text-xl text-center">
-              Full description
+            <label htmlFor="fullDescription" className="text-xl mr-4">
+              Full description{" "}
+              <span className="text-xs font-normal whitespace-nowrap">
+                (100 - 700 letters)
+              </span>
             </label>
             <textarea
-              minLength="10"
-              maxLength="100"
+              minLength="100"
+              maxLength="700"
               rows="4"
               id="fullDescription"
               name="fullDescription"
@@ -292,8 +333,11 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-8">
-            <label className="text-xl text-center" htmlFor="videoLink">
-              Enter an https:// URL:
+            <label className="text-xl mr-4" htmlFor="videoLink">
+              Your video URL{" "}
+              <span className="text-xs font-normal whitespace-nowrap">
+                (https://...)
+              </span>
             </label>
             <input
               type="url"
@@ -309,8 +353,8 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="teachingLevels" className="text-xl text-center">
-              Teaching levels
+            <label htmlFor="teachingLevels" className="text-xl ">
+              Credentials
             </label>
             <div className="flex flex-col space-y-2">
               <div className="flex space-x-2 items-center">
@@ -361,11 +405,8 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label
-              htmlFor="yearsOfTeachingExperience"
-              className="text-xl text-center"
-            >
-              Your teaching experience
+            <label htmlFor="yearsOfTeachingExperience" className="text-xl ">
+              Teaching experience
             </label>
             <span className="after:content-['__years']">
               <input
@@ -382,8 +423,8 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="emailAddress" className="text-xl text-center">
-              Your email:
+            <label htmlFor="emailAddress" className="text-xl ">
+              Email:
             </label>
             <input
               type="email"
@@ -397,8 +438,8 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="phoneNumber" className="text-xl text-center">
-              Your phone number
+            <label htmlFor="phoneNumber" className="text-xl ">
+              Phone number
             </label>
             <input
               type="text"
@@ -412,8 +453,8 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="photo" className="text-xl text-center">
-              Your photo
+            <label htmlFor="photo" className="text-xl">
+              Photo
             </label>
             <input
               type="file"
@@ -423,7 +464,14 @@ export default function CreateListing() {
               className="w-[100%] h-10 rounded"
             />
           </div>
-          <button type="submit">Create lesson</button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-white py-2 px-5 md:mr-8 mb-2 mt-4 rounded-2xl font-bold text-green-400 whitespace-nowrap"
+            >
+              Create lesson
+            </button>
+          </div>
         </form>
       </div>
     </main>
