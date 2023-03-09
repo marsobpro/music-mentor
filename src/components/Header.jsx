@@ -41,7 +41,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white border-b fixed w-full max-w-[1600px] top-0 z-40 left-0 right-0 m-auto shadow-md ">
+    <div className="bg-white border-b fixed w-full max-w-[1300px] top-0 z-40 left-0 right-0 m-auto shadow-sm ">
       <div className="w-full m-auto md:flex items-center  bg-white py-4 md:px-10 px-7 ">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 

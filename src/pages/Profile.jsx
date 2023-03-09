@@ -1,22 +1,71 @@
-import React from "react";
+import { getAuth } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SingleListingTile from "../components/SingleListingTile";
+import { db } from "../firebase";
 
 export default function Profile() {
+  const [listingsList, setListingsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const auth = getAuth();
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function getData() {
+      try {
+        const lessonsRef = collection(db, "listings");
+        const q = query(
+          lessonsRef,
+          where("userId", "==", auth.currentUser.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const temporaryListings = [];
+        querySnapshot.forEach((doc) => {
+          return temporaryListings.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        // setListingsList((prevState) => [...prevState, ...temporaryListings]);
+        setListingsList([...temporaryListings]);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData();
+  }, []);
   return (
     <main>
-      <div className="mt-40 w-[20rem] md:w-[30rem] py-6 bg-green-400 m-auto shadow-2xl rounded-2xl">
-        <div className="flex items-center justify-between flex-col md:flex-row md:text-center">
-          <p className="md:ml-6 text-white text-2xl font-semibold whitespace-nowrap text-center">
-            Start teaching now!
-          </p>
-          <Link
-            to="/create-listing"
-            className="bg-white py-2 px-5 md:mr-8 mb-2 mt-4 rounded-2xl font-bold text-green-400 whitespace-nowrap"
-          >
-            Add a lesson
-          </Link>
+      <div>
+        <div className="mt-40 w-[20rem] md:w-[30rem] py-6 bg-green-400 m-auto shadow-2xl rounded-2xl">
+          <div className="flex items-center justify-between flex-col md:flex-row md:text-center">
+            <p className="md:ml-6 text-white text-2xl font-semibold whitespace-nowrap text-center">
+              Start teaching now!
+            </p>
+            <Link
+              to="/create-listing"
+              className="bg-white py-2 px-5 md:mr-8 mb-2 mt-4 rounded-2xl font-bold text-green-400 whitespace-nowrap"
+            >
+              Add a lesson
+            </Link>
+          </div>
         </div>
       </div>
+      <section className="mt-12 md:mt-20 m-auto mb-6">
+        <h2 className="text-center text-3xl font-semibold mb-14">My lessons</h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
+          {listingsList.map((listing) => (
+            <SingleListingTile
+              key={listing.id}
+              id={listing.id}
+              data={listing.data}
+            />
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }

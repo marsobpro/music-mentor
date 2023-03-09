@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import Loading from "../components/Loading";
 import SingleListingTile from "../components/SingleListingTile";
+import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 
 export default function Lessons() {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,55 +15,63 @@ export default function Lessons() {
   useEffect(() => {
     setIsLoading(true);
     async function getData() {
-      const lessonsRef = collection(db, "listings");
-      const q = query(lessonsRef, where("college", "==", true));
-      const querySnapshot = await getDocs(q);
-      const temporaryListings = [];
-      querySnapshot.forEach((doc) => {
-        return temporaryListings.push({
-          id: doc.id,
-          data: doc.data(),
-        });
-      });
-      setListingsList((prevState) => [...prevState, ...temporaryListings]);
+      try {
+        const lessonsRef = collection(db, "listings");
 
-      // querySnapshot.forEach((doc) => {
-      //   console.log(doc.id, " => ", doc.data());
-      // });
-      setIsLoading(false);
+        const q = query(
+          lessonsRef,
+          where("subject", "==", subject),
+          where("city", "==", city)
+        );
+        const querySnapshot = await getDocs(q);
+        const temporaryListings = [];
+        querySnapshot.forEach((doc) => {
+          return temporaryListings.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        // setListingsList((prevState) => [...prevState, ...temporaryListings]);
+        setListingsList([...temporaryListings]);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
     getData();
   }, []);
-
-  function capitalizeFirstLetters(string) {
-    const arr = string.split(" ");
-    for (var i = 0; i < arr.length; i++) {
-      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-    }
-    const capitalized = arr.join(" ");
-    return capitalized;
-  }
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <main className="mt-28 text-2xl">
-      <h1 className="text-center">
+    <main className="mt-28 text-2xl max-w-[1100px] m-auto">
+      <h1 className="text-center text-3xl mx-4">
         Here are some{" "}
         <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
           {subject}
         </span>{" "}
         teachers from{" "}
         <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
-          {capitalizeFirstLetters(city)}{" "}
+          {city ? capitalizeFirstLetters(city) : ""}{" "}
         </span>
       </h1>
-      <ul>{<SingleListingTile />}</ul>
-      <p>{listingsList[0].data.emailAddress}</p>
-      <p>{listingsList[1].data.emailAddress}</p>
-      <p></p>
+
+      {listingsList.length > 0 && (
+        <section className="mt-16 md:mt-24 m-auto">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
+            {listingsList.map((listing) => (
+              <SingleListingTile
+                key={listing.id}
+                id={listing.id}
+                data={listing.data}
+              />
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   );
 }

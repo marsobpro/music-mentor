@@ -11,7 +11,7 @@ export default function Home() {
   const navigate = useNavigate();
   const { subjectOptions, cityOptions } = useContext(AppContext);
 
-  function onSubmitHandler(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     // Offline
     if (!isOnline && subject && city) {
@@ -25,16 +25,16 @@ export default function Home() {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center max-w-[1600px] m-auto">
+    <div className="h-screen flex justify-center items-center max-w-[1600px] m-auto mx-4">
       <main>
-        <div className="mb-11 font-semibold text-3xl font-mono">
+        <div className="mb-11 font-semibold text-3xl font-mono text-md space-y-4">
           <h1>Do you want to play the instrument?</h1>
           <h3>Find your Music Mentor.</h3>
         </div>
-        <div className="h-[200px] px-4 border bg-green-300 rounded-[50px] flex justify-center items-center ">
+        <div className="h-[200px] px-4 bg-green-300 rounded-[50px] flex justify-center items-center shadow-md">
           <form
-            onSubmit={onSubmitHandler}
-            className="xs:space-y-4 md:flex space-x-5 "
+            onSubmit={handleSubmit}
+            className="space-y-4 md:space-y-0 md:space-x-5 flex flex-col justify-start md:flex-row "
           >
             <div>
               <select
@@ -87,7 +87,7 @@ export default function Home() {
               />
               <label htmlFor="isOnline">Online</label>
             </div>
-            <div className="bg-white shadow-md hover:shadow-sm text-green-400 font-bold py-2 px-4 rounded-2xl cursor-pointer transition duration-150 ease-in-out">
+            <div className="bg-white shadow-md hover:shadow-sm text-green-400 font-bold py-2 px-4 rounded-2xl cursor-pointer transition duration-150 ease-in-out text-center mb-4 md:mb-0">
               <button type="submit">Search</button>
             </div>
           </form>

@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import { db } from "../firebase";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { CiPhone, CiMail } from "react-icons/ci";
+import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 
 export default function SingleListing() {
   const params = useParams();
