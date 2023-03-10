@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import Loading from "../components/Loading";
 import SingleListingTile from "../components/SingleListingTile";
@@ -11,18 +11,33 @@ export default function Lessons() {
   const [listingsList, setListingsList] = useState([]);
   const params = useParams();
   const { subject, city, id } = params;
+  console.log("Subject: ", subject, "City: ", city);
+  //
 
   useEffect(() => {
+    let q;
     setIsLoading(true);
     async function getData() {
       try {
         const lessonsRef = collection(db, "listings");
 
-        const q = query(
-          lessonsRef,
-          where("subject", "==", subject),
-          where("city", "==", city)
-        );
+        if (city == undefined && subject != undefined) {
+          q = query(
+            lessonsRef,
+            where("subject", "==", subject),
+            orderBy("createdAt", "desc")
+          );
+        } else if (subject == undefined && city == undefined) {
+          q = query(lessonsRef, orderBy("createdAt", "desc"));
+        } else {
+          q = query(
+            lessonsRef,
+            where("subject", "==", subject),
+            where("city", "==", city),
+            orderBy("createdAt", "desc")
+          );
+        }
+
         const querySnapshot = await getDocs(q);
         const temporaryListings = [];
         querySnapshot.forEach((doc) => {
@@ -53,10 +68,17 @@ export default function Lessons() {
         <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
           {subject}
         </span>{" "}
-        teachers from{" "}
-        <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
-          {city ? capitalizeFirstLetters(city) : ""}{" "}
-        </span>
+        teachers{" "}
+        {city ? (
+          <span>
+            from{" "}
+            <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
+              {capitalizeFirstLetters(city)}{" "}
+            </span>
+          </span>
+        ) : (
+          <span></span>
+        )}
       </h1>
 
       {listingsList.length > 0 && (
