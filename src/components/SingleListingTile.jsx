@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { BsFillTrashFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 
-export default function SingleListingTile({ id, data }) {
+export default function SingleListingTile({ id, data, onDelete }) {
   console.log(data);
   const navigate = useNavigate();
   return (
@@ -24,6 +26,11 @@ export default function SingleListingTile({ id, data }) {
           </h3>
           <p className="text-sm">{capitalizeFirstLetters(data?.city)}</p>
         </div>
+        <FaEdit className="absolute top-3 right-3 text-red-400 text-md " />
+        <BsFillTrashFill
+          onClick={() => onDelete(data.id)}
+          className="absolute top-3 right-11 text-red-400 text-md"
+        />
       </div>
       <div className="px-3 mb-2 h-44">
         <p className="text-[0.8rem] leading-6 tracking-wide font-normal">

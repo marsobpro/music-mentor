@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth } from "../firebase";
+import Loading from "../components/Loading";
 
 export default function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -31,7 +34,7 @@ export default function SignIn() {
       );
       if (userCredential.user) {
         toast.success("Welcome! Let's find you a mentor...🕵🏼‍♀️");
-
+        setIsLoading(false);
         navigate("/");
       }
     } catch (error) {
@@ -40,6 +43,11 @@ export default function SignIn() {
   }
 
   const { email, password } = loginFormData;
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <section>
       <h1 className="text-center font-bold text-4xl mt-28">Sign In</h1>

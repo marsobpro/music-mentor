@@ -51,8 +51,10 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="/create-listing" element={<ProtectedRoute />}>
+            <Route path="/create-listing" element={<CreateListing />} />
+          </Route>
 
-          <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

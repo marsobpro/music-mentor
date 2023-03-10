@@ -1,6 +1,13 @@
 import { getAuth } from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import SingleListingTile from "../components/SingleListingTile";
 import { db } from "../firebase";
@@ -37,6 +44,24 @@ export default function Profile() {
     }
     getData();
   }, []);
+
+  async function handleDelete(id) {
+    console.log("Handle delete function");
+    if (
+      window.confirm(
+        "For your safety, please confirm you want to delete this lesson"
+      )
+    ) {
+      await deleteDoc(doc(db, "listings", id));
+      const updatedListingsList = listingsList.filter(
+        (listing) => listing.id !== id
+      );
+      setListingsList(updatedListingsList);
+      toast.success("Lesson successfully removed!");
+    } else {
+      toast.error("You didn't cancel the lesson");
+    }
+  }
   return (
     <main>
       <div>
@@ -59,9 +84,11 @@ export default function Profile() {
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
           {listingsList.map((listing) => (
             <SingleListingTile
+              data={listing.data}
               key={listing.id}
               id={listing.id}
-              data={listing.data}
+              onDelete={handleDelete}
+              // onEdit={handleEdit}
             />
           ))}
         </ul>
