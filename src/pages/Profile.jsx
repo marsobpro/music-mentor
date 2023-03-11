@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SingleListingTile from "../components/SingleListingTile";
 import { db } from "../firebase";
 
@@ -16,6 +16,7 @@ export default function Profile() {
   const [listingsList, setListingsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const auth = getAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -62,6 +63,10 @@ export default function Profile() {
       toast.error("You didn't cancel the lesson");
     }
   }
+
+  function handleEdit(id) {
+    navigate(`/edit-listing/${id}`);
+  }
   return (
     <main>
       <div>
@@ -88,7 +93,7 @@ export default function Profile() {
               key={listing.id}
               id={listing.id}
               onDelete={handleDelete}
-              // onEdit={handleEdit}
+              onEdit={handleEdit}
             />
           ))}
         </ul>

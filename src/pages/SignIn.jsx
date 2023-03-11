@@ -39,6 +39,7 @@ export default function SignIn() {
       }
     } catch (error) {
       toast.error("Incorrect email and/or password");
+      setIsLoading(false);
     }
   }
 

@@ -14,6 +14,7 @@ import CreateListing from "./pages/CreateListing";
 import Profile from "./pages/Profile";
 import SingleListing from "./pages/SingleListing";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import EditListing from "./pages/EditListing";
 
 const subjectOptions = [
   { label: "Piano", value: "piano" },
@@ -48,6 +49,7 @@ function App() {
           />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/edit-listing/:id" element={<EditListing />} />
           <Route path="/profile" element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
