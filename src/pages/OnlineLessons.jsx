@@ -5,6 +5,7 @@ import { db } from "../firebase";
 import Loading from "../components/Loading";
 import SingleListingTile from "../components/SingleListingTile";
 import { AppContext } from "../App";
+import toast from "react-hot-toast";
 
 export default function OnlineLessons() {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +21,7 @@ export default function OnlineLessons() {
     );
     if (!filtered.length && name != undefined) {
       navigate("/");
+      toast.error("Sorry, we don't have this subject in our database :(");
     }
   }
 

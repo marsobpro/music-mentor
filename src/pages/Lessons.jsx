@@ -6,6 +6,7 @@ import Loading from "../components/Loading";
 import SingleListingTile from "../components/SingleListingTile";
 import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 import { AppContext } from "../App";
+import toast from "react-hot-toast";
 
 export default function Lessons() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,7 @@ export default function Lessons() {
     );
     if (!filtered.length && name != undefined) {
       navigate("/");
+      toast.error("Sorry, we don't have this subject in our database :(");
     }
   }
   function isProperCityName(options, city) {
@@ -32,6 +34,7 @@ export default function Lessons() {
     );
     if (!filtered.length && city != undefined) {
       navigate("/");
+      toast.error("Sorry, we don't have this city in our database :(");
     }
   }
 

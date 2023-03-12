@@ -8,7 +8,6 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
-// ZROB CHECKBOXY -> VALUE, ONCHANGE ORAZ ZMIEN HANDLECHANGE
 
 export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);

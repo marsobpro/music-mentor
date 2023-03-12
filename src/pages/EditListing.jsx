@@ -7,6 +7,7 @@ import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { getAuth } from "firebase/auth";
+import { AppContext } from "../App";
 // ZROB CHECKBOXY -> VALUE, ONCHANGE ORAZ ZMIEN HANDLECHANGE
 
 export default function CreateListing() {
@@ -37,6 +38,7 @@ export default function CreateListing() {
   const navigate = useNavigate();
   const params = useParams();
   const auth = getAuth();
+  const { subjectOptions, cityOptions } = useContext(AppContext);
 
   // useEffect(() => {
   //   if (editedListingData?.userId !== auth.currentUser?.uid) {
