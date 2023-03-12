@@ -1,22 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import Loading from "../components/Loading";
 import SingleListingTile from "../components/SingleListingTile";
 import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
+import { AppContext } from "../App";
 
 export default function Lessons() {
   const [isLoading, setIsLoading] = useState(false);
   const [listingsList, setListingsList] = useState([]);
   const params = useParams();
-  const { subject, city, id } = params;
-  console.log("Subject: ", subject, "City: ", city);
-  //
+  const navigate = useNavigate();
+  const { subjectOptions, cityOptions } = useContext(AppContext);
+  const { subject, city } = params;
+
+  // console.log("Subject: ", subject, "City: ", city);
+  // console.log(subjectOptions, cityOptions);
+
+  function isProperSubjectName(options, name) {
+    const filtered = options.filter(
+      (singleSubject) => singleSubject.value === subject
+    );
+    if (!filtered.length && name != undefined) {
+      navigate("/");
+    }
+  }
+  function isProperCityName(options, city) {
+    const filtered = options.filter(
+      (singleSubject) => singleSubject.value === city
+    );
+    if (!filtered.length && city != undefined) {
+      navigate("/");
+    }
+  }
 
   useEffect(() => {
-    let q;
     setIsLoading(true);
+    isProperSubjectName(subjectOptions, subject);
+    isProperCityName(cityOptions, city);
+    let q;
+
     async function getData() {
       try {
         const lessonsRef = collection(db, "listings");
@@ -48,7 +72,6 @@ export default function Lessons() {
         });
         // setListingsList((prevState) => [...prevState, ...temporaryListings]);
         setListingsList([...temporaryListings]);
-
         setIsLoading(false);
       } catch (error) {
         console.log(error);

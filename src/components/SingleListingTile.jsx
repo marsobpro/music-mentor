@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 
 export default function SingleListingTile({ id, data, onDelete, onEdit }) {
-  console.log(data);
+  // console.log(data);
   const navigate = useNavigate();
   return (
     <li className="bg-white border border-slate-500 rounded-3xl w-[300px] shadow-md relative">
@@ -45,14 +45,18 @@ export default function SingleListingTile({ id, data, onDelete, onEdit }) {
           </ul>
         </div>
       </div>{" "}
-      <FaEdit
-        onClick={() => onEdit(id)}
-        className="absolute top-3 right-3 text-red-400 text-md cursor-pointer z-50"
-      />
-      <BsFillTrashFill
-        onClick={() => onDelete(id)}
-        className="absolute top-3 right-11 text-red-400 text-md cursor-pointer"
-      />
+      {onEdit && (
+        <FaEdit
+          onClick={() => onEdit(id)}
+          className="absolute top-3 right-3 text-red-400 text-md cursor-pointer z-50"
+        />
+      )}
+      {onDelete && (
+        <BsFillTrashFill
+          onClick={() => onDelete(id)}
+          className="absolute top-3 right-11 text-red-400 text-md cursor-pointer"
+        />
+      )}
     </li>
   );
 }

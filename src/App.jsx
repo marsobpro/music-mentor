@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import SingleListing from "./pages/SingleListing";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import EditListing from "./pages/EditListing";
+import OnlineLessons from "./pages/OnlineLessons";
 
 const subjectOptions = [
   { label: "Piano", value: "piano" },
@@ -47,6 +48,11 @@ function App() {
             path="/lessons/:subject/:city/:id"
             element={<SingleListing />}
           />
+          <Route path="/online-lessons/" element={<OnlineLessons />}></Route>
+          <Route
+            path="/online-lessons/:subject"
+            element={<OnlineLessons />}
+          ></Route>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/edit-listing/:id" element={<EditListing />} />
@@ -56,7 +62,6 @@ function App() {
           <Route path="/create-listing" element={<ProtectedRoute />}>
             <Route path="/create-listing" element={<CreateListing />} />
           </Route>
-
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

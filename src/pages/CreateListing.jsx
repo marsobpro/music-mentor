@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import Loading from "../components/Loading";
 import { AppContext } from "../App";
-import { auth, db, storage } from "../firebase";
+import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
 // ZROB CHECKBOXY -> VALUE, ONCHANGE ORAZ ZMIEN HANDLECHANGE
 
@@ -13,6 +14,7 @@ export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);
   const { subjectOptions, cityOptions } = useContext(AppContext);
   const navigate = useNavigate();
+  const auth = getAuth();
   const [addLessonFormData, setAddLessonFormData] = useState({
     firstName: "",
     lastName: "",
@@ -105,7 +107,7 @@ export default function CreateListing() {
     );
 
     setIsLoading(false);
-    toast.success("You've created a listing!", { icon: "🙌", duration: 2200 });
+    toast.success("You've created a listing!", { icon: "🙌", duration: 3000 });
     navigate(
       `/lessons/${addLessonFormDataCopy.subject}/${addLessonFormDataCopy.city}/${docRef.id}`
     );

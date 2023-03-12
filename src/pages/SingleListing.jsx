@@ -21,7 +21,6 @@ export default function SingleListing() {
       if (docSnap.exists()) {
         setSingleListingData(docSnap.data());
         setIsLoading(false);
-        console.log(docSnap.data());
       } else {
         console.log("Docsnap just does not exist!");
       }
@@ -51,7 +50,7 @@ export default function SingleListing() {
           {" "}
           <ul className="flex items-center justify-around w-[90%] m-auto text-center">
             <li className="flex flex-col justify-center text-center ">
-              <span className="font-semibold">{`${singleListingData?.yearsOfTeachingExperience}`}</span>
+              <span className="font-semibold">{`${singleListingData?.yearsOfTeachingExperience} years`}</span>
               <span className="text-xs">Experience</span>
             </li>
             <li className="flex flex-col justify-center text-center">

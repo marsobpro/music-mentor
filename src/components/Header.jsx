@@ -65,6 +65,7 @@ export default function Header() {
                 className={`text-gray-700 hover:text-gray-400 duration-500 whitespace-nowrap ${
                   isCurrentRoute(link.link) && "underline  underline-offset-8"
                 }`}
+                onClick={() => setOpen(!open)}
               >
                 {link.name.toUpperCase()}
               </Link>
