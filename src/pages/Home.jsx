@@ -21,20 +21,20 @@ export default function Home() {
     if (isOnline && subject) {
       navigate(`/online-lessons/${subject}`);
     }
-    toast.success("Let's find you a mentor!", { icon: "🎺", duration: 2200 });
+    toast.success("Let's find you a mentor!", { icon: "🎺", duration: 2600 });
   }
 
   return (
-    <div className="h-screen flex justify-center items-center max-w-[1600px] m-auto mx-4">
-      <main>
-        <div className="mb-11 font-semibold text-3xl font-mono text-md space-y-4">
-          <h1>Do you want to play the instrument?</h1>
-          <h3>Find your Music Mentor.</h3>
+    <main className="grid grid-rows-2 mdplus:flex mdplus:flex-row mdplus:justify-between mt-36 md:mt-28 max-w-[1300px] h-[900px] md:h-[700px] m-auto border border-pink-700">
+      <div className="flex flex-col justify-center md:space-y-6 border border-blue-800">
+        <div className="font-semibold font-sans space-y-4 tracking-widest text-center mdplus:text-left mb-4">
+          <h1 className="text-3xl">Do you want to play the instrument?</h1>
+          <h3 className="text-xl">Find your Music Mentor.</h3>
         </div>
-        <div className="h-[200px] px-4 bg-green-300 rounded-[50px] flex justify-center items-center shadow-md">
+        <div className="flex justify-center px-4 py-7 mx-4 w-auto bg-green-400 rounded-[50px] shadow-md border border-slate-300">
           <form
             onSubmit={handleSubmit}
-            className="space-y-4 md:space-y-0 md:space-x-5 flex flex-col justify-start md:flex-row "
+            className="flex flex-col justify-start md:flex-row space-y-4 md:space-y-0 md:space-x-2"
           >
             <div>
               <select
@@ -63,7 +63,7 @@ export default function Home() {
                 value={city}
                 disabled={isOnline}
                 required={!isOnline}
-                className="rounded-2xl"
+                className="rounded-2xl w-full md:w-auto"
               >
                 <option value="" disabled>
                   Choose the city
@@ -84,15 +84,45 @@ export default function Home() {
                 onChange={() => {
                   setIsOline((prevState) => !prevState);
                 }}
+                className="rounded"
               />
               <label htmlFor="isOnline">Online</label>
             </div>
-            <div className="bg-white shadow-md hover:shadow-sm text-green-400 font-bold py-2 px-4 rounded-2xl cursor-pointer transition duration-150 ease-in-out text-center mb-4 md:mb-0">
+            <div className="w-full py-2 px-4 mx-2 mb-4 md:mb-0 bg-white shadow-md hover:shadow-sm text-green-400 font-bold rounded-2xl cursor-pointer transition duration-150 ease-in-out text-center">
               <button type="submit">Search</button>
             </div>
           </form>
         </div>
-      </main>
-    </div>
+      </div>
+
+      {/* Pictures */}
+
+      <div className="flex justify-center space-x-2 md:space-x-8 border border-orange-200 mt-2">
+        <div className="">
+          <div
+            style={{
+              backgroundImage: `url(src/assets/teacher1.jpg)`,
+            }}
+            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px]"
+          ></div>
+        </div>
+        <div className="">
+          <div
+            style={{
+              backgroundImage: `url(src/assets/teacher2.jpg)`,
+            }}
+            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px] mt-20"
+          ></div>
+        </div>
+        <div className="flex justify-center">
+          <div
+            style={{
+              backgroundImage: `url(src/assets/teacher3.jpg)`,
+            }}
+            className="w-[100px] sm:w-[170px] bg-no-repeat bg-center bg-cover rounded-[100px]"
+          ></div>
+        </div>
+      </div>
+    </main>
   );
 }
