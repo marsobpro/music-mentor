@@ -2,6 +2,7 @@ import { getAuth } from "firebase/auth";
 import {
   collection,
   deleteDoc,
+  doc,
   getDocs,
   query,
   where,
@@ -47,7 +48,6 @@ export default function Profile() {
   }, []);
 
   async function handleDelete(id) {
-    console.log("Handle delete function");
     if (
       window.confirm(
         "For your safety, please confirm you want to delete this lesson"

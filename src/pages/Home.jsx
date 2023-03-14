@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AppContext } from "../App";
+import { HiOutlineStatusOnline } from "react-icons/hi";
+import { MdLocationOn } from "react-icons/md";
 
 export default function Home() {
   const [subject, setSubject] = useState("");
@@ -25,13 +27,13 @@ export default function Home() {
   }
 
   return (
-    <main className="grid grid-rows-2 mdplus:flex mdplus:flex-row mdplus:justify-between mt-36 md:mt-28 max-w-[1300px] h-[900px] md:h-[700px] m-auto border border-pink-700">
-      <div className="flex flex-col justify-center md:space-y-6 border border-blue-800">
-        <div className="font-semibold font-sans space-y-4 tracking-widest text-center mdplus:text-left mb-4">
+    <main className="grid grid-rows-2 mdplus:flex mdplus:flex-row mdplus:justify-between mt-16 md:mt-28 px-3 sm:px-7 max-w-[1300px] h-[900px] md:h-[700px] m-auto">
+      <div className="flex flex-col justify-center md:space-y-6">
+        <div className="space-y-4 mb-4 font-semibold font-sans tracking-widest text-center mdplus:text-left ">
           <h1 className="text-3xl">Do you want to play the instrument?</h1>
           <h3 className="text-xl">Find your Music Mentor.</h3>
         </div>
-        <div className="flex justify-center px-4 py-7 mx-4 w-auto bg-green-400 rounded-[50px] shadow-md border border-slate-300">
+        <div className="flex justify-center px-4 py-7 mx-4 md:w-[700px] xl:w-auto md:m-auto bg-green-400 rounded-[50px] shadow-md border border-slate-300">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col justify-start md:flex-row space-y-4 md:space-y-0 md:space-x-2"
@@ -97,30 +99,57 @@ export default function Home() {
 
       {/* Pictures */}
 
-      <div className="flex justify-center space-x-2 md:space-x-8 border border-orange-200 mt-2">
+      <div className="flex justify-center space-x-2 md:space-x-8 mt-2">
         <div className="">
           <div
             style={{
               backgroundImage: `url(src/assets/teacher1.jpg)`,
             }}
-            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px]"
-          ></div>
+            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px] flex justify-center relative"
+          >
+            <div className="absolute bottom-[15%] w-[85%] sm:w-[75%] bg-white rounded-3xl p-[7px] sm:p-4">
+              <h2 className="text-xl sm:text-2xl font-bold">Erin</h2>
+              <p className=" hidden sm:block text-sm">Piano mentor</p>
+              <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
+                {<MdLocationOn className="text-green-600 mr-1" />} Poznań
+              </div>
+            </div>
+          </div>
         </div>
         <div className="">
           <div
             style={{
               backgroundImage: `url(src/assets/teacher2.jpg)`,
             }}
-            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px] mt-20"
-          ></div>
+            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px] mt-20 flex justify-center relative"
+          >
+            <div className="absolute top-[15%] w-[85%] sm:w-[75%] bg-white rounded-3xl  p-[7px] sm:p-4">
+              <h2 className="text-2xl font-bold">Pam</h2>
+              <p className="hidden sm:block text-sm">Cello mentor</p>
+              <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
+                {
+                  <HiOutlineStatusOnline className="text-green-600 text-lg mr-1" />
+                }{" "}
+                Online
+              </div>
+            </div>
+          </div>
         </div>
         <div className="flex justify-center">
           <div
             style={{
               backgroundImage: `url(src/assets/teacher3.jpg)`,
             }}
-            className="w-[100px] sm:w-[170px] bg-no-repeat bg-center bg-cover rounded-[100px]"
-          ></div>
+            className="w-[100px] sm:w-[170px] bg-no-repeat bg-center bg-cover rounded-[100px] flex justify-center relative"
+          >
+            <div className="absolute bottom-[15%] w-[85%] sm:w-[75%] bg-white rounded-3xl p-[7px] sm:p-4">
+              <h2 className="text-2xl font-bold">Jim</h2>
+              <p className="hidden sm:block text-sm">Violin mentor</p>
+              <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
+                {<MdLocationOn className="text-green-600 mr-1" />} Warsaw
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

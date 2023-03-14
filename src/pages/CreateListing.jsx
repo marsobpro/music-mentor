@@ -77,6 +77,16 @@ export default function CreateListing() {
     setIsLoading(true);
     let imageUrl = null;
 
+    if (!online && !atStudentsPlace && !atMentorsPlace) {
+      toast.error("Please choose the location of your lessons.");
+      return;
+    }
+
+    if (!elementarySchool && !highSchool && !college && !adults) {
+      toast.error("Please choose at least one age group you are teaching.");
+      return;
+    }
+
     // Upload the image and get imageUrl
     if (image != null) {
       try {
@@ -153,6 +163,7 @@ export default function CreateListing() {
               name="firstName"
               value={firstName}
               maxLength="50"
+              required
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
             />
@@ -168,6 +179,7 @@ export default function CreateListing() {
               name="lastName"
               value={lastName}
               maxLength="50"
+              required
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
             />
@@ -183,6 +195,7 @@ export default function CreateListing() {
               value={subject}
               onChange={handleChange}
               className="h-10 rounded"
+              required
             >
               <option value="" disabled>
                 --Choose--
@@ -205,6 +218,7 @@ export default function CreateListing() {
               value={city}
               onChange={handleChange}
               className="h-10 rounded"
+              required
             >
               <option value="" disabled>
                 --Choose--
@@ -231,6 +245,7 @@ export default function CreateListing() {
                 max="400"
                 onChange={handleChange}
                 className="w-[25%] h-10 rounded"
+                required
               />
             </span>
           </div>
@@ -249,6 +264,7 @@ export default function CreateListing() {
                 step="5"
                 onChange={handleChange}
                 className="w-[25%] h-10 rounded"
+                required
               />
             </span>
           </div>
@@ -311,6 +327,7 @@ export default function CreateListing() {
               value={shortDescription}
               onChange={handleChange}
               className="w-[100%] h-20 rounded"
+              required
             />
           </div>
           {/*  */}
@@ -330,6 +347,7 @@ export default function CreateListing() {
               value={fullDescription}
               onChange={handleChange}
               className="w-[100%] h-40 rounded"
+              required
             />
           </div>
           {/*  */}
@@ -419,6 +437,7 @@ export default function CreateListing() {
                 max="50"
                 onChange={handleChange}
                 className="w-[25%] h-10 rounded"
+                required
               />
             </span>
           </div>
@@ -435,6 +454,7 @@ export default function CreateListing() {
               maxLength="50"
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
+              required
             />
           </div>
           {/*  */}
@@ -447,9 +467,11 @@ export default function CreateListing() {
               id="phoneNumber"
               name="phoneNumber"
               value={phoneNumber}
+              minLength="7"
               maxLength="20"
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
+              required
             />
           </div>
           {/*  */}
@@ -463,6 +485,7 @@ export default function CreateListing() {
               accept=".jpg, .jpeg, .png"
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
+              required
             />
           </div>
           <div className="flex justify-center">

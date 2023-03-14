@@ -120,6 +120,12 @@ export default function Lessons() {
           </ul>
         </section>
       )}
+      {listingsList.length == 0 && (
+        <p className="mt-24 font-semibold">
+          ☹️ Unfortunately, I did not find any teachers meeting the given
+          criteria in the database. Try again with different data!
+        </p>
+      )}
     </main>
   );
 }
