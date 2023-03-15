@@ -33,12 +33,14 @@ export default function SignIn() {
         password
       );
       if (userCredential.user) {
-        toast.success("Welcome! Let's find you a mentor...🕵🏼‍♀️");
+        toast.success("Welcome! Let's find you a mentor...🕵🏼‍♀️", {
+          duration: 3200,
+        });
         setIsLoading(false);
         navigate("/");
       }
     } catch (error) {
-      toast.error("Incorrect email and/or password");
+      toast.error("Incorrect email and/or password", { duration: 3200 });
       setIsLoading(false);
     }
   }
@@ -56,6 +58,7 @@ export default function SignIn() {
       <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto bg-white shadow-2xl rounded-2xl">
         <form onSubmit={handleSubmit}>
           <input
+            required
             type="email"
             name="email"
             id="email"
@@ -66,6 +69,7 @@ export default function SignIn() {
           />
           <div className="relative">
             <input
+              required
               type={passwordIsVisible ? "text" : "password"}
               name="password"
               id="password"

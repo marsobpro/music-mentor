@@ -88,7 +88,10 @@ export default function Header() {
             >
               Profile
             </NavLink>
-            <button onClick={handleLogout} className="text-red-500 text-sm">
+            <button
+              onClick={handleLogout}
+              className="text-red-500 text-sm hover:text-red-700 hover:underline"
+            >
               Sign out
             </button>
           </div>

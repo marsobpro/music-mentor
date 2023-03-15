@@ -71,7 +71,7 @@ export default function CreateListing() {
       } else {
         setIsLoading(false);
         setAllowRender(false);
-        console.log("No such document");
+        console.log("Doc doesn't exist");
       }
     }
     getData();
@@ -85,12 +85,9 @@ export default function CreateListing() {
           ...prevState,
           [e.target.id]: true,
         }));
-        console.log(e.target.checked);
         return;
       }
       if (!e.target.checked) {
-        console.log(e.target.checked);
-
         setAddLessonFormData((prevState) => ({
           ...prevState,
           [e.target.id]: false,
@@ -137,7 +134,6 @@ export default function CreateListing() {
       userId: auth.currentUser.uid,
     };
     delete addLessonFormDataCopy.image;
-    console.dir(addLessonFormDataCopy);
     const docRef = doc(db, "listings", params.id);
     await updateDoc(docRef, addLessonFormDataCopy);
 
@@ -149,9 +145,6 @@ export default function CreateListing() {
     navigate(
       `/lessons/${addLessonFormDataCopy.subject}/${addLessonFormDataCopy.city}/${docRef.id}`
     );
-
-    console.log(addLessonFormDataCopy);
-    console.dir(addLessonFormDataCopy);
   }
 
   const {

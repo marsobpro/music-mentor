@@ -21,7 +21,7 @@ export default function Contact() {
   const { name, email, message } = formData;
 
   return (
-    <main className="mt-32 mb-4 px-4 max-w-[1300px] m-auto px-8">
+    <main className="mt-32 mb-4 max-w-[1300px] m-auto px-8">
       <h1 className="text-center text-3xl font-semibold leading-6">Contact</h1>
 
       <div className="w-full m-auto mt-10">
@@ -64,7 +64,7 @@ export default function Contact() {
           <button
             type="submit"
             onClick={handleSubmit}
-            className="w-[40%] sm:px-10 sm:w-auto m-auto bg-green-400 rounded-full shadow-md cursor-pointer hover:shadow-sm"
+            className="w-[40%] sm:px-10 sm:w-auto m-auto bg-green-200 rounded-full shadow-md cursor-pointer hover:shadow-sm"
           >
             Send
           </button>

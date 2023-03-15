@@ -16,9 +16,6 @@ export default function Lessons() {
   const { subjectOptions, cityOptions } = useContext(AppContext);
   const { subject, city } = params;
 
-  // console.log("Subject: ", subject, "City: ", city);
-  // console.log(subjectOptions, cityOptions);
-
   function isProperSubjectName(options, name) {
     const filtered = options.filter(
       (singleSubject) => singleSubject.value === subject

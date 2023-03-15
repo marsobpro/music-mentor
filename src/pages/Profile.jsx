@@ -68,7 +68,7 @@ export default function Profile() {
     navigate(`/edit-listing/${id}`);
   }
   return (
-    <main>
+    <main className="max-w-[1100px] m-auto">
       <div>
         <div className="mt-40 w-[20rem] md:w-[30rem] py-6 bg-green-400 m-auto shadow-2xl rounded-2xl">
           <div className="flex items-center justify-between flex-col md:flex-row md:text-center">

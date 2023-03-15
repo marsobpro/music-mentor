@@ -22,7 +22,7 @@ export default function SingleListing() {
         setSingleListingData(docSnap.data());
         setIsLoading(false);
       } else {
-        console.log("Docsnap just does not exist!");
+        console.log("Docsnap does not exist!");
       }
     }
     getData();
@@ -33,8 +33,8 @@ export default function SingleListing() {
   }
 
   return (
-    <main className="max-w-[1000px] m-auto">
-      <div className="bg-green-200 rounded-3xl mt-[90px] py-4 px-4 mb-4">
+    <main className="max-w-[1000px] m-auto px-6">
+      <div className="bg-green-200 rounded-3xl mt-24 py-4  mb-4">
         <div className="mb-10 w-40 m-auto">
           <img
             src={`${singleListingData?.imageUrl}`}
@@ -43,10 +43,11 @@ export default function SingleListing() {
             className="bg-white p-1 object-cover w-full h-40 rounded-3xl mb-4"
           />
           <p className="text-center font-semibold text-4xl font-mono"></p>
-          <p className="text-center text-xs">Last seen: 2 days ago</p>
+          <p className="text-center text-3xl font-bold mb-4">{`${singleListingData?.firstName}`}</p>
+          <p className="text-center text-sm">Last seen: 2 days ago</p>
         </div>
 
-        <div className="bg-white rounded-full py-4">
+        <div className="bg-white rounded-full py-4 mx-2">
           {" "}
           <ul className="flex items-center justify-around w-[90%] m-auto text-center">
             <li className="flex flex-col justify-center text-center ">
@@ -64,12 +65,18 @@ export default function SingleListing() {
           </ul>
         </div>
       </div>
-
-      <div className="ml-4 px-6 leading-8 mb-12 bg-green-200 text-red-500 inline-block rounded-2xl">
-        <p>{`${singleListingData?.subject}`}</p>
+      <div className="flex space-x-4">
+        {" "}
+        <div className="px-6 leading-8 mb-12 bg-green-200 text-red-500 text-xl inline-block rounded-2xl">
+          <p>{`${singleListingData?.subject}`}</p>
+        </div>
+        <div className="px-6 leading-8 mb-12 bg-green-200 text-red-500 text-xl inline-block rounded-2xl">
+          <p>{`${singleListingData?.city}`}</p>
+        </div>
       </div>
+
       {/* 50 words */}
-      <div className="px-4 mb-12">
+      <div className="mb-12">
         <p className="font-bold text-2xl leading-8">
           {singleListingData?.shortDescription}
         </p>
@@ -82,7 +89,8 @@ export default function SingleListing() {
             {singleListingData?.atMentorsPlace ? <GiConfirmed /> : <GiCancel />}
           </span>
           <p className="inline-block">
-            At Mentors' place {`(in ${singleListingData?.city})`}
+            At Mentors' place{" "}
+            {`(in ${capitalizeFirstLetters(singleListingData?.city)})`}
           </p>
         </div>
         <div className="text-sm flex">
@@ -94,8 +102,7 @@ export default function SingleListing() {
             )}
           </span>
           <p className="inline-block">
-            At Students' place{" "}
-            {singleListingData?.atStudentsPlace ? "(in Gdynia)" : ""}
+            At Students' place {singleListingData?.atStudentsPlace ? "" : ""}
           </p>
         </div>
         <div className="text-sm w-full flex">
@@ -107,7 +114,7 @@ export default function SingleListing() {
       </div>
 
       {/* lorem 140 */}
-      <div className="px-5 font-semibold leading-7 mb-12">
+      <div className="font-semibold leading-7 mb-12">
         <p>{singleListingData?.fullDescription}</p>
       </div>
 

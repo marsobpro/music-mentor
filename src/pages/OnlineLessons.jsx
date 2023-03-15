@@ -56,7 +56,6 @@ export default function OnlineLessons() {
             data: doc.data(),
           });
         });
-        // setListingsList((prevState) => [...prevState, ...temporaryListings]);
         setListingsList([...temporaryListings]);
 
         setIsLoading(false);

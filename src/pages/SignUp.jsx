@@ -44,7 +44,7 @@ export default function SignUp() {
       signUpFormDataCopy.timestamp = serverTimestamp();
 
       await setDoc(doc(db, "users", user.uid), signUpFormDataCopy);
-      toast.success("Sign up was succesfull");
+      toast.success("Sign up was succesfull", { icon: "🥳", duration: 3200 });
       navigate("/");
 
       console.log(auth.currentUser.name, auth.currentUser.lastName);
@@ -53,7 +53,7 @@ export default function SignUp() {
       //   navigate("/");
       // }
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { icon: "😞", duration: 3200 });
     }
   }
 
@@ -65,6 +65,7 @@ export default function SignUp() {
       <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto bg-white shadow-2xl rounded-2xl">
         <form onSubmit={handleSubmit}>
           <input
+            required
             type="text"
             name="name"
             id="name"
@@ -74,6 +75,7 @@ export default function SignUp() {
             className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
           />
           <input
+            required
             type="text"
             name="lastName"
             id="lastName"
@@ -83,6 +85,7 @@ export default function SignUp() {
             className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
           />
           <input
+            required
             type="email"
             name="email"
             id="email"
@@ -93,6 +96,7 @@ export default function SignUp() {
           />
           <div className="relative">
             <input
+              required
               type={passwordIsVisible ? "text" : "password"}
               name="password"
               id="password"

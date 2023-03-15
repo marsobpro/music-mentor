@@ -45,7 +45,6 @@ export default function CreateListing() {
           ...prevState,
           [e.target.id]: true,
         }));
-        // console.log(addLessonFormData);
         return;
       }
       if (!e.target.checked) {
@@ -53,7 +52,6 @@ export default function CreateListing() {
           ...prevState,
           [e.target.id]: false,
         }));
-        // console.log(addLessonFormData);
         return;
       }
     }
@@ -68,8 +66,6 @@ export default function CreateListing() {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
-    // console.log(e.target.id, e.target.files);
-    // console.log(addLessonFormData);
   }
 
   async function handleSubmit(e) {
@@ -78,12 +74,18 @@ export default function CreateListing() {
     let imageUrl = null;
 
     if (!online && !atStudentsPlace && !atMentorsPlace) {
-      toast.error("Please choose the location of your lessons.");
+      toast.error("Please choose the location of your lessons.", {
+        icon: "🎺",
+        duration: 3000,
+      });
       return;
     }
 
     if (!elementarySchool && !highSchool && !college && !adults) {
-      toast.error("Please choose at least one age group you are teaching.");
+      toast.error("Please choose at least one age group you are teaching.", {
+        icon: "🎺",
+        duration: 2600,
+      });
       return;
     }
 
@@ -108,7 +110,6 @@ export default function CreateListing() {
       userId: auth.currentUser.uid,
     };
     delete addLessonFormDataCopy.image;
-    console.dir(addLessonFormDataCopy);
 
     const docRef = await addDoc(
       collection(db, "listings"),
@@ -120,9 +121,6 @@ export default function CreateListing() {
     navigate(
       `/lessons/${addLessonFormDataCopy.subject}/${addLessonFormDataCopy.city}/${docRef.id}`
     );
-
-    console.log(addLessonFormDataCopy);
-    console.dir(addLessonFormDataCopy);
   }
 
   const {
@@ -150,7 +148,7 @@ export default function CreateListing() {
       <div className="md:w-[700px] m-auto px-8 py-6 bg-green-200 shadow-md rounded-2xl text-left sm:text-justify ">
         {" "}
         <h1 className="font-semibold text-5xl text-center mb-12 font-mono">
-          Add lesson
+          Add a lesson
         </h1>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 items-center justify-center mb-4 ">
@@ -326,7 +324,7 @@ export default function CreateListing() {
               name="shortDescription"
               value={shortDescription}
               onChange={handleChange}
-              className="w-[100%] h-20 rounded"
+              className="w-[100%] h-20 rounded text-sm"
               required
             />
           </div>
@@ -346,11 +344,11 @@ export default function CreateListing() {
               name="fullDescription"
               value={fullDescription}
               onChange={handleChange}
-              className="w-[100%] h-40 rounded"
+              className="w-[100%] h-40 rounded text-xs"
               required
             />
           </div>
-          {/*  */}
+
           <div className="grid grid-cols-2 items-center justify-center mb-8">
             <label className="text-xl mr-4" htmlFor="videoLink">
               Your video URL{" "}
