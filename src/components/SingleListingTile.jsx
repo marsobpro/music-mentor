@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 
-import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
-
 export default function SingleListingTile({ id, data, onDelete, onEdit }) {
   const navigate = useNavigate();
   return (
@@ -20,10 +18,8 @@ export default function SingleListingTile({ id, data, onDelete, onEdit }) {
             className="bg-white rounded-3xl object-cover w-full aspect-square"
           />
           <div className="absolute text-white bottom-2 left-3">
-            <h3 className="text-3xl font-semibold mb-1">
-              {capitalizeFirstLetters(data?.firstName)}
-            </h3>
-            <p className="text-sm">{capitalizeFirstLetters(data?.subject)}</p>
+            <h3 className="text-3xl font-semibold mb-1">{data?.firstName}</h3>
+            <p className="text-sm">{data.subject}</p>
           </div>
         </div>
         <div className="px-3 mb-2 h-44">
@@ -37,26 +33,26 @@ export default function SingleListingTile({ id, data, onDelete, onEdit }) {
             <li className="px-2 py-2 bg-green-300 rounded-3xl text-xs">
               {`${data.price} PLN / ${data.lessonTime} min`}
             </li>
-
             <li className="px-2 py-2 bg-green-300 rounded-3xl text-xs">
-              {`${capitalizeFirstLetters(data?.city)} ${
-                data.online ? "and Online" : ""
-              }`}
+              <span className="capitalize">{data.city}</span>
+              {data.online ? " and Online" : ""}
             </li>
           </ul>
         </div>
       </div>{" "}
-      {onEdit && (
-        <FaEdit
-          onClick={() => onEdit(id)}
-          className="absolute top-3 right-3 text-red-400 text-md cursor-pointer z-50"
-        />
-      )}
-      {onDelete && (
-        <BsFillTrashFill
-          onClick={() => onDelete(id)}
-          className="absolute top-3 right-11 text-red-400 text-md cursor-pointer"
-        />
+      {onEdit && onDelete ? (
+        <div className="absolute top-3 right-3 flex bg-white space-x-4 px-2 py-2 rounded-2xl text-black cursor-pointer">
+          <FaEdit
+            onClick={() => onEdit(id)}
+            className="text-md hover:text-red-600"
+          />
+          <BsFillTrashFill
+            onClick={() => onDelete(id)}
+            className="text-md hover:text-red-600"
+          />
+        </div>
+      ) : (
+        ""
       )}
     </li>
   );

@@ -4,7 +4,6 @@ import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import Loading from "../components/Loading";
 import SingleListingTile from "../components/SingleListingTile";
-import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 import { AppContext } from "../App";
 import toast from "react-hot-toast";
 
@@ -45,13 +44,13 @@ export default function Lessons() {
       try {
         const lessonsRef = collection(db, "listings");
 
-        if (city == undefined && subject != undefined) {
+        if (city === undefined && subject !== undefined) {
           q = query(
             lessonsRef,
             where("subject", "==", subject),
             orderBy("createdAt", "desc")
           );
-        } else if (subject == undefined && city == undefined) {
+        } else if (subject === undefined && city === undefined) {
           q = query(lessonsRef, orderBy("createdAt", "desc"));
         } else {
           q = query(
@@ -85,7 +84,7 @@ export default function Lessons() {
   }
 
   return (
-    <main className="mt-28 text-2xl max-w-[1100px] m-auto">
+    <main className="mt-28 text-2xl max-w-[1100px] m-auto px-4">
       <h1 className="text-center text-3xl mx-4">
         Here are some{" "}
         <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
@@ -95,8 +94,8 @@ export default function Lessons() {
         {city ? (
           <span>
             from{" "}
-            <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
-              {capitalizeFirstLetters(city)}{" "}
+            <span className="text-green-500 capitalize font-semibold underline decoration-dotted underline-offset-4">
+              {city}{" "}
             </span>
           </span>
         ) : (
@@ -104,7 +103,7 @@ export default function Lessons() {
         )}
       </h1>
 
-      {listingsList.length > 0 && (
+      {listingsList.length ? (
         <section className="mt-16 md:mt-24 m-auto">
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
             {listingsList.map((listing) => (
@@ -116,9 +115,8 @@ export default function Lessons() {
             ))}
           </ul>
         </section>
-      )}
-      {listingsList.length == 0 && (
-        <p className="mt-24 font-semibold">
+      ) : (
+        <p className="mt-24 text-center font-semibold">
           ☹️ Unfortunately, I did not find any teachers meeting the given
           criteria in the database. Try again with different data!
         </p>

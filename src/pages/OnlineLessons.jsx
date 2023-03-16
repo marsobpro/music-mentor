@@ -91,7 +91,7 @@ export default function OnlineLessons() {
         )}
       </h1>
 
-      {listingsList.length > 0 && (
+      {listingsList.length ? (
         <section className="mt-16 md:mt-24 m-auto">
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
             {listingsList.map((listing) => (
@@ -103,6 +103,8 @@ export default function OnlineLessons() {
             ))}
           </ul>
         </section>
+      ) : (
+        ""
       )}
     </main>
   );

@@ -5,7 +5,6 @@ import Loading from "../components/Loading";
 import { db } from "../firebase";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { CiPhone, CiMail } from "react-icons/ci";
-import capitalizeFirstLetters from "../utils/capitalizeFirstLetters";
 
 export default function SingleListing() {
   const params = useParams();
@@ -68,10 +67,10 @@ export default function SingleListing() {
       <div className="flex space-x-4">
         {" "}
         <div className="px-6 leading-8 mb-12 bg-green-200 text-red-500 text-xl inline-block rounded-2xl">
-          <p>{`${singleListingData?.subject}`}</p>
+          <p>{singleListingData?.subject}</p>
         </div>
         <div className="px-6 leading-8 mb-12 bg-green-200 text-red-500 text-xl inline-block rounded-2xl">
-          <p>{`${singleListingData?.city}`}</p>
+          <p className="capitalize">{singleListingData?.city}</p>
         </div>
       </div>
 
@@ -90,7 +89,14 @@ export default function SingleListing() {
           </span>
           <p className="inline-block">
             At Mentors' place{" "}
-            {`(in ${capitalizeFirstLetters(singleListingData?.city)})`}
+            {singleListingData?.atMentorsPlace ? (
+              <span>
+                (in
+                <span className="capitalize">{` ${singleListingData?.city})`}</span>
+              </span>
+            ) : (
+              ""
+            )}
           </p>
         </div>
         <div className="text-sm flex">
@@ -102,7 +108,15 @@ export default function SingleListing() {
             )}
           </span>
           <p className="inline-block">
-            At Students' place {singleListingData?.atStudentsPlace ? "" : ""}
+            At Students' place{" "}
+            {singleListingData?.atStudentsPlace ? (
+              <span>
+                (in
+                <span className="capitalize">{` ${singleListingData?.city})`}</span>
+              </span>
+            ) : (
+              ""
+            )}
           </p>
         </div>
         <div className="text-sm w-full flex">
@@ -113,7 +127,6 @@ export default function SingleListing() {
         </div>
       </div>
 
-      {/* lorem 140 */}
       <div className="font-semibold leading-7 mb-12">
         <p>{singleListingData?.fullDescription}</p>
       </div>

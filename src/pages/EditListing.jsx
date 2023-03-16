@@ -40,14 +40,6 @@ export default function CreateListing() {
   const auth = getAuth();
   const { subjectOptions, cityOptions } = useContext(AppContext);
 
-  // useEffect(() => {
-  //   if (editedListingData?.userId !== auth.currentUser?.uid) {
-  //     console.log("ASD");
-  //   }
-  //   console.log(editedListingData?.userId);
-  //   console.log(auth.currentUser.uid);
-  // }, [auth.currentUser.uid, editedListingData, editedListingData]);
-
   useEffect(() => {
     async function checkAccess() {
       const docRef = doc(db, "listings", params.id);
@@ -176,7 +168,7 @@ export default function CreateListing() {
 
   return (
     <>
-      {allowRender && (
+      {allowRender ? (
         <main className="max-w-[1200px] mt-32 m-auto ">
           <div className="md:w-[700px] m-auto px-8 py-6 bg-green-200 shadow-md rounded-2xl text-left sm:text-justify ">
             {" "}
@@ -524,6 +516,8 @@ export default function CreateListing() {
             </form>
           </div>
         </main>
+      ) : (
+        ""
       )}
     </>
   );

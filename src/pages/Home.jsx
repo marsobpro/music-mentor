@@ -30,7 +30,7 @@ export default function Home() {
     <main className="grid grid-rows-2 mdplus:flex mdplus:flex-row mdplus:justify-between mt-16 md:mt-28 px-3 sm:px-7 max-w-[1300px] h-[900px] md:h-[700px] m-auto">
       <div className="flex flex-col justify-center md:space-y-6">
         <div className="space-y-4 mb-4 font-semibold font-sans tracking-widest text-center mdplus:text-left ">
-          <h1 className="text-3xl leading-snug md:text-[3.6rem]">
+          <h1 className="text-2xl leading-snug md:text-[3.6rem]">
             Do you want to play
             <br />
             an instrument?

@@ -3,7 +3,7 @@ import loading from "../assets/loading.svg";
 
 export default function Loading() {
   return (
-    <div className="flex justify-center mt-52">
+    <div className="grid h-screen place-items-center">
       <div>
         <img src={loading} alt="Loading..."></img>
       </div>
