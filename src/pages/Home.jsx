@@ -9,7 +9,6 @@ export default function Home() {
   const [subject, setSubject] = useState("");
   const [city, setCity] = useState("");
   const [isOnline, setIsOline] = useState(false);
-
   const navigate = useNavigate();
   const { subjectOptions, cityOptions } = useContext(AppContext);
 
@@ -23,7 +22,7 @@ export default function Home() {
     if (isOnline && subject) {
       navigate(`/online-lessons/${subject}`);
     }
-    toast.success("Let's find you a mentor!", { icon: "🎺", duration: 2600 });
+    toast.success("Let's find you a mentor!", { icon: "🎺" });
   }
 
   return (

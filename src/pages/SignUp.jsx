@@ -3,7 +3,7 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 export default function SignUp() {
@@ -44,16 +44,10 @@ export default function SignUp() {
       signUpFormDataCopy.timestamp = serverTimestamp();
 
       await setDoc(doc(db, "users", user.uid), signUpFormDataCopy);
-      toast.success("Sign up was succesfull", { icon: "🥳", duration: 3200 });
+      toast.success("Sign up was succesfull", { icon: "🥳" });
       navigate("/");
-
-      console.log(auth.currentUser.name, auth.currentUser.lastName);
-
-      // if (userCredential.user) {
-      //   navigate("/");
-      // }
     } catch (error) {
-      toast.error("Something went wrong", { icon: "😞", duration: 3200 });
+      toast.error("Something went wrong", { icon: "😞" });
     }
   }
 

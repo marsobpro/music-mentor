@@ -35,7 +35,14 @@ function App() {
   return (
     <AppContext.Provider value={{ subjectOptions, cityOptions }}>
       <Router>
-        <Toaster position="bottom-center" reverseOrder={false} />
+        <Toaster
+          position="bottom-center"
+          reverseOrder={false}
+          toastOptions={{
+            style: { backgroundColor: "rgb(74 222 128)", color: "black" },
+            duration: 4000,
+          }}
+        />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

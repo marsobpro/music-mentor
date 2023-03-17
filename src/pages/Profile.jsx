@@ -1,4 +1,5 @@
-import { getAuth } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   collection,
   deleteDoc,
@@ -7,11 +8,10 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-import SingleListingTile from "../components/SingleListingTile";
+import { getAuth } from "firebase/auth";
 import { db } from "../firebase";
+import SingleListingTile from "../components/SingleListingTile";
+import toast from "react-hot-toast";
 
 export default function Profile() {
   const [listingsList, setListingsList] = useState([]);
@@ -89,9 +89,9 @@ export default function Profile() {
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
           {listingsList.map((listing) => (
             <SingleListingTile
-              data={listing.data}
               key={listing.id}
-              id={listing.id}
+              listingData={listing.data}
+              listingId={listing.id}
               onDelete={handleDelete}
               onEdit={handleEdit}
             />

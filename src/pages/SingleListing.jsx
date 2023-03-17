@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import { db } from "../firebase";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { CiPhone, CiMail } from "react-icons/ci";
+import toast from "react-hot-toast";
 
 export default function SingleListing() {
   const params = useParams();
@@ -21,7 +22,9 @@ export default function SingleListing() {
         setSingleListingData(docSnap.data());
         setIsLoading(false);
       } else {
-        console.log("Docsnap does not exist!");
+        toast.error(
+          "Sorry, I could not download this listing. Please try again."
+        );
       }
     }
     getData();

@@ -33,14 +33,12 @@ export default function SignIn() {
         password
       );
       if (userCredential.user) {
-        toast.success("Welcome! Let's find you a mentor...🕵🏼‍♀️", {
-          duration: 3200,
-        });
+        toast.success("Welcome! Let's find you a mentor...🕵🏼‍♀️");
         setIsLoading(false);
         navigate("/");
       }
     } catch (error) {
-      toast.error("Incorrect email and/or password", { duration: 3200 });
+      toast.error("Incorrect email and/or password");
       setIsLoading(false);
     }
   }

@@ -15,43 +15,41 @@ export default function Lessons() {
   const { subjectOptions, cityOptions } = useContext(AppContext);
   const { subject, city } = params;
 
-  function isProperSubjectName(options, name) {
-    const filtered = options.filter(
-      (singleSubject) => singleSubject.value === subject
-    );
-    if (!filtered.length && name != undefined) {
-      navigate("/");
-      toast.error("Sorry, we don't have this subject in our database :(");
+  function isProperValue(availableOptions, validatedValue) {
+    if (!validatedValue) {
+      return;
     }
-  }
-  function isProperCityName(options, city) {
-    const filtered = options.filter(
-      (singleSubject) => singleSubject.value === city
+    const filtered = availableOptions.filter(
+      (singleItem) => singleItem.value === validatedValue
     );
-    if (!filtered.length && city != undefined) {
+    if (!filtered.length) {
       navigate("/");
-      toast.error("Sorry, we don't have this city in our database :(");
+      toast.error(
+        "We did not find any lessons meeting the given criteria. Please try again with different data."
+      );
     }
   }
 
   useEffect(() => {
     setIsLoading(true);
-    isProperSubjectName(subjectOptions, subject);
-    isProperCityName(cityOptions, city);
-    let q;
+    isProperValue(subjectOptions, subject);
+    isProperValue(cityOptions, city);
 
     async function getData() {
       try {
+        let q = null;
         const lessonsRef = collection(db, "listings");
 
-        if (city === undefined && subject !== undefined) {
-          q = query(
-            lessonsRef,
-            where("subject", "==", subject),
-            orderBy("createdAt", "desc")
-          );
-        } else if (subject === undefined && city === undefined) {
-          q = query(lessonsRef, orderBy("createdAt", "desc"));
+        if (city === undefined) {
+          if (subject !== undefined) {
+            q = query(
+              lessonsRef,
+              where("subject", "==", subject),
+              orderBy("createdAt", "desc")
+            );
+          } else {
+            q = query(lessonsRef, orderBy("createdAt", "desc"));
+          }
         } else {
           q = query(
             lessonsRef,
@@ -109,8 +107,8 @@ export default function Lessons() {
             {listingsList.map((listing) => (
               <SingleListingTile
                 key={listing.id}
-                id={listing.id}
-                data={listing.data}
+                listingId={listing.id}
+                listingData={listing.data}
               />
             ))}
           </ul>
@@ -118,7 +116,7 @@ export default function Lessons() {
       ) : (
         <p className="mt-24 text-center font-semibold">
           ☹️ Unfortunately, I did not find any teachers meeting the given
-          criteria in the database. Try again with different data!
+          criteria in the database. Please try again with different data!
         </p>
       )}
     </main>

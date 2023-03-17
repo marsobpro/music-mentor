@@ -76,7 +76,6 @@ export default function CreateListing() {
     if (!online && !atStudentsPlace && !atMentorsPlace) {
       toast.error("Please choose the location of your lessons.", {
         icon: "🎺",
-        duration: 3000,
       });
       return;
     }
@@ -84,7 +83,6 @@ export default function CreateListing() {
     if (!elementarySchool && !highSchool && !college && !adults) {
       toast.error("Please choose at least one age group you are teaching.", {
         icon: "🎺",
-        duration: 2600,
       });
       return;
     }
@@ -117,7 +115,7 @@ export default function CreateListing() {
     );
 
     setIsLoading(false);
-    toast.success("You've created a listing!", { icon: "🙌", duration: 3000 });
+    toast.success("You've created a listing!", { icon: "🙌" });
     navigate(
       `/lessons/${addLessonFormDataCopy.subject}/${addLessonFormDataCopy.city}/${docRef.id}`
     );
