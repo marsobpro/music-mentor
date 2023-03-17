@@ -26,9 +26,9 @@ export default function Home() {
   }
 
   return (
-    <main className="grid grid-rows-2 mdplus:flex mdplus:flex-row mdplus:justify-between mt-16 md:mt-28 px-3 sm:px-7 max-w-[1300px] h-[900px] md:h-[700px] m-auto">
+    <main className="grid grid-rows-2 max-w-[1300px] h-[900px] mt-16 px-3 m-auto sm:px-7 md:h-[700px] md:mt-28 mdplus:flex mdplus:flex-row mdplus:justify-between">
       <div className="flex flex-col justify-center md:space-y-6">
-        <div className="space-y-4 mb-4 font-semibold font-sans tracking-widest text-center mdplus:text-left ">
+        <div className="space-y-4 mb-4 font-semibold font-sans tracking-widest text-center mdplus:text-left">
           <h1 className="text-2xl leading-snug md:text-[3.6rem]">
             Do you want to play
             <br />
@@ -36,10 +36,10 @@ export default function Home() {
           </h1>
           <h3 className="text-sm md:text-2xl">Find your Music Mentor!</h3>
         </div>
-        <div className="flex justify-center px-4 py-7 mx-4 md:w-[700px] xl:w-auto md:m-auto bg-green-400 rounded-[50px] shadow-md border border-slate-300">
+        <div className="flex justify-center px-4 py-7 mx-4 md:w-[700px] md:m-auto xl:w-auto rounded-[50px] shadow-md border border-slate-300 bg-green-400">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col justify-start md:flex-row space-y-4 md:space-y-0 md:space-x-2"
+            className="flex flex-col justify-start space-y-4 md:flex-row md:space-y-0 md:space-x-2"
           >
             <div>
               <select
@@ -68,7 +68,7 @@ export default function Home() {
                 value={city}
                 disabled={isOnline}
                 required={!isOnline}
-                className="rounded-2xl w-full md:w-auto"
+                className="w-full rounded-2xl md:w-auto"
               >
                 <option value="" disabled>
                   Choose the city
@@ -93,7 +93,7 @@ export default function Home() {
               />
               <label htmlFor="isOnline">Online</label>
             </div>
-            <div className="w-full py-2 px-4 mx-2 mb-4 md:mb-0 bg-white shadow-md hover:shadow-sm text-green-400 font-bold rounded-2xl cursor-pointer transition duration-150 ease-in-out text-center">
+            <div className="w-full py-2 px-4 mx-2 mb-4 md:mb-0 shadow-md hover:shadow-sm font-bold rounded-2xl cursor-pointer text-center transition duration-150 ease-in-out text-green-400 bg-white">
               <button type="submit">Search</button>
             </div>
           </form>
@@ -102,19 +102,19 @@ export default function Home() {
 
       {/* Pictures */}
 
-      <div className="flex justify-center space-x-2 md:space-x-8 mt-2">
+      <div className="flex justify-center space-x-2 mt-2 md:space-x-8">
         <div className="">
           <div
             style={{
               backgroundImage: `url(src/assets/teacher1.jpg)`,
             }}
-            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px] flex justify-center relative"
+            className="relative flex justify-center w-[100px] h-full sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center"
           >
-            <div className="absolute bottom-[15%] w-[85%] sm:w-[75%] bg-white rounded-3xl p-[7px] sm:p-4">
-              <h2 className="text-xl sm:text-2xl font-bold">Erin</h2>
-              <p className=" hidden sm:block text-sm">Piano mentor</p>
+            <div className="absolute bottom-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white">
+              <h2 className="text-xl font-bold sm:text-2xl">Erin</h2>
+              <p className="hidden text-sm sm:block">Piano mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
-                {<MdLocationOn className="text-green-600 mr-1" />} Poznań
+                {<MdLocationOn className="mr-1 text-green-600" />} Poznań
               </div>
             </div>
           </div>
@@ -124,14 +124,14 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher2.jpg)`,
             }}
-            className="w-[100px] sm:w-[170px] h-full bg-no-repeat bg-cover bg-center rounded-[100px] mt-20 flex justify-center relative"
+            className="relative flex justify-center w-[100px] h-full mt-20 sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center"
           >
-            <div className="absolute top-[15%] w-[85%] sm:w-[75%] bg-white rounded-3xl  p-[7px] sm:p-4">
+            <div className="absolute top-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white">
               <h2 className="text-2xl font-bold">Pam</h2>
               <p className="hidden sm:block text-sm">Cello mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
                 {
-                  <HiOutlineStatusOnline className="text-green-600 text-lg mr-1" />
+                  <HiOutlineStatusOnline className="mr-1 text-lg text-green-600" />
                 }{" "}
                 Online
               </div>
@@ -143,13 +143,13 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher3.jpg)`,
             }}
-            className="w-[100px] sm:w-[170px] bg-no-repeat bg-center bg-cover rounded-[100px] flex justify-center relative"
+            className="relative flex justify-center w-[100px] sm:w-[170px] rounded-[100px] bg-no-repeat bg-center bg-cover"
           >
-            <div className="absolute bottom-[15%] w-[85%] sm:w-[75%] bg-white rounded-3xl p-[7px] sm:p-4">
+            <div className="absolute bottom-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white">
               <h2 className="text-2xl font-bold">Jim</h2>
               <p className="hidden sm:block text-sm">Violin mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
-                {<MdLocationOn className="text-green-600 mr-1" />} Warsaw
+                {<MdLocationOn className="mr-1 text-green-600" />} Warsaw
               </div>
             </div>
           </div>

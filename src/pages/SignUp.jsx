@@ -54,9 +54,9 @@ export default function SignUp() {
   const { name, lastName, email, password } = signUpFormData;
   return (
     <section>
-      <h1 className="text-center font-bold text-4xl mt-28">Sign Up</h1>
+      <h1 className="mt-28 text-center font-bold text-4xl">Sign Up</h1>
 
-      <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto bg-white shadow-2xl rounded-2xl">
+      <div className="w-[20rem] py-8 px-3 mt-16 md:w-[30rem] md:px-20 m-auto shadow-2xl rounded-2xl bg-white">
         <form onSubmit={handleSubmit}>
           <input
             required
@@ -66,7 +66,7 @@ export default function SignUp() {
             value={name}
             placeholder="Your name"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
+            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
           />
           <input
             required
@@ -76,7 +76,7 @@ export default function SignUp() {
             value={lastName}
             placeholder="Your last name"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
+            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
           />
           <input
             required
@@ -86,7 +86,7 @@ export default function SignUp() {
             value={email}
             placeholder="Your E-mail"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
+            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
           />
           <div className="relative">
             <input
@@ -97,7 +97,7 @@ export default function SignUp() {
               value={password}
               placeholder="Password"
               onChange={handleChange}
-              className="w-full h-14 rounded bg-gray-200 mb-4 border-none"
+              className="w-full h-14 rounded mb-4 border-none bg-gray-200"
             />
             {passwordIsVisible ? (
               <VscEyeClosed
@@ -114,23 +114,19 @@ export default function SignUp() {
           <div className="text-center">
             <button
               type="submit"
-              className=" w-full md:w-auto md:px-12 py-2 bg-green-400 rounded-2xl font-bold text-white mb-2 mt-4"
+              className="w-full mb-2 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold bg-green-400 text-white"
             >
               Create profile
             </button>
-            <p className="text-sm text-gray-400 text-center">
+            <p className="text-sm text-center text-gray-400">
               Already have an account?&nbsp;
               <Link
                 to="/sign-in"
-                className="underline hover:text-gray-600 cursor-pointer "
+                className="underline cursor-pointer hover:text-gray-600"
               >
                 Log in instead
               </Link>
             </p>
-            {/* <p>{`Name: ${name}`}</p>
-            <p>{`Last Name: ${lastName}`}</p>
-            <p>{`Email: ${email}`}</p>
-            <p>{`Password: ${password}`}</p> */}
           </div>
         </form>
       </div>

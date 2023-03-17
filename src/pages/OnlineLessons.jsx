@@ -15,19 +15,24 @@ export default function OnlineLessons() {
   const { subjectOptions } = useContext(AppContext);
   const { subject } = params;
 
-  function isProperSubjectName(options, name) {
-    const filtered = options.filter(
-      (singleSubject) => singleSubject.value === subject
+  function isProperValue(availableOptions, validatedValue) {
+    if (!validatedValue) {
+      return;
+    }
+    const filtered = availableOptions.filter(
+      (singleItem) => singleItem.value === validatedValue
     );
-    if (!filtered.length && name != undefined) {
+    if (!filtered.length) {
       navigate("/");
-      toast.error("Sorry, we don't have this subject in our database :(");
+      toast.error(
+        "We did not find any lessons meeting the given criteria. Please try again with different data."
+      );
     }
   }
 
   useEffect(() => {
     setIsLoading(true);
-    isProperSubjectName(subjectOptions, subject);
+    isProperValue(subjectOptions, subject);
 
     let q;
     async function getData() {
@@ -71,12 +76,12 @@ export default function OnlineLessons() {
   }
 
   return (
-    <main className="mt-28 text-2xl max-w-[1100px] m-auto">
-      <h1 className="text-center text-3xl mx-4">
+    <main className="max-w-[1100px] mt-28 text-2xl m-auto">
+      <h1 className="mx-4 text-center text-3xl">
         Learn to play{" "}
         {subject ? (
           <span>
-            <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
+            <span className="font-semibold underline decoration-dotted underline-offset-4 text-green-500">
               {subject}
             </span>{" "}
             online!
@@ -84,7 +89,7 @@ export default function OnlineLessons() {
         ) : (
           <span>
             any instrument{" "}
-            <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
+            <span className="font-semibold underline decoration-dotted underline-offset-4 text-green-500">
               online!
             </span>
           </span>
@@ -92,13 +97,13 @@ export default function OnlineLessons() {
       </h1>
 
       {listingsList.length ? (
-        <section className="mt-16 md:mt-24 m-auto">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
+        <section className="mt-16 m-auto md:mt-24">
+          <ul className="grid grid-cols-1 gap-x-4 gap-y-16 justify-items-center sm:grid-cols-2 lg:grid-cols-3">
             {listingsList.map((listing) => (
               <SingleListingTile
                 key={listing.id}
-                id={listing.id}
-                data={listing.data}
+                listingId={listing.id}
+                listingData={listing.data}
               />
             ))}
           </ul>

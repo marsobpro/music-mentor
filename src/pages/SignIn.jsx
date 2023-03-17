@@ -51,9 +51,9 @@ export default function SignIn() {
 
   return (
     <section>
-      <h1 className="text-center font-bold text-4xl mt-28">Sign In</h1>
+      <h1 className="mt-28 text-center font-bold text-4xl">Sign In</h1>
 
-      <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto bg-white shadow-2xl rounded-2xl">
+      <div className="w-[20rem] py-8 px-3 mt-16 m-auto md:w-[30rem] md:px-20 shadow-2xl rounded-2xl bg-white">
         <form onSubmit={handleSubmit}>
           <input
             required
@@ -63,7 +63,7 @@ export default function SignIn() {
             value={email}
             placeholder="Your E-mail"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
+            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
           />
           <div className="relative">
             <input
@@ -74,7 +74,7 @@ export default function SignIn() {
               value={password}
               placeholder="Password"
               onChange={handleChange}
-              className="w-full h-14 rounded bg-gray-200 mb-4 border-none"
+              className="w-full h-14 mb-4 border-none rounded bg-gray-200"
             />
             {passwordIsVisible ? (
               <VscEyeClosed
@@ -91,15 +91,15 @@ export default function SignIn() {
           <div className="text-center">
             <button
               type="submit"
-              className=" w-full md:w-auto md:px-12 py-2 bg-green-400 rounded-2xl font-bold text-white mb-2 mt-4"
+              className="w-full mb-2 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold bg-green-400 text-white"
             >
               Login
             </button>
-            <p className="text-sm text-gray-400 text-center">
+            <p className="text-sm text-center text-gray-400">
               Forgot password?{" "}
               <Link
                 to="/forgot-password"
-                className="underline hover:text-gray-600 cursor-pointer"
+                className="underline cursor-pointer hover:text-gray-600"
               >
                 Reset
               </Link>
@@ -108,14 +108,14 @@ export default function SignIn() {
         </form>
       </div>
 
-      <div className="w-[20rem] md:w-[30rem] py-6 bg-green-400 mt-8 m-auto shadow-2xl rounded-2xl">
-        <div className="flex items-center justify-between flex-col md:flex-row md:text-center">
-          <p className="md:ml-6 text-white text-2xl font-semibold whitespace-nowrap text-center">
+      <div className="w-[20rem] py-6 mt-8 m-auto md:w-[30rem] shadow-2xl rounded-2xl bg-green-400">
+        <div className="flex flex-col items-center justify-between md:flex-row md:text-center">
+          <p className="md:ml-6 text-2xl font-semibold whitespace-nowrap text-center text-white">
             Not registered yet?
           </p>
           <Link
             to="/sign-up"
-            className="bg-white py-2 px-5 md:mr-8 mb-2 mt-4 rounded-2xl font-bold text-green-400 whitespace-nowrap"
+            className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap bg-white text-green-400"
           >
             Register now
           </Link>

@@ -117,7 +117,7 @@ export default function CreateListing() {
       }
     }
 
-    //Create the formData copy, add and delete from it
+    //Create the formData copy, modify it
     const addLessonFormDataCopy = {
       ...addLessonFormData,
       createdAt: serverTimestamp(),
@@ -132,7 +132,6 @@ export default function CreateListing() {
     setIsLoading(false);
     toast.success("You've successfully updated your lesson!", {
       icon: "🙌",
-      duration: 3000,
     });
     navigate(
       `/lessons/${addLessonFormDataCopy.subject}/${addLessonFormDataCopy.city}/${docRef.id}`
@@ -170,14 +169,14 @@ export default function CreateListing() {
     <>
       {allowRender ? (
         <main className="max-w-[1200px] mt-32 m-auto ">
-          <div className="md:w-[700px] m-auto px-8 py-6 bg-green-200 shadow-md rounded-2xl text-left sm:text-justify ">
+          <div className="md:w-[700px] m-auto px-8 py-6 text-left sm:text-justify shadow-md rounded-2xl bg-green-200 ">
             {" "}
-            <h1 className="font-semibold text-5xl text-center mb-12 font-mono">
+            <h1 className="mb-12 text-center font-semibold text-5xl font-mono">
               Edit your lesson
             </h1>
             <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-2 items-center justify-center mb-4 ">
-                <label htmlFor="firstName" className="text-xl ">
+              <div className="grid grid-cols-2 items-center justify-center mb-4">
+                <label htmlFor="firstName" className="text-xl">
                   Name:
                 </label>
                 <input
@@ -192,7 +191,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="lastName" className="text-xl ">
+                <label htmlFor="lastName" className="text-xl">
                   Last name:
                 </label>
                 <input
@@ -207,7 +206,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="subject" className="text-xl ">
+                <label htmlFor="subject" className="text-xl">
                   Subject
                 </label>
                 <select
@@ -269,7 +268,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-8">
-                <label htmlFor="lessonTime" className="text-xl ">
+                <label htmlFor="lessonTime" className="text-xl">
                   Lesson time
                 </label>
                 <span className="after:content-['__minutes']">
@@ -332,7 +331,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="shortDescription" className="text-xl mr-4">
+                <label htmlFor="shortDescription" className="mr-4 text-xl">
                   Short description{" "}
                   <span className="text-xs font-normal whitespace-nowrap">
                     (50 - 250 letters)
@@ -351,7 +350,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="fullDescription" className="text-xl mr-4">
+                <label htmlFor="fullDescription" className="mr-4 text-xl">
                   Full description{" "}
                   <span className="text-xs font-normal whitespace-nowrap">
                     (100 - 700 letters)
@@ -370,7 +369,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-8">
-                <label className="text-xl mr-4" htmlFor="videoLink">
+                <label className="mr-4 text-xl" htmlFor="videoLink">
                   Your video URL{" "}
                   <span className="text-xs font-normal whitespace-nowrap">
                     (https://...)
@@ -446,7 +445,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="yearsOfTeachingExperience" className="text-xl ">
+                <label htmlFor="yearsOfTeachingExperience" className="text-xl">
                   Teaching experience
                 </label>
                 <span className="after:content-['__years']">
@@ -464,7 +463,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="emailAddress" className="text-xl ">
+                <label htmlFor="emailAddress" className="text-xl">
                   Email:
                 </label>
                 <input
@@ -479,7 +478,7 @@ export default function CreateListing() {
               </div>
               {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="phoneNumber" className="text-xl ">
+                <label htmlFor="phoneNumber" className="text-xl">
                   Phone number
                 </label>
                 <input
@@ -508,7 +507,7 @@ export default function CreateListing() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="bg-white py-2 px-5 md:mr-8 mb-2 mt-4 rounded-2xl font-bold text-green-400 whitespace-nowrap"
+                  className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap bg-white text-green-400"
                 >
                   Edit lesson
                 </button>

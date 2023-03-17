@@ -70,23 +70,23 @@ export default function Profile() {
   return (
     <main className="max-w-[1100px] m-auto">
       <div>
-        <div className="mt-40 w-[20rem] md:w-[30rem] py-6 bg-green-400 m-auto shadow-2xl rounded-2xl">
-          <div className="flex items-center justify-between flex-col md:flex-row md:text-center">
-            <p className="md:ml-6 text-white text-2xl font-semibold whitespace-nowrap text-center">
+        <div className="w-[20rem] py-6 m-auto mt-40 md:w-[30rem] shadow-2xl rounded-2xl bg-green-400">
+          <div className="flex flex-col items-center justify-between md:flex-row md:text-center">
+            <p className="md:ml-6 text-2xl font-semibold whitespace-nowrap text-center text-white">
               Start teaching now!
             </p>
             <Link
               to="/create-listing"
-              className="bg-white py-2 px-5 md:mr-8 mb-2 mt-4 rounded-2xl font-bold text-green-400 whitespace-nowrap"
+              className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap bg-white text-green-400"
             >
               Add a lesson
             </Link>
           </div>
         </div>
       </div>
-      <section className="mt-12 md:mt-20 m-auto mb-6">
-        <h2 className="text-center text-3xl font-semibold mb-14">My lessons</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
+      <section className="mt-12 mb-6 m-auto md:mt-20">
+        <h2 className="mb-14 text-center text-3xl font-semibold">My lessons</h2>
+        <ul className="grid grid-cols-1 gap-x-4 gap-y-16 justify-items-center sm:grid-cols-2 lg:grid-cols-3">
           {listingsList.map((listing) => (
             <SingleListingTile
               key={listing.id}

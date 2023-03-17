@@ -67,7 +67,6 @@ export default function Lessons() {
             data: doc.data(),
           });
         });
-        // setListingsList((prevState) => [...prevState, ...temporaryListings]);
         setListingsList([...temporaryListings]);
         setIsLoading(false);
       } catch (error) {
@@ -82,17 +81,17 @@ export default function Lessons() {
   }
 
   return (
-    <main className="mt-28 text-2xl max-w-[1100px] m-auto px-4">
-      <h1 className="text-center text-3xl mx-4">
+    <main className="max-w-[1100px] px-4 mt-28 m-auto text-2xl">
+      <h1 className="mx-4 text-center text-3xl">
         Here are some{" "}
-        <span className="text-green-500 font-semibold underline decoration-dotted underline-offset-4">
+        <span className="underline decoration-dotted underline-offset-4 font-semibold text-green-500">
           {subject}
         </span>{" "}
         teachers{" "}
         {city ? (
           <span>
             from{" "}
-            <span className="text-green-500 capitalize font-semibold underline decoration-dotted underline-offset-4">
+            <span className="capitalize font-semibold underline decoration-dotted underline-offset-4 text-green-500">
               {city}{" "}
             </span>
           </span>
@@ -102,8 +101,8 @@ export default function Lessons() {
       </h1>
 
       {listingsList.length ? (
-        <section className="mt-16 md:mt-24 m-auto">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-16 justify-items-center ">
+        <section className="mt-16 m-auto md:mt-24">
+          <ul className="grid grid-cols-1 gap-x-4 gap-y-16 justify-items-center sm:grid-cols-2 lg:grid-cols-3">
             {listingsList.map((listing) => (
               <SingleListingTile
                 key={listing.id}

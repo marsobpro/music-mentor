@@ -3,7 +3,7 @@ import loading from "../assets/loading.svg";
 
 export default function Loading() {
   return (
-    <div className="grid h-screen place-items-center">
+    <div className="grid place-items-center h-screen">
       <div>
         <img src={loading} alt="Loading..."></img>
       </div>

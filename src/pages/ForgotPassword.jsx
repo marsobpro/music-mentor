@@ -17,9 +17,9 @@ export default function ForgotPassword() {
   const { email } = loginFormData;
   return (
     <section>
-      <h1 className="text-center font-bold text-4xl mt-28">Reset Password</h1>
+      <h1 className="mt-28 text-center font-bold text-4xl">Reset Password</h1>
 
-      <div className="w-[20rem] md:w-[30rem] py-8 px-3 md:px-20 mt-16 m-auto  bg-white shadow-2xl rounded-2xl">
+      <div className="w-[20rem] py-8 px-3 mt-16 m-auto md:px-20 md:w-[30rem] shadow-2xl rounded-2xl bg-white">
         <form>
           <input
             type="email"
@@ -28,21 +28,21 @@ export default function ForgotPassword() {
             value={email}
             placeholder="Your E-mail"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded bg-gray-200 border-none"
+            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
           />
 
           <div className="text-center">
             <button
               type="submit"
-              className=" w-full md:w-auto md:px-12 py-2 bg-green-400 rounded-2xl font-bold text-white mb-2 mt-4"
+              className="w-full mb-2 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold bg-green-400 text-white"
             >
               Reset
             </button>
-            <p className="text-sm text-gray-400 text-center">
+            <p className="text-sm text-center text-gray-400">
               Don't have an account?{" "}
               <Link
                 to="/sign-up"
-                className="underline hover:text-gray-600 cursor-pointer "
+                className="underline cursor-pointer hover:text-gray-600"
               >
                 Register
               </Link>
