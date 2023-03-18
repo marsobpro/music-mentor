@@ -1,7 +1,8 @@
 {
   "name": "musicmentor",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Marcin Sobieraj (marsobpro@gmail.com)",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,13 +11,15 @@
   },
   "dependencies": {
     "firebase": "^9.17.2",
-    "flowbite": "^1.6.3",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.7",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",

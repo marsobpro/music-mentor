@@ -30,6 +30,10 @@ const cityOptions = [
 ];
 
 export const AppContext = React.createContext(null);
+const toastStyling = {
+  style: { backgroundColor: "rgb(74 222 128)", color: "black" },
+  duration: 4000,
+};
 
 function App() {
   return (
@@ -38,10 +42,7 @@ function App() {
         <Toaster
           position="bottom-center"
           reverseOrder={false}
-          toastOptions={{
-            style: { backgroundColor: "rgb(74 222 128)", color: "black" },
-            duration: 4000,
-          }}
+          toastOptions={toastStyling}
         />
         <Header />
         <Routes>

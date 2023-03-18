@@ -3,7 +3,7 @@ import Loading from "../components/Loading";
 import { AppContext } from "../App";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
+import { v4, validate } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
@@ -256,6 +256,7 @@ export default function CreateListing() {
                 id="lessonTime"
                 name="lessonTime"
                 value={lessonTime}
+                min="0"
                 max="120"
                 step="5"
                 onChange={handleChange}
