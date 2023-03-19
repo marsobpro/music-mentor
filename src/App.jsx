@@ -28,12 +28,12 @@ const cityOptions = [
   { label: "Szczecin", value: "szczecin" },
   { label: "Gdansk", value: "gdansk" },
 ];
-
-export const AppContext = React.createContext(null);
 const toastStyling = {
   style: { backgroundColor: "rgb(74 222 128)", color: "black" },
   duration: 4000,
 };
+
+export const AppContext = React.createContext(null);
 
 function App() {
   return (

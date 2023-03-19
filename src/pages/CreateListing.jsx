@@ -73,20 +73,6 @@ export default function CreateListing() {
     setIsLoading(true);
     let imageUrl = null;
 
-    if (!online && !atStudentsPlace && !atMentorsPlace) {
-      toast.error("Please choose the location of your lessons.", {
-        icon: "🎺",
-      });
-      return;
-    }
-
-    if (!elementarySchool && !highSchool && !college && !adults) {
-      toast.error("Please choose at least one age group you are teaching.", {
-        icon: "🎺",
-      });
-      return;
-    }
-
     // Upload the image and get imageUrl
     if (image != null) {
       try {
