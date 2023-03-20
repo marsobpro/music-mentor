@@ -5,6 +5,7 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -26,7 +27,8 @@ export default function Profile() {
         const lessonsRef = collection(db, "listings");
         const q = query(
           lessonsRef,
-          where("userId", "==", auth.currentUser.uid)
+          where("userId", "==", auth.currentUser.uid),
+          orderBy("createdAt", "desc")
         );
         const querySnapshot = await getDocs(q);
         const temporaryListings = [];

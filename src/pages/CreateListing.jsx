@@ -8,6 +8,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
+import validateCreateListingData from "../utils/validateCreateListingData";
 
 export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,138 +39,48 @@ export default function CreateListing() {
     image: null,
   });
 
-  function validateData() {
-    let errors = {};
-
-    if (!firstName) {
-      errors.firstName = "Name is required!";
-    } else if (firstName.length > 50) {
-      errors.firstName = "The name should be max. 50 characters long";
-    }
-
-    if (!lastName) {
-      errors.lastName = "Last name is required!";
-    } else if (firstName.length > 50) {
-      errors.lastName = "The last name should be max. 50 characters long";
-    }
-
-    if (!subject) {
-      errors.subject = "What instrument do you teach?";
-    }
-
-    if (lessonTime < 30) {
-      errors.lessonTime = "Lesson should last at least 30 minutes";
-    } else if (lessonTime > 120) {
-      errors.lessonTime = "Lesson should last max. 120 minutes";
-    }
-
-    if (price < 20) {
-      errors.price = "Lesson should cost at least 20 PLN";
-    } else if (price > 400) {
-      errors.price = "Lesson should cost max. 400 PLN";
-    }
-
-    if (!city) {
-      errors.city = "Please choose a city";
-    }
-
-    if (
-      !atMentorsPlace.checked &&
-      !atStudentsPlace.checked &&
-      !online.checked
-    ) {
-      errors.lessonLocation = "Where do you teach? Choose at least 1 option";
-    }
-
-    if (shortDescription.length < 50) {
-      errors.shortDescription =
-        "Short description should be at least 50 characters long";
-    } else if (shortDescription.length > 250) {
-      errors.shortDescription =
-        "Short description should be max. 250 characters long";
-    }
-
-    if (fullDescription.length < 100) {
-      errors.fullDescription =
-        "Full description should be min. 100 characters long";
-    } else if (fullDescription.length > 700) {
-      errors.fullDescription =
-        "Full description should be max. 700 characters long";
-    }
-
-    if (
-      !elementarySchool.checked &&
-      !highSchool.checked &&
-      !college.checked &&
-      !adults.checked
-    ) {
-      errors.levelsOfTeaching = "Choose at least one level of teaching";
-    }
-
-    if (!yearsOfTeachingExperience) {
-      errors.yearsOfTeachingExperience =
-        "At least 1 year of experience required";
-    }
-
-    if (!phoneNumber) {
-      errors.phoneNumber = "Enter your phone number";
-    }
-
-    if (!emailAddress) {
-      errors.emailAddress = "Please enter email address";
-    }
-
-    if (!image) {
-      errors.image = "Please upload a picture of yourself";
-    }
-
-    return errors;
-  }
-
   function handleChange(e) {
+    const { type, checked, id, files, value } = e.target;
     //Checkboxes
-    if (e.target.type === "checkbox") {
-      if (e.target.checked) {
+    if (type === "checkbox") {
+      if (checked) {
         setAddLessonFormData((prevState) => ({
           ...prevState,
-          [e.target.id]: true,
+          [id]: true,
         }));
         return;
       }
-      if (!e.target.checked) {
+      if (!checked) {
         setAddLessonFormData((prevState) => ({
           ...prevState,
-          [e.target.id]: false,
+          [id]: false,
         }));
         return;
       }
     }
     // Files
-    if (e.target.files) {
+    if (files) {
       setAddLessonFormData((prevState) => ({
         ...prevState,
-        image: e.target.files[0],
+        image: files[0],
       }));
     }
     setAddLessonFormData((prevState) => ({
       ...prevState,
-      [e.target.id]: e.target.value,
+      [id]: value,
     }));
   }
 
   async function handleSubmit(e) {
-    // console.dir(addLessonFormData);
-
     e.preventDefault();
     setIsLoading(true);
-    const errors = validateData();
+    const errors = validateCreateListingData(addLessonFormData);
     if (Object.keys(errors).length) {
       setFoundErrors(errors);
       setIsLoading(false);
       toast.error("Check that you have filled out the form correctly.", {
         icon: "🔎",
       });
-      console.log("errors", errors);
       return;
     }
     let imageUrl = null;
@@ -268,7 +179,6 @@ export default function CreateListing() {
               id="lastName"
               name="lastName"
               value={lastName}
-              maxLength="50"
               onChange={handleChange}
               className={`w-[100%] h-10 rounded ${
                 foundErrors.lastName ? "border border-red-500" : ""
@@ -372,7 +282,7 @@ export default function CreateListing() {
                 id="lessonTime"
                 name="lessonTime"
                 value={lessonTime}
-                max="120"
+                min="0"
                 step="5"
                 onChange={handleChange}
                 className={`w-[25%] h-10 rounded ${
@@ -436,7 +346,7 @@ export default function CreateListing() {
 
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="shortDescription" className=" mr-4 text-xl">
+            <label htmlFor="shortDescription" className="mr-4 text-xl">
               Short description{" "}
               <span className="text-xs font-normal whitespace-nowrap">
                 (50 - 250 letters)
@@ -602,7 +512,6 @@ export default function CreateListing() {
               id="emailAddress"
               name="emailAddress"
               value={emailAddress}
-              maxLength="50"
               onChange={handleChange}
               className={`w-[100%] h-10 rounded ${
                 foundErrors.emailAddress ? "border border-red-500" : ""
@@ -642,7 +551,7 @@ export default function CreateListing() {
             </label>
             <input
               type="file"
-              id="image"
+              id="photo"
               accept=".jpg, .jpeg, .png"
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
