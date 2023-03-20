@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 
 export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);
+  const [foundErrors, setFoundErrors] = useState({});
   const { subjectOptions, cityOptions } = useContext(AppContext);
   const navigate = useNavigate();
   const auth = getAuth();
@@ -36,6 +37,94 @@ export default function CreateListing() {
     emailAddress: "",
     image: null,
   });
+
+  function validateData() {
+    let errors = {};
+
+    if (!firstName) {
+      errors.firstName = "Name is required!";
+    } else if (firstName.length > 50) {
+      errors.firstName = "The name should be max. 50 characters long";
+    }
+
+    if (!lastName) {
+      errors.lastName = "Last name is required!";
+    } else if (firstName.length > 50) {
+      errors.lastName = "The last name should be max. 50 characters long";
+    }
+
+    if (!subject) {
+      errors.subject = "What instrument do you teach?";
+    }
+
+    if (lessonTime < 30) {
+      errors.lessonTime = "Lesson should last at least 30 minutes";
+    } else if (lessonTime > 120) {
+      errors.lessonTime = "Lesson should last max. 120 minutes";
+    }
+
+    if (price < 20) {
+      errors.price = "Lesson should cost at least 20 PLN";
+    } else if (price > 400) {
+      errors.price = "Lesson should cost max. 400 PLN";
+    }
+
+    if (!city) {
+      errors.city = "Please choose a city";
+    }
+
+    if (
+      !atMentorsPlace.checked &&
+      !atStudentsPlace.checked &&
+      !online.checked
+    ) {
+      errors.lessonLocation = "Where do you teach? Choose at least 1 option";
+    }
+
+    if (shortDescription.length < 50) {
+      errors.shortDescription =
+        "Short description should be at least 50 characters long";
+    } else if (shortDescription.length > 250) {
+      errors.shortDescription =
+        "Short description should be max. 250 characters long";
+    }
+
+    if (fullDescription.length < 100) {
+      errors.fullDescription =
+        "Full description should be min. 100 characters long";
+    } else if (fullDescription.length > 700) {
+      errors.fullDescription =
+        "Full description should be max. 700 characters long";
+    }
+
+    if (
+      !elementarySchool.checked &&
+      !highSchool.checked &&
+      !college.checked &&
+      !adults.checked
+    ) {
+      errors.levelsOfTeaching = "Choose at least one level of teaching";
+    }
+
+    if (!yearsOfTeachingExperience) {
+      errors.yearsOfTeachingExperience =
+        "At least 1 year of experience required";
+    }
+
+    if (!phoneNumber) {
+      errors.phoneNumber = "Enter your phone number";
+    }
+
+    if (!emailAddress) {
+      errors.emailAddress = "Please enter email address";
+    }
+
+    if (!image) {
+      errors.image = "Please upload a picture of yourself";
+    }
+
+    return errors;
+  }
 
   function handleChange(e) {
     //Checkboxes
@@ -69,8 +158,20 @@ export default function CreateListing() {
   }
 
   async function handleSubmit(e) {
+    // console.dir(addLessonFormData);
+
     e.preventDefault();
     setIsLoading(true);
+    const errors = validateData();
+    if (Object.keys(errors).length) {
+      setFoundErrors(errors);
+      setIsLoading(false);
+      toast.error("Check that you have filled out the form correctly.", {
+        icon: "🔎",
+      });
+      console.log("errors", errors);
+      return;
+    }
     let imageUrl = null;
 
     // Upload the image and get imageUrl
@@ -144,12 +245,19 @@ export default function CreateListing() {
               id="firstName"
               name="firstName"
               value={firstName}
-              maxLength="50"
-              required
               onChange={handleChange}
-              className="w-[100%] h-10 rounded"
+              className={`w-[100%] h-10 rounded ${
+                foundErrors.firstName ? "border border-red-500" : ""
+              }`}
             />
+
+            {foundErrors.firstName ? (
+              <p className="form-error-message">{foundErrors.firstName}</p>
+            ) : (
+              ""
+            )}
           </div>
+
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="lastName" className="text-xl ">
@@ -161,10 +269,16 @@ export default function CreateListing() {
               name="lastName"
               value={lastName}
               maxLength="50"
-              required
               onChange={handleChange}
-              className="w-[100%] h-10 rounded"
+              className={`w-[100%] h-10 rounded ${
+                foundErrors.lastName ? "border border-red-500" : ""
+              }`}
             />
+            {foundErrors.lastName ? (
+              <p className="form-error-message">{foundErrors.lastName}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -176,8 +290,9 @@ export default function CreateListing() {
               name="subject"
               value={subject}
               onChange={handleChange}
-              className="h-10 rounded"
-              required
+              className={`h-10 rounded ${
+                foundErrors.subject ? "border border-red-500" : ""
+              }`}
             >
               <option value="" disabled>
                 --Choose--
@@ -188,6 +303,11 @@ export default function CreateListing() {
                 </option>
               ))}
             </select>
+            {foundErrors.subject ? (
+              <p className="form-error-message">{foundErrors.subject}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -199,8 +319,9 @@ export default function CreateListing() {
               name="city"
               value={city}
               onChange={handleChange}
-              className="h-10 rounded"
-              required
+              className={`h-10 rounded ${
+                foundErrors.city ? "border border-red-500" : ""
+              }`}
             >
               <option value="" disabled>
                 --Choose--
@@ -211,6 +332,11 @@ export default function CreateListing() {
                 </option>
               ))}
             </select>
+            {foundErrors.city ? (
+              <p className="form-error-message">{foundErrors.city}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -223,13 +349,17 @@ export default function CreateListing() {
                 id="price"
                 name="price"
                 value={price}
-                min="10"
-                max="400"
                 onChange={handleChange}
-                className="w-[25%] h-10 rounded"
-                required
+                className={`w-[25%] h-10 rounded ${
+                  foundErrors.price ? "border border-red-500" : ""
+                }`}
               />
             </span>
+            {foundErrors.price ? (
+              <p className="form-error-message">{foundErrors.price}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-8">
@@ -242,14 +372,19 @@ export default function CreateListing() {
                 id="lessonTime"
                 name="lessonTime"
                 value={lessonTime}
-                min="0"
                 max="120"
                 step="5"
                 onChange={handleChange}
-                className="w-[25%] h-10 rounded"
-                required
+                className={`w-[25%] h-10 rounded ${
+                  foundErrors.lessonTime ? "border border-red-500" : ""
+                }`}
               />
             </span>
+            {foundErrors.lessonTime ? (
+              <p className="form-error-message">{foundErrors.lessonTime}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -292,7 +427,13 @@ export default function CreateListing() {
                 <label htmlFor="online">Online</label>
               </div>
             </div>
+            {foundErrors.lessonLocation ? (
+              <p className="form-error-message">{foundErrors.lessonLocation}</p>
+            ) : (
+              ""
+            )}
           </div>
+
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="shortDescription" className=" mr-4 text-xl">
@@ -302,17 +443,24 @@ export default function CreateListing() {
               </span>
             </label>
             <textarea
-              minLength="50"
-              maxLength="250"
               rows="4"
               id="shortDescription"
               name="shortDescription"
               value={shortDescription}
               onChange={handleChange}
-              className="w-[100%] h-20 rounded text-sm"
-              required
+              className={`w-[100%] h-20 rounded text-sm ${
+                foundErrors.shortDescription ? "border border-red-500" : ""
+              }`}
             />
+            {foundErrors.shortDescription ? (
+              <p className="form-error-message">
+                {foundErrors.shortDescription}
+              </p>
+            ) : (
+              ""
+            )}
           </div>
+
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="fullDescription" className="mr-4 text-xl">
@@ -322,16 +470,22 @@ export default function CreateListing() {
               </span>
             </label>
             <textarea
-              minLength="100"
-              maxLength="700"
               rows="4"
               id="fullDescription"
               name="fullDescription"
               value={fullDescription}
               onChange={handleChange}
-              className="w-[100%] h-40 rounded text-xs"
-              required
+              className={`w-[100%] h-40 rounded text-xs ${
+                foundErrors.fullDescription ? "border border-red-500" : ""
+              }`}
             />
+            {foundErrors.fullDescription ? (
+              <p className="form-error-message">
+                {foundErrors.fullDescription}
+              </p>
+            ) : (
+              ""
+            )}
           </div>
 
           <div className="grid grid-cols-2 items-center justify-center mb-8">
@@ -355,8 +509,8 @@ export default function CreateListing() {
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="teachingLevels" className="text-xl ">
-              Credentials
+            <label htmlFor="levelsOfTeaching" className="text-xl ">
+              Levels Of Teaching
             </label>
             <div className="flex flex-col space-y-2">
               <div className="flex space-x-2 items-center">
@@ -404,6 +558,13 @@ export default function CreateListing() {
                 <label htmlFor="adults">Adults</label>
               </div>
             </div>
+            {foundErrors.levelsOfTeaching ? (
+              <p className="form-error-message">
+                {foundErrors.levelsOfTeaching}
+              </p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -417,12 +578,19 @@ export default function CreateListing() {
                 name="yearsOfTeachingExperience"
                 value={yearsOfTeachingExperience}
                 min="0"
-                max="50"
                 onChange={handleChange}
-                className="w-[25%] h-10 rounded"
-                required
+                className={`w-[25%] h-10 rounded ${
+                  foundErrors.shortDescription ? "border border-red-500" : ""
+                }`}
               />
             </span>
+            {foundErrors.yearsOfTeachingExperience ? (
+              <p className="form-error-message">
+                {foundErrors.yearsOfTeachingExperience}
+              </p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -436,9 +604,15 @@ export default function CreateListing() {
               value={emailAddress}
               maxLength="50"
               onChange={handleChange}
-              className="w-[100%] h-10 rounded"
-              required
+              className={`w-[100%] h-10 rounded ${
+                foundErrors.emailAddress ? "border border-red-500" : ""
+              }`}
             />
+            {foundErrors.emailAddress ? (
+              <p className="form-error-message">{foundErrors.emailAddress}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
@@ -450,26 +624,34 @@ export default function CreateListing() {
               id="phoneNumber"
               name="phoneNumber"
               value={phoneNumber}
-              minLength="7"
-              maxLength="20"
               onChange={handleChange}
-              className="w-[100%] h-10 rounded"
-              required
+              className={`w-[100%] h-10 rounded ${
+                foundErrors.phoneNumber ? "border border-red-500" : ""
+              }`}
             />
+            {foundErrors.phoneNumber ? (
+              <p className="form-error-message">{foundErrors.phoneNumber}</p>
+            ) : (
+              ""
+            )}
           </div>
           {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="photo" className="text-xl">
-              Photo
+            <label htmlFor="image" className="text-xl">
+              Photo of yourself
             </label>
             <input
               type="file"
-              id="photo"
+              id="image"
               accept=".jpg, .jpeg, .png"
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
-              required
             />
+            {foundErrors.image ? (
+              <p className="form-error-message">{foundErrors.image}</p>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex justify-center">
             <button

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .form-error-message {
+    @apply relative left-[50%] translate-x-[50%] my-4 text-xs text-center text-red-700;
+  }
+}
+
 body {
   background-color: rgba(252, 250, 250, 0.993);
 }

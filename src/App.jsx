@@ -29,8 +29,9 @@ const cityOptions = [
   { label: "Gdansk", value: "gdansk" },
 ];
 const toastStyling = {
-  style: { backgroundColor: "rgb(74 222 128)", color: "black" },
   duration: 4000,
+  success: { style: { backgroundColor: "rgb(74 222 128)", color: "black" } },
+  error: { style: { backgroundColor: "rgb(170 23 23)", color: "white" } },
 };
 
 export const AppContext = React.createContext(null);
