@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 export default function Profile() {
   const [listingsList, setListingsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [userName, setUserName] = useState("");
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -41,6 +42,7 @@ export default function Profile() {
         // setListingsList((prevState) => [...prevState, ...temporaryListings]);
         setListingsList([...temporaryListings]);
 
+        setUserName(auth.currentUser.displayName);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -72,7 +74,17 @@ export default function Profile() {
   return (
     <main className="max-w-[1100px] m-auto">
       <div>
-        <div className="w-[20rem] py-6 m-auto mt-40 md:w-[30rem] shadow-2xl rounded-2xl bg-green-400">
+        <h1 className="mt-28 text-center font-bold text-4xl">
+          Hi
+          {userName ? (
+            <span className="underline underline-offset-4 decoration-dotted text-green-400">
+              {`, ${userName} 🥳`}
+            </span>
+          ) : (
+            "! 🥳"
+          )}
+        </h1>
+        <div className="w-[20rem] py-6 m-auto mt-20 md:w-[30rem] shadow-2xl rounded-2xl bg-green-400">
           <div className="flex flex-col items-center justify-between md:flex-row md:text-center">
             <p className="md:ml-6 text-2xl font-semibold whitespace-nowrap text-center text-white">
               Start teaching now!
@@ -87,7 +99,9 @@ export default function Profile() {
         </div>
       </div>
       <section className="mt-12 mb-6 m-auto md:mt-20">
-        <h2 className="mb-14 text-center text-3xl font-semibold">My lessons</h2>
+        <h2 className="mb-14 text-center text-2xl font-semibold">
+          Lessons added by you
+        </h2>
         <ul className="grid grid-cols-1 gap-x-4 gap-y-16 justify-items-center sm:grid-cols-2 lg:grid-cols-3">
           {listingsList.map((listing) => (
             <SingleListingTile

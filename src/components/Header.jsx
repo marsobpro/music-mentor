@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 export default function Header() {
   const links = [
     { name: "LESSONS", link: "/lessons" },
-    { name: "ABOUT US", link: "/about-us" },
+    { name: "HOW IT WORKS", link: "/how-it-works" },
     { name: "CONTACT", link: "/contact" },
   ];
 

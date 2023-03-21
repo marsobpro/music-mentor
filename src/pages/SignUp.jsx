@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+  updateProfile,
+} from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -41,8 +45,16 @@ export default function SignUp() {
         emailAddress: errors.emailAddress,
         password: errors.password,
       });
-      console.log(errorsFound.firstName, errorsFound.lastName);
       toast.error("Check that you have filled out the form correctly.");
+      return;
+    }
+
+    const signInMethods = await fetchSignInMethodsForEmail(auth, emailAddress);
+    if (signInMethods.length) {
+      toast.error(
+        "This email already exists in our database. Try to log in instead."
+      );
+      navigate("/sign-in");
       return;
     }
 
@@ -54,7 +66,7 @@ export default function SignUp() {
       );
 
       updateProfile(auth.currentUser, {
-        firstName,
+        displayName: firstName,
         lastName,
       });
 

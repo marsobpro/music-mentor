@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
-import AboutUs from "./pages/AboutUs";
+import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
 import Lessons from "./pages/Lessons";
 import SignIn from "./pages/SignIn";
@@ -48,7 +48,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/lessons" element={<Lessons />} />
           <Route path="/lessons/:subject" element={<Lessons />} />

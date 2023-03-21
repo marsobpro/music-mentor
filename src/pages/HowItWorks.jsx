@@ -3,12 +3,12 @@ import choose from "../assets/choose.svg";
 import contact from "../assets/contact.svg";
 import play from "../assets/play.svg";
 
-export default function AboutUs() {
+export default function HowItWorks() {
   return (
     <main className="max-w-[1300px] mt-32 mb-4 px-4 m-auto">
       <header>
         <div className="mb-32 text-center">
-          <h1 className="mb-2 font-semibold text-5xl">How does it work?</h1>
+          <h1 className="mb-2 font-semibold text-5xl">How it works?</h1>
           <p>(you're just 3 steps from your dreams!)</p>
         </div>
       </header>
@@ -58,7 +58,7 @@ export default function AboutUs() {
               <h2 className="mb-3 font-bold text-3xl tracking-wide">
                 3. Learn and play!
               </h2>
-              <p>Something smart about having fun!</p>
+              <p>Just have fun!</p>
             </div>
           </div>
         </div>

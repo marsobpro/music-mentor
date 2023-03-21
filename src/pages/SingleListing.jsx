@@ -46,7 +46,6 @@ export default function SingleListing() {
           />
           <p className="text-center font-semibold text-4xl font-mono"></p>
           <p className="mb-4 text-center text-3xl font-bold">{`${singleListingData?.firstName}`}</p>
-          <p className="text-center text-sm">Last seen: 2 days ago</p>
         </div>
 
         <div className="py-4 mx-2 rounded-full bg-white">
