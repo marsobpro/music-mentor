@@ -108,9 +108,9 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher1.jpg)`,
             }}
-            className="relative flex justify-center w-[100px] h-full sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center"
+            className="mentor-photo-top"
           >
-            <div className="absolute bottom-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white">
+            <div className="mentor-photo-top-text">
               <h2 className="text-xl font-bold sm:text-2xl">Erin</h2>
               <p className="hidden text-sm sm:block">Piano mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
@@ -124,9 +124,9 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher2.jpg)`,
             }}
-            className="relative flex justify-center w-[100px] h-full mt-20 sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center"
+            className="mentor-photo-bottom"
           >
-            <div className="absolute top-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white">
+            <div className="mentor-photo-bottom-text">
               <h2 className="text-2xl font-bold">Pam</h2>
               <p className="hidden sm:block text-sm">Cello mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
@@ -143,9 +143,9 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher3.jpg)`,
             }}
-            className="relative flex justify-center w-[100px] sm:w-[170px] rounded-[100px] bg-no-repeat bg-center bg-cover"
+            className="mentor-photo-top"
           >
-            <div className="absolute bottom-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white">
+            <div className="mentor-photo-top-text">
               <h2 className="text-2xl font-bold">Jim</h2>
               <p className="hidden sm:block text-sm">Violin mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">

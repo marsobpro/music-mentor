@@ -6,6 +6,20 @@
   .form-error-message {
     @apply relative left-[50%] translate-x-[50%] my-4 text-xs text-center text-red-700;
   }
+
+  /* HOME */
+  .mentor-photo-top {
+    @apply relative flex justify-center w-[100px] h-full sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center;
+  }
+  .mentor-photo-top-text {
+    @apply absolute bottom-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white;
+  }
+  .mentor-photo-bottom {
+    @apply relative flex justify-center w-[100px] h-full mt-20 sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center;
+  }
+  .mentor-photo-bottom-text {
+    @apply absolute top-[15%] w-[85%] p-[7px] sm:w-[75%] sm:p-4 rounded-3xl bg-white;
+  }
 }
 
 body {

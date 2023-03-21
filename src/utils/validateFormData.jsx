@@ -12,7 +12,6 @@ export default function validateFormData(data) {
     image,
     firstName = "",
     lastName = "",
-    abc,
     atMentorsPlace,
     atStudentsPlace,
     online,
@@ -99,6 +98,20 @@ export default function validateFormData(data) {
 
   if (!password) {
     errors.password = "Enter password";
+  } else {
+    if (password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
+    } else if (!/[A-Z]/.test(password)) {
+      errors.password = "Password must contain at least 1 uppercase letter";
+    } else if (!/[a-z]/.test(password)) {
+      errors.password = "Password must contain at least 1 lowercase letter";
+    } else if (!/[!@#$%^&*()]/.test(password)) {
+      errors.password = "Password must contain at least 1 special character";
+    } else if (!/\d/.test(password)) {
+      errors.password = "Password must contain at least 1 number";
+    } else if (/\s/.test(password)) {
+      errors.password = "Password cannot contain whitespace characters";
+    }
   }
 
   if (!image) {

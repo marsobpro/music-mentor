@@ -1,35 +1,73 @@
 import React, { useState } from "react";
-import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import {
+  fetchSignInMethodsForEmail,
+  getAuth,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import toast from "react-hot-toast";
+import validateFormData from "../utils/validateFormData";
 
 export default function ForgotPassword() {
-  const [loginFormData, setLoginFormData] = useState({
-    email: "",
+  const [resetFormData, setResetFormData] = useState({
+    emailAddress: "",
   });
+  const [emailError, setEmailError] = useState();
 
   function handleChange(e) {
-    setLoginFormData((prevState) => ({
+    setResetFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   }
 
-  const { email } = loginFormData;
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const errors = validateFormData(resetFormData);
+    if (errors.emailAddress) {
+      setEmailError(errors.emailAddress);
+      toast.error("Check if you entered the correct email");
+      return;
+    }
+    const auth = getAuth();
+    try {
+      const signInMethods = await fetchSignInMethodsForEmail(
+        auth,
+        emailAddress
+      );
+      if (signInMethods.length) {
+        await sendPasswordResetEmail(auth, emailAddress);
+        toast.success(`Reset mail has been sent to ${emailAddress}`);
+      } else {
+        toast.error("Email not found");
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  }
+
+  const { emailAddress } = resetFormData;
   return (
     <section>
       <h1 className="mt-28 text-center font-bold text-4xl">Reset Password</h1>
 
       <div className="w-[20rem] py-8 px-3 mt-16 m-auto md:px-20 md:w-[30rem] shadow-2xl rounded-2xl bg-white">
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
+            type="text"
+            autoComplete="email"
+            name="emailAddress"
+            id="emailAddress"
+            value={emailAddress}
             placeholder="Your E-mail"
             onChange={handleChange}
             className="w-full h-14 mb-4 rounded border-none bg-gray-200"
           />
+          {emailError ? (
+            <p className="text-xs text-center text-red-700">{emailError}</p>
+          ) : (
+            ""
+          )}
 
           <div className="text-center">
             <button

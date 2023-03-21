@@ -83,7 +83,7 @@ export default function Lessons() {
   return (
     <main className="max-w-[1100px] px-4 mt-28 m-auto text-2xl">
       <h1 className="mx-4 text-center text-3xl">
-        Here are some{" "}
+        Here are our{" "}
         <span className="underline decoration-dotted underline-offset-4 font-semibold text-green-500">
           {subject}
         </span>{" "}
