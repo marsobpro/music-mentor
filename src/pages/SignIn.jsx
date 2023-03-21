@@ -10,7 +10,7 @@ import validateFormData from "../utils/validateFormData";
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
-  const [hasEmailProperFormat, setHasEmailProperFormat] = useState(true);
+  const [errorsFound, setErrorsFound] = useState({});
   const navigate = useNavigate();
 
   const [loginFormData, setLoginFormData] = useState({
@@ -28,13 +28,17 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    setHasEmailProperFormat(true);
 
     const errors = validateFormData(loginFormData);
-    if (errors.emailAddress) {
+    if (errors.emailAddress || errors.password) {
       setIsLoading(false);
-      setHasEmailProperFormat(false);
-      toast.error("Enter email in the proper format (example@mail.com)");
+      setErrorsFound({
+        emailAddress: errors.emailAddress,
+        password: errors.password,
+      });
+      console.log(errors.password);
+
+      toast.error("Check that you have filled out the form correctly.");
       return;
     }
 
@@ -76,9 +80,16 @@ export default function SignIn() {
             placeholder="E-mail"
             onChange={handleChange}
             className={`w-full h-14 mb-4 rounded border-none bg-gray-200 ${
-              hasEmailProperFormat ? "" : "bg-red-200"
+              errorsFound.emailAddress ? "bg-red-200" : ""
             }`}
           />
+          {errorsFound.emailAddress ? (
+            <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
+              {errorsFound.emailAddress}
+            </p>
+          ) : (
+            ""
+          )}
           <div className="relative">
             <input
               type={passwordIsVisible ? "text" : "password"}
@@ -87,8 +98,17 @@ export default function SignIn() {
               value={password}
               placeholder="Password"
               onChange={handleChange}
-              className="w-full h-14 mb-4 border-none rounded bg-gray-200"
+              className={`w-full h-14 mb-4 border-none rounded bg-gray-200 ${
+                errorsFound.password ? "bg-red-200" : ""
+              }`}
             />
+            {errorsFound.password ? (
+              <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
+                {errorsFound.password}
+              </p>
+            ) : (
+              ""
+            )}
             {passwordIsVisible ? (
               <VscEyeClosed
                 className="absolute right-2 top-4 text-xl"

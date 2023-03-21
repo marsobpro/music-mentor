@@ -32,6 +32,7 @@ export default function SignUp() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    // Validate form
     const errors = validateFormData(signUpFormData);
     if (
       errors.firstName ||
@@ -48,7 +49,7 @@ export default function SignUp() {
       toast.error("Check that you have filled out the form correctly.");
       return;
     }
-
+    // Check if email already exists
     const signInMethods = await fetchSignInMethodsForEmail(auth, emailAddress);
     if (signInMethods.length) {
       toast.error(
@@ -57,7 +58,7 @@ export default function SignUp() {
       navigate("/sign-in");
       return;
     }
-
+    // Create an account
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,

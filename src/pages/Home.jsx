@@ -26,15 +26,20 @@ export default function Home() {
   }
 
   return (
-    <main className="grid grid-rows-2 max-w-[1300px] h-[900px] mt-16 px-3 m-auto sm:px-7 md:h-[700px] md:mt-28 mdplus:flex mdplus:flex-row mdplus:justify-between">
+    <main className="grid grid-rows-2 max-w-[1300px] h-[900px] mt-20 px-3 m-auto sm:px-7 md:h-[700px] md:mt-28 mdplus:flex mdplus:flex-row mdplus:justify-between">
       <div className="flex flex-col justify-center md:space-y-6">
-        <div className="space-y-4 mb-4 font-semibold font-sans tracking-widest text-center mdplus:text-left">
-          <h1 className="text-2xl leading-snug md:text-[3.6rem]">
+        <div className="space-y-4 mb-8 font-semibold font-sans tracking-widest text-center mdplus:text-left">
+          <h1 className="text-2xl leading-snug md:text-5xl">
             Do you want to play
             <br />
             an instrument?
           </h1>
-          <h3 className="text-sm md:text-2xl">Find your Music Mentor!</h3>
+          <h3 className="text-xl md:text-2xl">
+            Find your{" "}
+            <span className="block sm:inline mt-4 sm:mt-4 sm:ml-2 font-pacifico text-4xl text-green-600 ">
+              Music Mentor!
+            </span>
+          </h3>
         </div>
         <div className="flex justify-center px-4 py-7 mx-4 md:w-[700px] md:m-auto xl:w-auto rounded-[50px] shadow-md border border-slate-300 bg-green-400">
           <form
@@ -102,8 +107,8 @@ export default function Home() {
 
       {/* Pictures */}
 
-      <div className="flex justify-center space-x-2 mt-2 md:space-x-8">
-        <div className="">
+      <div className="flex justify-center mt-8 space-x-2 md:space-x-8">
+        <div>
           <div
             style={{
               backgroundImage: `url(src/assets/teacher1.jpg)`,

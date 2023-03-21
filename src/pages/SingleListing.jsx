@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { CiPhone, CiMail } from "react-icons/ci";
 import toast from "react-hot-toast";
+import YoutubeVideo from "../components/YoutubeVideo";
 
 export default function SingleListing() {
   const params = useParams();
@@ -82,6 +83,14 @@ export default function SingleListing() {
           {singleListingData?.shortDescription}
         </p>
       </div>
+
+      {singleListingData?.videoLink ? (
+        <div className="">
+          <YoutubeVideo url={singleListingData?.videoLink} />
+        </div>
+      ) : (
+        ""
+      )}
 
       <div className=" px-5 py-2 mb-12 space-y-4 shadow-md rounded-3xl">
         <h3 className="text-lg font-semibold">Where?</h3>

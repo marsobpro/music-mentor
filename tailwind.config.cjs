@@ -2,7 +2,13 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        pacifico: ["Pacifico", "cursive"],
+        sacramento: ["Sacramento", "cursive"],
+      },
+    },
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
