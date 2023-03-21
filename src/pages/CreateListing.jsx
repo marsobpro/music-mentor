@@ -8,11 +8,11 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import toast from "react-hot-toast";
-import validateCreateListingData from "../utils/validateCreateListingData";
+import validateFormData from "../utils/validateFormData";
 
 export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);
-  const [foundErrors, setFoundErrors] = useState({});
+  const [errorsFound, setErrorsFound] = useState({});
   const { subjectOptions, cityOptions } = useContext(AppContext);
   const navigate = useNavigate();
   const auth = getAuth();
@@ -74,9 +74,9 @@ export default function CreateListing() {
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    const errors = validateCreateListingData(addLessonFormData);
+    const errors = validateFormData(addLessonFormData);
     if (Object.keys(errors).length) {
-      setFoundErrors(errors);
+      setErrorsFound(errors);
       setIsLoading(false);
       toast.error("Check that you have filled out the form correctly.", {
         icon: "🔎",
@@ -141,7 +141,7 @@ export default function CreateListing() {
 
   return (
     <main className="max-w-[1200px] mt-32 m-auto">
-      <div className="m-auto px-8 py-6 md:w-[700px] shadow-md rounded-2xl text-left sm:text-justify bg-green-200">
+      <div className="m-auto px-8 py-6 md:w-[700px] shadow-md rounded-2xl text-left sm:text-justify bg-green-500">
         {" "}
         <h1 className="mb-12 font-semibold text-5xl text-center font-mono">
           Add a lesson
@@ -158,12 +158,12 @@ export default function CreateListing() {
               value={firstName}
               onChange={handleChange}
               className={`w-[100%] h-10 rounded ${
-                foundErrors.firstName ? "border border-red-500" : ""
+                errorsFound.firstName ? "border border-red-500" : ""
               }`}
             />
 
-            {foundErrors.firstName ? (
-              <p className="form-error-message">{foundErrors.firstName}</p>
+            {errorsFound.firstName ? (
+              <p className="form-error-message">{errorsFound.firstName}</p>
             ) : (
               ""
             )}
@@ -181,11 +181,11 @@ export default function CreateListing() {
               value={lastName}
               onChange={handleChange}
               className={`w-[100%] h-10 rounded ${
-                foundErrors.lastName ? "border border-red-500" : ""
+                errorsFound.lastName ? "border border-red-500" : ""
               }`}
             />
-            {foundErrors.lastName ? (
-              <p className="form-error-message">{foundErrors.lastName}</p>
+            {errorsFound.lastName ? (
+              <p className="form-error-message">{errorsFound.lastName}</p>
             ) : (
               ""
             )}
@@ -201,7 +201,7 @@ export default function CreateListing() {
               value={subject}
               onChange={handleChange}
               className={`h-10 rounded ${
-                foundErrors.subject ? "border border-red-500" : ""
+                errorsFound.subject ? "border border-red-500" : ""
               }`}
             >
               <option value="" disabled>
@@ -213,8 +213,8 @@ export default function CreateListing() {
                 </option>
               ))}
             </select>
-            {foundErrors.subject ? (
-              <p className="form-error-message">{foundErrors.subject}</p>
+            {errorsFound.subject ? (
+              <p className="form-error-message">{errorsFound.subject}</p>
             ) : (
               ""
             )}
@@ -230,7 +230,7 @@ export default function CreateListing() {
               value={city}
               onChange={handleChange}
               className={`h-10 rounded ${
-                foundErrors.city ? "border border-red-500" : ""
+                errorsFound.city ? "border border-red-500" : ""
               }`}
             >
               <option value="" disabled>
@@ -242,8 +242,8 @@ export default function CreateListing() {
                 </option>
               ))}
             </select>
-            {foundErrors.city ? (
-              <p className="form-error-message">{foundErrors.city}</p>
+            {errorsFound.city ? (
+              <p className="form-error-message">{errorsFound.city}</p>
             ) : (
               ""
             )}
@@ -261,12 +261,12 @@ export default function CreateListing() {
                 value={price}
                 onChange={handleChange}
                 className={`w-[25%] h-10 rounded ${
-                  foundErrors.price ? "border border-red-500" : ""
+                  errorsFound.price ? "border border-red-500" : ""
                 }`}
               />
             </span>
-            {foundErrors.price ? (
-              <p className="form-error-message">{foundErrors.price}</p>
+            {errorsFound.price ? (
+              <p className="form-error-message">{errorsFound.price}</p>
             ) : (
               ""
             )}
@@ -286,12 +286,12 @@ export default function CreateListing() {
                 step="5"
                 onChange={handleChange}
                 className={`w-[25%] h-10 rounded ${
-                  foundErrors.lessonTime ? "border border-red-500" : ""
+                  errorsFound.lessonTime ? "border border-red-500" : ""
                 }`}
               />
             </span>
-            {foundErrors.lessonTime ? (
-              <p className="form-error-message">{foundErrors.lessonTime}</p>
+            {errorsFound.lessonTime ? (
+              <p className="form-error-message">{errorsFound.lessonTime}</p>
             ) : (
               ""
             )}
@@ -337,8 +337,8 @@ export default function CreateListing() {
                 <label htmlFor="online">Online</label>
               </div>
             </div>
-            {foundErrors.lessonLocation ? (
-              <p className="form-error-message">{foundErrors.lessonLocation}</p>
+            {errorsFound.lessonLocation ? (
+              <p className="form-error-message">{errorsFound.lessonLocation}</p>
             ) : (
               ""
             )}
@@ -359,12 +359,12 @@ export default function CreateListing() {
               value={shortDescription}
               onChange={handleChange}
               className={`w-[100%] h-20 rounded text-sm ${
-                foundErrors.shortDescription ? "border border-red-500" : ""
+                errorsFound.shortDescription ? "border border-red-500" : ""
               }`}
             />
-            {foundErrors.shortDescription ? (
+            {errorsFound.shortDescription ? (
               <p className="form-error-message">
-                {foundErrors.shortDescription}
+                {errorsFound.shortDescription}
               </p>
             ) : (
               ""
@@ -386,12 +386,12 @@ export default function CreateListing() {
               value={fullDescription}
               onChange={handleChange}
               className={`w-[100%] h-40 rounded text-xs ${
-                foundErrors.fullDescription ? "border border-red-500" : ""
+                errorsFound.fullDescription ? "border border-red-500" : ""
               }`}
             />
-            {foundErrors.fullDescription ? (
+            {errorsFound.fullDescription ? (
               <p className="form-error-message">
-                {foundErrors.fullDescription}
+                {errorsFound.fullDescription}
               </p>
             ) : (
               ""
@@ -468,9 +468,9 @@ export default function CreateListing() {
                 <label htmlFor="adults">Adults</label>
               </div>
             </div>
-            {foundErrors.levelsOfTeaching ? (
+            {errorsFound.levelsOfTeaching ? (
               <p className="form-error-message">
-                {foundErrors.levelsOfTeaching}
+                {errorsFound.levelsOfTeaching}
               </p>
             ) : (
               ""
@@ -490,13 +490,13 @@ export default function CreateListing() {
                 min="0"
                 onChange={handleChange}
                 className={`w-[25%] h-10 rounded ${
-                  foundErrors.shortDescription ? "border border-red-500" : ""
+                  errorsFound.shortDescription ? "border border-red-500" : ""
                 }`}
               />
             </span>
-            {foundErrors.yearsOfTeachingExperience ? (
+            {errorsFound.yearsOfTeachingExperience ? (
               <p className="form-error-message">
-                {foundErrors.yearsOfTeachingExperience}
+                {errorsFound.yearsOfTeachingExperience}
               </p>
             ) : (
               ""
@@ -508,17 +508,18 @@ export default function CreateListing() {
               Email:
             </label>
             <input
-              type="email"
+              type="text"
+              autoComplete="email"
               id="emailAddress"
               name="emailAddress"
               value={emailAddress}
               onChange={handleChange}
               className={`w-[100%] h-10 rounded ${
-                foundErrors.emailAddress ? "border border-red-500" : ""
+                errorsFound.emailAddress ? "border border-red-500" : ""
               }`}
             />
-            {foundErrors.emailAddress ? (
-              <p className="form-error-message">{foundErrors.emailAddress}</p>
+            {errorsFound.emailAddress ? (
+              <p className="form-error-message">{errorsFound.emailAddress}</p>
             ) : (
               ""
             )}
@@ -535,11 +536,11 @@ export default function CreateListing() {
               value={phoneNumber}
               onChange={handleChange}
               className={`w-[100%] h-10 rounded ${
-                foundErrors.phoneNumber ? "border border-red-500" : ""
+                errorsFound.phoneNumber ? "border border-red-500" : ""
               }`}
             />
-            {foundErrors.phoneNumber ? (
-              <p className="form-error-message">{foundErrors.phoneNumber}</p>
+            {errorsFound.phoneNumber ? (
+              <p className="form-error-message">{errorsFound.phoneNumber}</p>
             ) : (
               ""
             )}
@@ -556,8 +557,8 @@ export default function CreateListing() {
               onChange={handleChange}
               className="w-[100%] h-10 rounded"
             />
-            {foundErrors.image ? (
-              <p className="form-error-message">{foundErrors.image}</p>
+            {errorsFound.image ? (
+              <p className="form-error-message">{errorsFound.image}</p>
             ) : (
               ""
             )}
@@ -565,7 +566,7 @@ export default function CreateListing() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap bg-white text-green-400"
+              className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap shadow-lg hover:shadow-none bg-white text-green-600"
             >
               Create lesson
             </button>

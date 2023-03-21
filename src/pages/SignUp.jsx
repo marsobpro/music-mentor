@@ -5,15 +5,17 @@ import toast from "react-hot-toast";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
+import validateFormData from "../utils/validateFormData";
 
 export default function SignUp() {
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+  const [errorsFound, setErrorsFound] = useState({});
   const navigate = useNavigate();
 
   const [signUpFormData, setSignUpFormData] = useState({
-    name: "",
+    firstName: "",
     lastName: "",
-    email: "",
+    emailAddress: "",
     password: "",
   });
 
@@ -26,16 +28,34 @@ export default function SignUp() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const errors = validateFormData(signUpFormData);
+    if (
+      errors.firstName ||
+      errors.lastName ||
+      errors.emailAddress ||
+      errors.password
+    ) {
+      setErrorsFound({
+        firstName: errors.firstName,
+        lastName: errors.lastName,
+        emailAddress: errors.emailAddress,
+        password: errors.password,
+      });
+      console.log(errorsFound.firstName, errorsFound.lastName);
+      toast.error("Check that you have filled out the form correctly.");
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
+        emailAddress,
         password
       );
 
       updateProfile(auth.currentUser, {
-        firsName: name,
-        lastName: lastName,
+        firstName,
+        lastName,
       });
 
       const user = userCredential.user;
@@ -44,14 +64,16 @@ export default function SignUp() {
       signUpFormDataCopy.timestamp = serverTimestamp();
 
       await setDoc(doc(db, "users", user.uid), signUpFormDataCopy);
-      toast.success("Sign up was succesfull", { icon: "🥳" });
+      toast.success("Your account has been successfully created", {
+        icon: "🥳",
+      });
       navigate("/");
     } catch (error) {
       toast.error("Something went wrong", { icon: "😞" });
     }
   }
 
-  const { name, lastName, email, password } = signUpFormData;
+  const { firstName, lastName, emailAddress, password } = signUpFormData;
   return (
     <section>
       <h1 className="mt-28 text-center font-bold text-4xl">Sign Up</h1>
@@ -59,45 +81,74 @@ export default function SignUp() {
       <div className="w-[20rem] py-8 px-3 mt-16 md:w-[30rem] md:px-20 m-auto shadow-2xl rounded-2xl bg-white">
         <form onSubmit={handleSubmit}>
           <input
-            required
             type="text"
-            name="name"
-            id="name"
-            value={name}
-            placeholder="Your name"
+            name="firstName"
+            id="firstName"
+            value={firstName}
+            placeholder="Name"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
+            className={`w-full h-14 mb-4 rounded border-none bg-gray-200 ${
+              errorsFound.firstName ? "bg-red-200" : ""
+            }`}
           />
+          {errorsFound.firstName ? (
+            <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
+              {errorsFound.firstName}
+            </p>
+          ) : (
+            ""
+          )}
+
           <input
-            required
             type="text"
             name="lastName"
             id="lastName"
             value={lastName}
-            placeholder="Your last name"
+            placeholder="Last name"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
+            className={`w-full h-14 mb-4 rounded border-none bg-gray-200 ${
+              errorsFound.lastName ? "bg-red-200" : ""
+            }`}
           />
+          {errorsFound.lastName ? (
+            <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
+              {errorsFound.lastName}
+            </p>
+          ) : (
+            ""
+          )}
+
           <input
-            required
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            placeholder="Your E-mail"
+            type="text"
+            autoComplete="email"
+            name="emailAddress"
+            id="emailAddress"
+            value={emailAddress}
+            placeholder="E-mail"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
+            className={`w-full h-14 mb-4 rounded border-none bg-gray-200 ${
+              errorsFound.emailAddress ? "bg-red-200" : ""
+            }`}
           />
+          {errorsFound.emailAddress ? (
+            <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
+              {errorsFound.emailAddress}
+            </p>
+          ) : (
+            ""
+          )}
+
           <div className="relative">
             <input
-              required
               type={passwordIsVisible ? "text" : "password"}
               name="password"
               id="password"
               value={password}
               placeholder="Password"
               onChange={handleChange}
-              className="w-full h-14 rounded mb-4 border-none bg-gray-200"
+              className={`w-full h-14 rounded mb-4 border-none bg-gray-200 ${
+                errorsFound.password ? "bg-red-200" : ""
+              }`}
             />
             {passwordIsVisible ? (
               <VscEyeClosed
@@ -110,11 +161,20 @@ export default function SignUp() {
                 onClick={() => setPasswordIsVisible((prevState) => !prevState)}
               />
             )}
+
+            {errorsFound.password ? (
+              <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
+                {errorsFound.password}
+              </p>
+            ) : (
+              ""
+            )}
           </div>
+
           <div className="text-center">
             <button
               type="submit"
-              className="w-full mb-2 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold bg-green-400 text-white"
+              className="w-full mb-4 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold shadow-lg hover:shadow-none bg-green-500 text-white"
             >
               Create profile
             </button>

@@ -1,28 +1,39 @@
-export default function validateCreateListingData(data) {
+export default function validateFormData(data) {
   const {
     subject,
     lessonTime,
     price,
     city,
-    shortDescription,
-    fullDescription,
+    shortDescription = "",
+    fullDescription = "",
     yearsOfTeachingExperience,
-    phoneNumber,
-    emailAddress,
+    phoneNumber = "",
+    emailAddress = "",
     image,
-    firstName,
-    lastName,
+    firstName = "",
+    lastName = "",
+    abc,
+    atMentorsPlace,
+    atStudentsPlace,
+    online,
+    elementarySchool,
+    highSchool,
+    college,
+    adults,
+    password,
   } = data;
   let errors = {};
 
-  if (!firstName) {
-    errors.firstName = "Name is required!";
+  const emailRegex = /^(\S[^@\s]*)@([^\s@]+)\.([^\s@]+)$/;
+
+  if (!firstName.trim()) {
+    errors.firstName = "Name is required";
   } else if (firstName.length > 50) {
     errors.firstName = "The name should be max. 50 characters long";
   }
 
-  if (!lastName) {
-    errors.lastName = "Last name is required!";
+  if (!lastName.trim()) {
+    errors.lastName = "Last name is required";
   } else if (firstName.length > 50) {
     errors.lastName = "The last name should be max. 50 characters long";
   }
@@ -44,35 +55,30 @@ export default function validateCreateListingData(data) {
   }
 
   if (!city) {
-    errors.city = "Please choose a city";
+    errors.city = "Choose a city";
   }
 
-  if (!atMentorsPlace.checked && !atStudentsPlace.checked && !online.checked) {
+  if (!atMentorsPlace && !atStudentsPlace && !online) {
     errors.lessonLocation = "Where do you teach? Choose at least 1 option";
   }
 
-  if (shortDescription.length < 50) {
+  if (shortDescription.trim().length < 50) {
     errors.shortDescription =
       "Short description should be at least 50 characters long";
-  } else if (data.shortDescription.length > 250) {
+  } else if (shortDescription.trim().length > 250) {
     errors.shortDescription =
       "Short description should be max. 250 characters long";
   }
 
-  if (fullDescription.length < 100) {
+  if (fullDescription.trim().length < 100) {
     errors.fullDescription =
       "Full description should be min. 100 characters long";
-  } else if (fullDescription.length > 700) {
+  } else if (fullDescription.trim().length > 700) {
     errors.fullDescription =
       "Full description should be max. 700 characters long";
   }
 
-  if (
-    !elementarySchool.checked &&
-    !highSchool.checked &&
-    !college.checked &&
-    !adults.checked
-  ) {
+  if (!elementarySchool && !highSchool && !college && !adults) {
     errors.levelsOfTeaching = "Choose at least one level of teaching";
   }
 
@@ -80,17 +86,23 @@ export default function validateCreateListingData(data) {
     errors.yearsOfTeachingExperience = "At least 1 year of experience required";
   }
 
-  if (!phoneNumber) {
+  if (!phoneNumber.trim()) {
     errors.phoneNumber = "Enter your phone number";
   }
 
-  if (!emailAddress) {
-    errors.emailAddress = "Please enter email address";
+  if (!emailAddress.trim()) {
+    errors.emailAddress = "Enter email address";
+  } else if (!emailRegex.test(emailAddress)) {
+    errors.emailAddress =
+      "Enter the email in the correct format (example@mail.com)";
+  }
+
+  if (!password) {
+    errors.password = "Enter password";
   }
 
   if (!image) {
-    errors.image = "Please upload a picture of yourself";
+    errors.image = "Upload a picture of yourself";
   }
-
   return errors;
 }

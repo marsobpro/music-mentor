@@ -5,14 +5,16 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth } from "../firebase";
 import Loading from "../components/Loading";
+import validateFormData from "../utils/validateFormData";
 
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+  const [hasEmailProperFormat, setHasEmailProperFormat] = useState(true);
   const navigate = useNavigate();
 
   const [loginFormData, setLoginFormData] = useState({
-    email: "",
+    emailAddress: "",
     password: "",
   });
 
@@ -26,10 +28,20 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
+    setHasEmailProperFormat(true);
+
+    const errors = validateFormData(loginFormData);
+    if (errors.emailAddress) {
+      setIsLoading(false);
+      setHasEmailProperFormat(false);
+      toast.error("Enter email in the proper format (example@mail.com)");
+      return;
+    }
+
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        email,
+        emailAddress,
         password
       );
       if (userCredential.user) {
@@ -43,7 +55,7 @@ export default function SignIn() {
     }
   }
 
-  const { email, password } = loginFormData;
+  const { emailAddress, password } = loginFormData;
 
   if (isLoading) {
     return <Loading />;
@@ -56,18 +68,19 @@ export default function SignIn() {
       <div className="w-[20rem] py-8 px-3 mt-16 m-auto md:w-[30rem] md:px-20 shadow-2xl rounded-2xl bg-white">
         <form onSubmit={handleSubmit}>
           <input
-            required
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            placeholder="Your E-mail"
+            type="text"
+            autoComplete="email"
+            name="emailAddress"
+            id="emailAddress"
+            value={emailAddress}
+            placeholder="E-mail"
             onChange={handleChange}
-            className="w-full h-14 mb-4 rounded border-none bg-gray-200"
+            className={`w-full h-14 mb-4 rounded border-none bg-gray-200 ${
+              hasEmailProperFormat ? "" : "bg-red-200"
+            }`}
           />
           <div className="relative">
             <input
-              required
               type={passwordIsVisible ? "text" : "password"}
               name="password"
               id="password"
