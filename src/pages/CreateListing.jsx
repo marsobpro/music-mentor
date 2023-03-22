@@ -140,8 +140,8 @@ export default function CreateListing() {
   }
 
   return (
-    <main className="max-w-[1200px] mt-32 m-auto mx-2 mb-2">
-      <div className="m-auto px-8 py-6 md:w-[700px] shadow-md rounded-2xl text-left sm:text-justify bg-green-500">
+    <main className="max-w-[1200px] mt-32 m-auto">
+      <div className="md:w-[700px] m-auto px-8 py-6 shadow-md rounded-2xl text-left sm:text-justify bg-green-300">
         {" "}
         <h1 className="mb-12 font-semibold text-5xl text-center font-mono">
           Add a lesson

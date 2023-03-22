@@ -21,7 +21,6 @@ const subjectOptions = [
   { label: "Piano", value: "piano" },
   { label: "Guitar", value: "guitar" },
   { label: "Violin", value: "violin" },
-  { label: "Cello", value: "cello" },
 ];
 const cityOptions = [
   { label: "Poznan", value: "poznan" },

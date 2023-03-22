@@ -63,7 +63,8 @@ export default function CreateListing() {
       } else {
         setIsLoading(false);
         setAllowRender(false);
-        console.log("Doc doesn't exist");
+        toast.error("Sorry, something went wrong. Please try again.");
+        navigate("/profile");
       }
     }
     getData();
@@ -168,8 +169,8 @@ export default function CreateListing() {
   return (
     <>
       {allowRender ? (
-        <main className="max-w-[1200px] mt-32 m-auto ">
-          <div className="md:w-[700px] m-auto px-8 py-6 text-left sm:text-justify shadow-md rounded-2xl bg-green-200 ">
+        <main className="max-w-[1200px] mt-32 m-auto">
+          <div className="md:w-[700px] m-auto px-8 py-6 text-left sm:text-justify shadow-md rounded-2xl bg-green-300">
             {" "}
             <h1 className="mb-12 text-center font-semibold text-5xl font-mono">
               Edit your lesson

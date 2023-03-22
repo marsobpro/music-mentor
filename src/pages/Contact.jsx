@@ -73,17 +73,14 @@ export default function Contact() {
           </button>
         </form>
       </div>
-      <div className="flex flex-col justify-around mt-12 space-y-8 sm:flex-row sm:space-y-0 text-center ">
+      <div className="flex flex-col justify-around mt-12 space-y-8 sm:flex-row sm:space-y-0 text-center">
         <a
           href="mailto:marsobpro@gmail.com"
           className="py-2 px-4 rounded-2xl bg-green-400"
         >
           musicmentor@gmail.com
         </a>
-        <a
-          href="tel:123123123123123"
-          className="py-2 px-4 rounded-2xl bg-green-400"
-        >
+        <a href="tel:799011749" className="py-2 px-4 rounded-2xl bg-green-400">
           +48 123 456 789
         </a>
       </div>

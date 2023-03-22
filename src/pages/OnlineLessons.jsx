@@ -65,6 +65,7 @@ export default function OnlineLessons() {
 
         setIsLoading(false);
       } catch (error) {
+        toast.error("Sorry, I couldn't fetch the data. Please try again.");
         console.log(error);
       }
     }

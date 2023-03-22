@@ -39,12 +39,12 @@ export default function Profile() {
             data: doc.data(),
           });
         });
-        // setListingsList((prevState) => [...prevState, ...temporaryListings]);
         setListingsList([...temporaryListings]);
 
         setUserName(auth.currentUser.displayName);
         setIsLoading(false);
       } catch (error) {
+        toast.error("Sorry, I couldn't fetch the data. Please try again.");
         console.log(error);
       }
     }
@@ -75,14 +75,11 @@ export default function Profile() {
     <main className="max-w-[1100px] m-auto">
       <div>
         <h1 className="mt-28 text-center font-bold text-4xl">
-          Hi
-          {userName ? (
-            <span className="underline underline-offset-4 decoration-dotted text-green-400">
-              {`, ${userName} 🥳`}
-            </span>
-          ) : (
-            "! 🥳"
-          )}
+          Hi,{" "}
+          <span className="underline underline-offset-4 decoration-dotted text-green-400">
+            {`${userName}`}{" "}
+          </span>
+          🥳
         </h1>
         <div className="w-[20rem] py-6 m-auto mt-20 md:w-[30rem] shadow-2xl rounded-2xl bg-green-400">
           <div className="flex flex-col items-center justify-between md:flex-row md:text-center">

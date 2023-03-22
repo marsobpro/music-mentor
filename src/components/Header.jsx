@@ -7,7 +7,7 @@ import { auth } from "../firebase";
 import toast from "react-hot-toast";
 
 export default function Header() {
-  let [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const links = [
@@ -39,7 +39,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed top-0 z-40 left-0 right-0 w-full max-w-[1300px] m-auto border-b shadow-sm bg-white">
+    <div className="fixed top-0 z-40 left-0 right-0 w-full max-w-[1300px] m-auto shadow-sm bg-white">
       <div className="w-full m-auto px-7 py-4 items-center md:flex md:px-10 bg-white">
         <Link
           to="/"
@@ -54,17 +54,21 @@ export default function Header() {
         >
           {links.map((link) => (
             <li key={link.name} className="my-7 md:ml-8 md:my-0 text-[1rem]">
-              <Link
-                to={link.link}
-                className={`whitespace-nowrap text-gray-700 hover:text-gray-400 ${
-                  isCurrentRoute(link.link)
-                    ? "underline underline-offset-8 decoration-green-400 decoration-4 "
-                    : ""
-                }`}
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {link.name.toUpperCase()}
-              </Link>
+              <div className="relative">
+                {" "}
+                <Link
+                  to={link.link}
+                  className={`whitespace-nowrap text-gray-700 hover:text-gray-400`}
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                  {link.name.toUpperCase()}
+                </Link>
+                {isCurrentRoute(link.link) ? (
+                  <div className="hidden md:block absolute bottom-[-.5rem] w-full left-0 border-b-4 transform rotate-3 border-green-400"></div>
+                ) : (
+                  ""
+                )}
+              </div>
             </li>
           ))}
         </ul>

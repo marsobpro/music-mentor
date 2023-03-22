@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   return (
-    <main className="grid grid-rows-2 max-w-[1300px] h-[900px] mt-20 px-3 m-auto sm:px-7 md:h-[700px] md:mt-28 mdplus:flex mdplus:flex-row mdplus:justify-between">
+    <main className="grid grid-rows-2 max-w-[1300px] h-[900px] mt-20 px-3 m-auto sm:px-7 mdplus:h-[700px] md:mt-28 mdplus:flex mdplus:flex-row mdplus:justify-between">
       <div className="flex flex-col justify-center md:space-y-6">
         <div className="space-y-4 mb-8 font-semibold font-sans tracking-widest text-center mdplus:text-left">
           <h1 className="text-2xl leading-snug md:text-5xl">
@@ -98,7 +98,7 @@ export default function Home() {
               />
               <label htmlFor="isOnline">Online</label>
             </div>
-            <div className="w-full py-2 px-4 mx-2 mb-4 md:mb-0 shadow-md hover:shadow-sm font-bold rounded-2xl cursor-pointer text-center transition duration-150 ease-in-out text-green-400 bg-white">
+            <div className="w-full py-2 px-4 mb-4 md:mb-0 md:mx-2 shadow-md hover:shadow-sm font-bold rounded-2xl cursor-pointer text-center transition duration-150 ease-in-out text-green-400 bg-white">
               <button type="submit">Search</button>
             </div>
           </form>
@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* Pictures */}
 
-      <div className="flex justify-center mt-8 space-x-2 md:space-x-8">
+      <div className="flex justify-center mt-8 space-x-2">
         <div>
           <div
             style={{
@@ -116,7 +116,7 @@ export default function Home() {
             className="mentor-photo-top"
           >
             <div className="mentor-photo-top-text">
-              <h2 className="text-xl font-bold sm:text-2xl">Erin</h2>
+              <h2 className="text-xl font-bold ">Erin</h2>
               <p className="hidden text-sm sm:block">Piano mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
                 {<MdLocationOn className="mr-1 text-green-600" />} Poznań
@@ -132,7 +132,7 @@ export default function Home() {
             className="mentor-photo-bottom"
           >
             <div className="mentor-photo-bottom-text">
-              <h2 className="text-2xl font-bold">Pam</h2>
+              <h2 className="text-xl font-bold">Pam</h2>
               <p className="hidden sm:block text-sm">Cello mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
                 {
@@ -151,7 +151,7 @@ export default function Home() {
             className="mentor-photo-top"
           >
             <div className="mentor-photo-top-text">
-              <h2 className="text-2xl font-bold">Jim</h2>
+              <h2 className="text-xl font-bold">Jim</h2>
               <p className="hidden sm:block text-sm">Violin mentor</p>
               <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
                 {<MdLocationOn className="mr-1 text-green-600" />} Warsaw

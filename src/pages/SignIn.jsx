@@ -30,13 +30,11 @@ export default function SignIn() {
     setIsLoading(true);
 
     const errors = validateFormData(loginFormData);
-    if (errors.emailAddress || errors.password) {
+    if (errors.emailAddress) {
       setIsLoading(false);
       setErrorsFound({
         emailAddress: errors.emailAddress,
-        password: errors.password,
       });
-      console.log(errors.password);
 
       toast.error("Check that you have filled out the form correctly.");
       return;
@@ -98,17 +96,8 @@ export default function SignIn() {
               value={password}
               placeholder="Password"
               onChange={handleChange}
-              className={`w-full h-14 mb-4 border-none rounded bg-gray-200 ${
-                errorsFound.password ? "bg-red-200" : ""
-              }`}
+              className={"w-full h-14 mb-4 border-none rounded bg-gray-200"}
             />
-            {errorsFound.password ? (
-              <p className="mt-[-10px] mb-2 text-xs text-center text-red-700">
-                {errorsFound.password}
-              </p>
-            ) : (
-              ""
-            )}
             {passwordIsVisible ? (
               <VscEyeClosed
                 className="absolute right-2 top-4 text-xl"
