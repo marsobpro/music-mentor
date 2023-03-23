@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { GiMusicalScore } from "react-icons/gi";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { ImSwitch } from "react-icons/im";
 import toast from "react-hot-toast";
 
 export default function Header() {
@@ -43,7 +43,7 @@ export default function Header() {
       <div className="w-full m-auto px-7 py-4 items-center md:flex md:px-10 bg-white">
         <Link
           to="/"
-          className="text-4xl font-pacifico cursor-pointer transition duration-150 text-green-400 hover:text-green-600"
+          className="text-3xl sm:text-4xl font-pacifico cursor-pointer transition duration-150 text-green-400 hover:text-green-600"
         >
           MM
         </Link>
@@ -75,7 +75,7 @@ export default function Header() {
       </div>
       <div
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute right-8 top-6 md:hidden text-3xl cursor-pointer"
+        className="absolute right-8 top-5 md:hidden text-3xl cursor-pointer"
       >
         {isMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
       </div>
@@ -88,12 +88,11 @@ export default function Header() {
             >
               Profile
             </NavLink>
-            <button
+            {/* className="text-sm hover:underline text-red-500 hover:text-red-700" */}
+            <ImSwitch
+              className="inline cursor-pointer text-black hover:text-red-500"
               onClick={handleLogout}
-              className="text-sm hover:underline text-red-500 hover:text-red-700"
-            >
-              Sign out
-            </button>
+            />
           </div>
         ) : (
           <NavLink

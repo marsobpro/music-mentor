@@ -1,19 +1,23 @@
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
+  onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 import { auth, db } from "../firebase";
 import validateFormData from "../utils/validateFormData";
 
 export default function SignUp() {
-  const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errorsFound, setErrorsFound] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const [signUpFormData, setSignUpFormData] = useState({
@@ -22,6 +26,18 @@ export default function SignUp() {
     emailAddress: "",
     password: "",
   });
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        navigate("/profile");
+      } else {
+        setIsLoggedIn(false);
+        setIsLoading(false);
+      }
+    });
+  }, [navigate, auth]);
 
   function handleChange(e) {
     setSignUpFormData((prevState) => ({
@@ -90,7 +106,12 @@ export default function SignUp() {
   }
 
   const { firstName, lastName, emailAddress, password } = signUpFormData;
-  return (
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  return !isLoggedIn ? (
     <section>
       <h1 className="mt-28 text-center font-bold text-4xl">Sign Up</h1>
 
@@ -156,7 +177,7 @@ export default function SignUp() {
 
           <div className="relative">
             <input
-              type={passwordIsVisible ? "text" : "password"}
+              type={isPasswordVisible ? "text" : "password"}
               name="password"
               id="password"
               value={password}
@@ -166,15 +187,15 @@ export default function SignUp() {
                 errorsFound.password ? "bg-red-200" : ""
               }`}
             />
-            {passwordIsVisible ? (
+            {isPasswordVisible ? (
               <VscEyeClosed
                 className="absolute right-2 top-4 text-xl"
-                onClick={() => setPasswordIsVisible((prevState) => !prevState)}
+                onClick={() => setIsPasswordVisible((prevState) => !prevState)}
               />
             ) : (
               <VscEye
                 className="absolute right-2 top-4 text-xl"
-                onClick={() => setPasswordIsVisible((prevState) => !prevState)}
+                onClick={() => setIsPasswordVisible((prevState) => !prevState)}
               />
             )}
 
@@ -207,5 +228,7 @@ export default function SignUp() {
         </form>
       </div>
     </section>
+  ) : (
+    ""
   );
 }

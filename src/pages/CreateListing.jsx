@@ -75,6 +75,10 @@ export default function CreateListing() {
     e.preventDefault();
     setIsLoading(true);
     const errors = validateFormData(addLessonFormData);
+    console.log(errors);
+    delete errors["password"];
+    delete errors["message"];
+
     if (errors.hasOwnProperty("password")) {
       delete errors["password"];
     }
@@ -141,7 +145,6 @@ export default function CreateListing() {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(errorsFound);
 
   return (
     <main className="max-w-[1200px] mt-32 m-auto">
@@ -173,7 +176,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="lastName" className="text-xl ">
               Last name:
@@ -196,7 +198,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="subject" className="text-xl ">
               Subject
@@ -226,7 +227,6 @@ export default function CreateListing() {
               ""
             )}
           </div>
-          {/*  */}
 
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="city" className="text-xl">
@@ -256,7 +256,7 @@ export default function CreateListing() {
               ""
             )}
           </div>
-          {/*  */}
+
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="price" className="text-xl ">
               Price
@@ -281,7 +281,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-8">
             <label htmlFor="lessonTime" className="text-xl">
               Lesson time
@@ -307,7 +306,7 @@ export default function CreateListing() {
               ""
             )}
           </div>
-          {/*  */}
+
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="lessonLocation" className="text-xl">
               Lesson location
@@ -356,7 +355,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="shortDescription" className="mr-4 text-xl">
               Short description{" "}
@@ -384,7 +382,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="fullDescription" className="mr-4 text-xl">
               Full description{" "}
@@ -412,24 +409,20 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
-
           <div className="grid grid-cols-2 items-center justify-center mb-8">
             <label className="mr-4 text-xl" htmlFor="videoLink">
-              Your video URL{" "}
-              <span className="text-xs font-normal whitespace-nowrap">
-                (https://...)
+              Youtube link{" "}
+              <span className="text-xs font-normal whitespace-nowrap block pt-1">
+                Show how you teach or how you play!
               </span>
             </label>
             <input
-              type="url"
+              type="text"
               name="videoLink"
               id="videoLink"
               value={videoLink}
               onChange={handleChange}
-              placeholder="https://example.com"
-              pattern="https://.*"
-              size="30"
+              placeholder="https://youtube.com/..."
               className={`w-[100%] h-10 rounded ${
                 errorsFound.videoLink ? "border border-red-500" : ""
               }`}
@@ -441,8 +434,6 @@ export default function CreateListing() {
               ""
             )}
           </div>
-
-          {/*  */}
 
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="levelsOfTeaching" className="text-xl ">
@@ -504,8 +495,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
-
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="yearsOfTeachingExperience" className="text-xl ">
               Teaching experience
@@ -533,8 +522,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
-
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="emailAddress" className="text-xl ">
               Email:
@@ -558,8 +545,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
-
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="phoneNumber" className="text-xl ">
               Phone number
@@ -582,8 +567,6 @@ export default function CreateListing() {
             )}
           </div>
 
-          {/*  */}
-
           <div className="grid grid-cols-2 items-center justify-center mb-4">
             <label htmlFor="image" className="text-xl">
               Photo of yourself
@@ -601,8 +584,6 @@ export default function CreateListing() {
               ""
             )}
           </div>
-
-          {/*  */}
 
           <div className="flex justify-center">
             <button

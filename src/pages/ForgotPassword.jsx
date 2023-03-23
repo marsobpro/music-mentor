@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   fetchSignInMethodsForEmail,
   getAuth,
+  onAuthStateChanged,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import validateFormData from "../utils/validateFormData";
+import { auth } from "../firebase";
+import Loading from "../components/Loading";
 
 export default function ForgotPassword() {
   const [resetFormData, setResetFormData] = useState({
     emailAddress: "",
   });
   const [emailError, setEmailError] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setResetFormData((prevState) => ({
@@ -20,6 +26,18 @@ export default function ForgotPassword() {
       [e.target.id]: e.target.value,
     }));
   }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        navigate("/profile");
+      } else {
+        setIsLoggedIn(false);
+        setIsLoading(false);
+      }
+    });
+  }, [navigate, auth]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -44,6 +62,10 @@ export default function ForgotPassword() {
     } catch (error) {
       toast.error(error);
     }
+  }
+
+  if (isLoading) {
+    return <Loading />;
   }
 
   const { emailAddress } = resetFormData;

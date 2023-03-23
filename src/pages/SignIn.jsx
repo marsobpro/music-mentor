@@ -1,22 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth } from "../firebase";
 import Loading from "../components/Loading";
 import validateFormData from "../utils/validateFormData";
 
 export default function SignIn() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errorsFound, setErrorsFound] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const [loginFormData, setLoginFormData] = useState({
     emailAddress: "",
     password: "",
   });
+
+  useEffect(() => {
+    console.log("In sign-in use Effect");
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        navigate("/profile");
+      } else {
+        setIsLoggedIn(false);
+        setIsLoading(false);
+      }
+    });
+  }, [navigate, auth]);
 
   function handleChange(e) {
     setLoginFormData((prevState) => ({
@@ -36,7 +50,7 @@ export default function SignIn() {
         emailAddress: errors.emailAddress,
       });
 
-      toast.error("Check that you have filled out the form correctly.");
+      toast.error("Please check your email address.");
       return;
     }
 
@@ -63,7 +77,7 @@ export default function SignIn() {
     return <Loading />;
   }
 
-  return (
+  return !isLoggedIn ? (
     <section>
       <h1 className="mt-28 text-center font-bold text-4xl">Sign In</h1>
 
@@ -88,9 +102,10 @@ export default function SignIn() {
           ) : (
             ""
           )}
+
           <div className="relative">
             <input
-              type={passwordIsVisible ? "text" : "password"}
+              type={isPasswordVisible ? "text" : "password"}
               name="password"
               id="password"
               value={password}
@@ -98,15 +113,15 @@ export default function SignIn() {
               onChange={handleChange}
               className={"w-full h-14 mb-4 border-none rounded bg-gray-200"}
             />
-            {passwordIsVisible ? (
+            {isPasswordVisible ? (
               <VscEyeClosed
                 className="absolute right-2 top-4 text-xl"
-                onClick={() => setPasswordIsVisible((prevState) => !prevState)}
+                onClick={() => setIsPasswordVisible((prevState) => !prevState)}
               />
             ) : (
               <VscEye
                 className="absolute right-2 top-4 text-xl"
-                onClick={() => setPasswordIsVisible((prevState) => !prevState)}
+                onClick={() => setIsPasswordVisible((prevState) => !prevState)}
               />
             )}
           </div>
@@ -144,5 +159,7 @@ export default function SignIn() {
         </div>
       </div>
     </section>
+  ) : (
+    ""
   );
 }

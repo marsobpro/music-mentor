@@ -20,7 +20,8 @@ export default function validateFormData(data) {
     college,
     adults,
     password = "",
-    videoLink,
+    videoLink = "",
+    message = "",
   } = data;
   let errors = {};
 
@@ -29,13 +30,13 @@ export default function validateFormData(data) {
     /^https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/)([a-zA-Z0-9_-]{11})/;
 
   if (!firstName.trim()) {
-    errors.firstName = "Name is required";
+    errors.firstName = "Please enter your name";
   } else if (firstName.length > 50) {
     errors.firstName = "The name should be max. 50 characters long";
   }
 
   if (!lastName.trim()) {
-    errors.lastName = "Last name is required";
+    errors.lastName = "Please enter your last name";
   } else if (firstName.length > 50) {
     errors.lastName = "The last name should be max. 50 characters long";
   }
@@ -61,7 +62,8 @@ export default function validateFormData(data) {
   }
 
   if (!atMentorsPlace && !atStudentsPlace && !online) {
-    errors.lessonLocation = "Where do you teach? Choose at least 1 option";
+    errors.lessonLocation =
+      "Where do you teach? Please choose at least 1 option";
   }
 
   if (shortDescription.trim().length < 50) {
@@ -81,7 +83,7 @@ export default function validateFormData(data) {
   }
 
   if (!elementarySchool && !highSchool && !college && !adults) {
-    errors.levelsOfTeaching = "Choose at least one level of teaching";
+    errors.levelsOfTeaching = "Please choose at least one level of teaching";
   }
 
   if (!yearsOfTeachingExperience) {
@@ -89,43 +91,56 @@ export default function validateFormData(data) {
   }
 
   if (!phoneNumber.trim()) {
-    errors.phoneNumber = "Enter your phone number";
+    errors.phoneNumber = "Please enter your phone number";
   }
 
   if (!emailAddress.trim()) {
-    errors.emailAddress = "Enter email address";
+    errors.emailAddress = "Please enter your email";
   } else if (!emailRegex.test(emailAddress)) {
     errors.emailAddress =
       "Enter the email in the correct format (example@mail.com)";
   }
 
   if (!password) {
-    errors.password = "Enter password";
+    errors.password = "Please choose a password";
   } else {
     if (password.length < 8) {
-      errors.password = "Password must be at least 8 characters long";
+      errors.password = "Password should be at least 8 characters long";
     } else if (!/[A-Z]/.test(password)) {
-      errors.password = "Password must contain at least 1 uppercase letter";
+      errors.password = "Password should contain at least 1 uppercase letter";
     } else if (!/[a-z]/.test(password)) {
-      errors.password = "Password must contain at least 1 lowercase letter";
+      errors.password = "Password should contain at least 1 lowercase letter";
     } else if (!/[!@#$%^&*()]/.test(password)) {
-      errors.password = "Password must contain at least 1 special character";
+      errors.password = "Password should contain at least 1 special character";
     } else if (!/\d/.test(password)) {
-      errors.password = "Password must contain at least 1 number";
+      errors.password = "Password should contain at least 1 number";
     } else if (/\s/.test(password)) {
       errors.password = "Password cannot contain whitespace characters";
     }
   }
 
   if (!image) {
-    errors.image = "Upload a picture of yourself";
+    errors.image = "Please upload a picture of yourself";
   }
 
   if (videoLink.trim().length) {
     if (!videoLink.match(youtubeUrlPattern)) {
       errors.videoLink =
-        "Please add a link in the correct format (https://www.youtube.com/watch?v= OR https://www.youtube.com/embed/)";
+        "Please add a link in the correct format (https://www.youtube.com/watch?v=... OR https://www.youtube.com/embed/...)";
     }
   }
+
+  if (!message.trim()) {
+    errors.message = "Please write a message";
+  } else {
+    if (message.trim().length < 20) {
+      errors.message =
+        "Please make sure that your message has at least 20 characters";
+    } else if (message.trim().length > 700) {
+      errors.message =
+        "Please try to keep your message to a maximum of 700 characters";
+    }
+  }
+
   return errors;
 }

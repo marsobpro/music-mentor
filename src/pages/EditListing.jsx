@@ -212,7 +212,7 @@ export default function CreateListing() {
                   ""
                 )}
               </div>
-              {/*  */}
+
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="lastName" className="text-xl">
                   Last name:
@@ -222,7 +222,6 @@ export default function CreateListing() {
                   id="lastName"
                   name="lastName"
                   value={lastName}
-                  maxLength="50"
                   onChange={handleChange}
                   className={`w-[100%] h-10 rounded ${
                     errorsFound.lastName ? "border border-red-500" : ""
@@ -235,8 +234,6 @@ export default function CreateListing() {
               ) : (
                 ""
               )}
-
-              {/*  */}
 
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="subject" className="text-xl">
@@ -267,7 +264,7 @@ export default function CreateListing() {
                   ""
                 )}
               </div>
-              {/*  */}
+
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="city" className="text-xl">
                   City
@@ -297,7 +294,7 @@ export default function CreateListing() {
                   ""
                 )}
               </div>
-              {/*  */}
+
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="price" className="text-xl ">
                   Price
@@ -308,8 +305,6 @@ export default function CreateListing() {
                     id="price"
                     name="price"
                     value={price}
-                    min="10"
-                    max="400"
                     onChange={handleChange}
                     className={`w-[25%] h-10 rounded ${
                       errorsFound.price ? "border border-red-500" : ""
@@ -324,7 +319,6 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-8">
                 <label htmlFor="lessonTime" className="text-xl">
                   Lesson time
@@ -335,7 +329,7 @@ export default function CreateListing() {
                     id="lessonTime"
                     name="lessonTime"
                     value={lessonTime}
-                    max="120"
+                    min="0"
                     step="5"
                     onChange={handleChange}
                     className={`w-[25%] h-10 rounded ${
@@ -350,7 +344,7 @@ export default function CreateListing() {
                   ""
                 )}
               </div>
-              {/*  */}
+
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="lessonLocation" className="text-xl">
                   Lesson location
@@ -404,7 +398,6 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="shortDescription" className="mr-4 text-xl">
                   Short description{" "}
@@ -413,8 +406,6 @@ export default function CreateListing() {
                   </span>
                 </label>
                 <textarea
-                  minLength="50"
-                  maxLength="250"
                   rows="4"
                   id="shortDescription"
                   name="shortDescription"
@@ -434,7 +425,6 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="fullDescription" className="mr-4 text-xl">
                   Full description{" "}
@@ -443,8 +433,6 @@ export default function CreateListing() {
                   </span>
                 </label>
                 <textarea
-                  minLength="100"
-                  maxLength="700"
                   rows="4"
                   id="fullDescription"
                   name="fullDescription"
@@ -464,40 +452,36 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
-
               <div className="grid grid-cols-2 items-center justify-center mb-8">
-                <label className="mr-4 text-xl" htmlFor="videoLink">
-                  Your Youtube video URL{" "}
-                  <span className="text-xs font-normal whitespace-nowrap">
-                    (https://...)
+                <label className="mr-4 text-xl text-left" htmlFor="videoLink">
+                  Youtube link{" "}
+                  <span className="text-xs font-normal whitespace-nowrap block">
+                    (Show how you teach or how you play!)
                   </span>
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   name="videoLink"
                   id="videoLink"
                   value={videoLink}
                   onChange={handleChange}
-                  placeholder="https://example.com"
-                  pattern="https://.*"
-                  size="30"
+                  placeholder="https://youtube.com/..."
                   className={`w-[100%] h-10 rounded ${
                     errorsFound.videoLink ? "border border-red-500" : ""
                   }`}
                 />
 
                 {errorsFound.videoLink ? (
-                  <p className="form-error-message">{errorsFound.videoLink}</p>
+                  <p className="form-error-message text-left">
+                    {errorsFound.videoLink}
+                  </p>
                 ) : (
                   ""
                 )}
               </div>
 
-              {/*  */}
-
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="levelsOfTeaching" className="text-xl ">
+                <label htmlFor="levelsOfTeaching" className="text-xl">
                   Levels Of Teaching
                 </label>
                 <div className="flex flex-col space-y-2">
@@ -560,7 +544,6 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="yearsOfTeachingExperience" className="text-xl">
                   Teaching experience
@@ -572,7 +555,6 @@ export default function CreateListing() {
                     name="yearsOfTeachingExperience"
                     value={yearsOfTeachingExperience}
                     min="0"
-                    max="50"
                     onChange={handleChange}
                     className={`w-[25%] h-10 rounded ${
                       errorsFound.shortDescription
@@ -591,8 +573,6 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
-
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="emailAddress" className="text-xl">
                   Email:
@@ -602,7 +582,6 @@ export default function CreateListing() {
                   id="emailAddress"
                   name="emailAddress"
                   value={emailAddress}
-                  maxLength="50"
                   onChange={handleChange}
                   className={`w-[100%] h-10 rounded ${
                     errorsFound.emailAddress ? "border border-red-500" : ""
@@ -618,8 +597,6 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/*  */}
-
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="phoneNumber" className="text-xl">
                   Phone number
@@ -629,7 +606,6 @@ export default function CreateListing() {
                   id="phoneNumber"
                   name="phoneNumber"
                   value={phoneNumber}
-                  maxLength="20"
                   onChange={handleChange}
                   className={`w-[100%] h-10 rounded ${
                     errorsFound.phoneNumber ? "border border-red-500" : ""
@@ -644,8 +620,6 @@ export default function CreateListing() {
                   ""
                 )}
               </div>
-
-              {/*  */}
 
               <div className="grid grid-cols-2 items-center justify-center mb-4">
                 <label htmlFor="photo" className="text-xl">
@@ -665,8 +639,6 @@ export default function CreateListing() {
                   ""
                 )}
               </div>
-
-              {/*  */}
 
               <div className="flex justify-center">
                 <button

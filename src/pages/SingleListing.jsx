@@ -69,10 +69,10 @@ export default function SingleListing() {
       </div>
       <div className="flex space-x-4">
         {" "}
-        <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl bg-green-200 text-red-500">
+        <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
           <p>{singleListingData?.subject}</p>
         </div>
-        <div className="px-6 leading-8 mb-12 text-xl inline-block rounded-2xl bg-green-200 text-red-500">
+        <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
           <p className="capitalize">{singleListingData?.city}</p>
         </div>
       </div>
