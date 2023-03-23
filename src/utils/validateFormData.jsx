@@ -19,11 +19,14 @@ export default function validateFormData(data) {
     highSchool,
     college,
     adults,
-    password,
+    password = "",
+    videoLink,
   } = data;
   let errors = {};
 
   const emailRegex = /^(\S[^@\s]*)@([^\s@]+)\.([^\s@]+)$/;
+  const youtubeUrlPattern =
+    /^https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/)([a-zA-Z0-9_-]{11})/;
 
   if (!firstName.trim()) {
     errors.firstName = "Name is required";
@@ -116,6 +119,13 @@ export default function validateFormData(data) {
 
   if (!image) {
     errors.image = "Upload a picture of yourself";
+  }
+
+  if (videoLink.trim().length) {
+    if (!videoLink.match(youtubeUrlPattern)) {
+      errors.videoLink =
+        "Please add a link in the correct format (https://www.youtube.com/watch?v= OR https://www.youtube.com/embed/)";
+    }
   }
   return errors;
 }
