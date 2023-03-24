@@ -14,22 +14,35 @@ export default function Home() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Offline
-    if (!isOnline && subject && city) {
-      navigate(`/lessons/${subject}/${city}`);
+    if (!subject) {
+      toast.error("Please tell us what do you want to learn!");
+      return;
     }
-    //Online
-    if (isOnline && subject) {
+    if (isOnline) {
       navigate(`/online-lessons/${subject}`);
+      toast.success(`Lets find ${subject} mentors who teach online!`, {
+        icon: "🥳",
+      });
+      return;
     }
-    toast.success("Let's find you a mentor!", { icon: "🎺" });
+    if (city) {
+      navigate(`/lessons/${subject}/${city}`);
+      toast.success(`Lets find ${subject} mentors from ${city}!`, {
+        icon: "🥳",
+      });
+    } else {
+      navigate(`/lessons/${subject}`);
+      toast.success(`Lets find ${subject} mentors!`, {
+        icon: "🥳",
+      });
+    }
   }
 
   return (
     <main className="grid grid-rows-2 max-w-[1300px] h-[900px] mt-20 px-3 m-auto sm:px-7 mdplus:h-[700px] md:mt-28 mdplus:flex mdplus:flex-row mdplus:justify-between">
       <div className="flex flex-col justify-center md:space-y-6">
-        <div className="space-y-4 mb-8 font-semibold font-sans tracking-widest text-center mdplus:text-left">
-          <h1 className="text-2xl leading-snug md:text-5xl">
+        <div className="space-y-4 mb-8 font-semibold font-montserrat tracking-widest text-center mdplus:text-left">
+          <h1 className="text-2xl md:text-4xl">
             Do you want to play
             <br />
             an instrument?
@@ -52,7 +65,6 @@ export default function Home() {
                 id="subject"
                 onChange={(e) => setSubject(e.target.value)}
                 value={subject}
-                required
                 className="rounded-2xl"
               >
                 <option value="" disabled>
@@ -72,7 +84,6 @@ export default function Home() {
                 onChange={(e) => setCity(e.target.value)}
                 value={city}
                 disabled={isOnline}
-                required={!isOnline}
                 className="w-full rounded-2xl md:w-auto"
               >
                 <option value="" disabled>
@@ -113,12 +124,12 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher1.jpg)`,
             }}
-            className="mentor-photo-top"
+            className="mentor-photo"
           >
-            <div className="mentor-photo-top-text">
-              <h2 className="text-xl font-bold ">Erin</h2>
-              <p className="hidden text-sm sm:block">Piano mentor</p>
-              <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
+            <div className="mentor-photo__info bottom-[15%]">
+              <h2 className="mentor-photo__info-header">Erin</h2>
+              <p className="mentor-photo__info-paragraph">Piano mentor</p>
+              <div className="mentor-photo__info-location">
                 {<MdLocationOn className="mr-1 text-green-600" />} Poznań
               </div>
             </div>
@@ -129,12 +140,12 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher2.jpg)`,
             }}
-            className="mentor-photo-bottom"
+            className="mentor-photo mt-20"
           >
-            <div className="mentor-photo-bottom-text">
-              <h2 className="text-xl font-bold">Pam</h2>
-              <p className="hidden sm:block text-sm">Cello mentor</p>
-              <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
+            <div className="mentor-photo__info top-[15%]">
+              <h2 className="mentor-photo__info-header">Pam</h2>
+              <p className="mentor-photo__info-paragraph">Cello mentor</p>
+              <div className="mentor-photo__info-location">
                 {
                   <HiOutlineStatusOnline className="mr-1 text-lg text-green-600" />
                 }{" "}
@@ -148,12 +159,12 @@ export default function Home() {
             style={{
               backgroundImage: `url(src/assets/teacher3.jpg)`,
             }}
-            className="mentor-photo-top"
+            className="mentor-photo"
           >
-            <div className="mentor-photo-top-text">
-              <h2 className="text-xl font-bold">Jim</h2>
-              <p className="hidden sm:block text-sm">Violin mentor</p>
-              <div className="flex items-center mt-1 mb-1 sm:mb-0 text-sm">
+            <div className="mentor-photo__info bottom-[15%]">
+              <h2 className="mentor-photo__info-header">Jim</h2>
+              <p className="mentor-photo__info-paragraph">Violin mentor</p>
+              <div className="mentor-photo__info-location">
                 {<MdLocationOn className="mr-1 text-green-600" />} Warsaw
               </div>
             </div>

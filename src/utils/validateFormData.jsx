@@ -120,7 +120,7 @@ export default function validateFormData(data) {
   }
 
   if (!image) {
-    errors.image = "Please upload a picture of yourself";
+    errors.image = "Please upload a photo of yourself";
   }
 
   if (videoLink.trim().length) {

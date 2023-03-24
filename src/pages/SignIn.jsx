@@ -20,7 +20,6 @@ export default function SignIn() {
   });
 
   useEffect(() => {
-    console.log("In sign-in use Effect");
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
@@ -115,7 +114,7 @@ export default function SignIn() {
             />
             {isPasswordVisible ? (
               <VscEyeClosed
-                className="absolute right-2 top-4 text-xl"
+                className="absolute right-2 top-[1.0937rem] text-xl"
                 onClick={() => setIsPasswordVisible((prevState) => !prevState)}
               />
             ) : (
@@ -128,7 +127,7 @@ export default function SignIn() {
           <div className="text-center">
             <button
               type="submit"
-              className="w-full mb-2 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold bg-green-400 text-white"
+              className="w-full mb-2 mt-4 py-2 md:w-auto md:px-12 rounded-2xl font-bold shadow-md hover:shadow-none transition duration-140 bg-green-400 text-white"
             >
               Login
             </button>
@@ -152,7 +151,7 @@ export default function SignIn() {
           </p>
           <Link
             to="/sign-up"
-            className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap bg-white text-green-400"
+            className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap shadow-md hover:shadow-none transition duration-140 bg-white text-green-400"
           >
             Register now
           </Link>

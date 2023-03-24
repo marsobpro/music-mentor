@@ -14,6 +14,7 @@ export default function CreateListing() {
   const [isLoading, setIsLoading] = useState(false);
   const [allowRender, setAllowRender] = useState(false);
   const [errorsFound, setErrorsFound] = useState({});
+  const [isUpdatingPhoto, setIsUpdatingPhoto] = useState(false);
   const [addLessonFormData, setAddLessonFormData] = useState({
     firstName: "",
     lastName: "",
@@ -106,8 +107,10 @@ export default function CreateListing() {
     e.preventDefault();
     setIsLoading(true);
     const errors = validateFormData(addLessonFormData);
-    if (errors.hasOwnProperty("password")) {
-      delete errors["password"];
+    delete errors["password"];
+    delete errors["message"];
+    if (!isUpdatingPhoto) {
+      delete errors["image"];
     }
     if (Object.keys(errors).length) {
       setErrorsFound(errors);
@@ -121,7 +124,7 @@ export default function CreateListing() {
     let imageUrl = null;
 
     // Upload the image and get imageUrl
-    if (image != null) {
+    if (isUpdatingPhoto) {
       try {
         const fileName = `listingsImages/${image.name + v4()}`;
         const imageRef = ref(storage, fileName);
@@ -130,6 +133,8 @@ export default function CreateListing() {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      imageUrl = addLessonFormData?.imageUrl;
     }
 
     //Create the formData copy, modify it
@@ -183,8 +188,8 @@ export default function CreateListing() {
   return (
     <>
       {allowRender ? (
-        <main className="max-w-[1200px] mt-32 m-auto">
-          <div className="md:w-[700px] m-auto px-8 py-6 text-left sm:text-justify shadow-md rounded-2xl bg-green-300">
+        <main className="max-w-[1200px] mt-28 m-auto">
+          <div className="md:w-[700px] m-auto px-8 py-6 mb-2 text-left sm:text-justify shadow-md rounded-2xl bg-green-300">
             {" "}
             <h1 className="mb-12 text-center font-semibold text-5xl font-mono">
               Edit your lesson
@@ -306,7 +311,7 @@ export default function CreateListing() {
                     name="price"
                     value={price}
                     onChange={handleChange}
-                    className={`w-[25%] h-10 rounded ${
+                    className={`w-[25%] min-w-[3.5rem] h-10 rounded ${
                       errorsFound.price ? "border border-red-500" : ""
                     }`}
                   />
@@ -332,7 +337,7 @@ export default function CreateListing() {
                     min="0"
                     step="5"
                     onChange={handleChange}
-                    className={`w-[25%] h-10 rounded ${
+                    className={`w-[25%] min-w-[3.5rem] h-10 rounded ${
                       errorsFound.lessonTime ? "border border-red-500" : ""
                     }`}
                   />
@@ -346,7 +351,7 @@ export default function CreateListing() {
               </div>
 
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="lessonLocation" className="text-xl">
+                <label htmlFor="lessonLocation" className="text-xl mr-4">
                   Lesson location
                 </label>
                 <div className="flex flex-col space-y-2">
@@ -411,7 +416,7 @@ export default function CreateListing() {
                   name="shortDescription"
                   value={shortDescription}
                   onChange={handleChange}
-                  className={`w-[100%] h-20 rounded text-sm ${
+                  className={`w-[100%] h-20 rounded text-xs sm:text-sm ${
                     errorsFound.shortDescription ? "border border-red-500" : ""
                   }`}
                 />
@@ -455,7 +460,7 @@ export default function CreateListing() {
               <div className="grid grid-cols-2 items-center justify-center mb-8">
                 <label className="mr-4 text-xl text-left" htmlFor="videoLink">
                   Youtube link{" "}
-                  <span className="text-xs font-normal whitespace-nowrap block">
+                  <span className="text-xs font-normal block">
                     (Show how you teach or how you play!)
                   </span>
                 </label>
@@ -481,7 +486,7 @@ export default function CreateListing() {
               </div>
 
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="levelsOfTeaching" className="text-xl">
+                <label htmlFor="levelsOfTeaching" className="text-xl mr-4">
                   Levels Of Teaching
                 </label>
                 <div className="flex flex-col space-y-2">
@@ -545,7 +550,10 @@ export default function CreateListing() {
               </div>
 
               <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="yearsOfTeachingExperience" className="text-xl">
+                <label
+                  htmlFor="yearsOfTeachingExperience"
+                  className="text-xl mr-4"
+                >
                   Teaching experience
                 </label>
                 <span className="after:content-['__years']">
@@ -597,8 +605,8 @@ export default function CreateListing() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="phoneNumber" className="text-xl">
+              <div className="grid grid-cols-2 items-center justify-center mb-6">
+                <label htmlFor="phoneNumber" className="text-xl mr-4">
                   Phone number
                 </label>
                 <input
@@ -621,20 +629,67 @@ export default function CreateListing() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 items-center justify-center mb-4">
-                <label htmlFor="photo" className="text-xl">
+              <div className="grid grid-cols-2 items-center justify-center mb-10">
+                {" "}
+                <div>
+                  <h3 className="text-xl mr-4">
+                    Do you want to update the photo?
+                  </h3>
+                </div>
+                <div className="flex align-center justify-around">
+                  {" "}
+                  <button
+                    type="button"
+                    className={`px-2 py-1 rounded-2xl cursor-pointer shadow-md hover:shadow-none transition duration-120 bg-white text-black ${
+                      isUpdatingPhoto ? "border-2 border-black" : ""
+                    }`}
+                    onClick={() => setIsUpdatingPhoto(true)}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    className={`px-2 py-1 rounded-2xl cursor-pointer shadow-md hover:shadow-none transition duration-120 bg-white text-black ${
+                      isUpdatingPhoto ? "" : "border-2 border-black"
+                    }`}
+                    onClick={() => setIsUpdatingPhoto(false)}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 items-center justify-center mb-6">
+                <label htmlFor="photo" className="text-xl mr-4">
                   Photo of yourself
                 </label>
-                <input
-                  type="file"
-                  id="photo"
-                  accept=".jpg, .jpeg, .png"
-                  onChange={handleChange}
-                  className="w-[100%] h-10 rounded"
-                />
+                <div>
+                  {isUpdatingPhoto ? (
+                    <input
+                      type="file"
+                      id="photo"
+                      accept=".jpg, .jpeg, .png"
+                      onChange={handleChange}
+                      className="w-[100%] h-10 rounded"
+                      disabled={!isUpdatingPhoto}
+                    />
+                  ) : (
+                    <div className="flex flex-col justify-around items-center text-center space-y-3 md:space-y-0 md:text-left md:flex-row">
+                      <p className="text-xs">We'll keep your current photo: </p>
+                      <img
+                        src={`${addLessonFormData?.imageUrl}`}
+                        alt="Mentor's profile picture"
+                        loading="lazy"
+                        className="w-[60px] p-[0.18rem] h-auto rounded-xl object-cover bg-white"
+                      />
+                    </div>
+                  )}
+                </div>
 
                 {errorsFound.image ? (
-                  <p className="form-error-message">{errorsFound.image}</p>
+                  <p className="form-error-message text-left">
+                    {errorsFound.image}
+                  </p>
                 ) : (
                   ""
                 )}

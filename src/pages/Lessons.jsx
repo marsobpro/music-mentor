@@ -83,16 +83,14 @@ export default function Lessons() {
 
   return (
     <main className="max-w-[1100px] px-4 mt-28 m-auto text-2xl">
-      <h1 className="mx-4 text-center text-3xl">
+      <h1 className="mx-4 text-center font-montserrat font-bold text-3xl">
         Here are our{" "}
-        <span className="underline decoration-dotted underline-offset-4 font-semibold text-green-500">
-          {subject}
-        </span>{" "}
-        teachers{" "}
+        <span className="font-pacifico text-green-500">{subject}</span> mentors
         {city ? (
           <span>
+            {" "}
             from{" "}
-            <span className="capitalize font-semibold underline decoration-dotted underline-offset-4 text-green-500">
+            <span className="capitalize font-pacifico text-green-500">
               {city}{" "}
             </span>
           </span>
@@ -114,9 +112,9 @@ export default function Lessons() {
           </ul>
         </section>
       ) : (
-        <p className="mt-24 text-center font-semibold">
-          ☹️ Unfortunately, I did not find any teachers meeting the given
-          criteria in the database. Please try again with different data!
+        <p className="mt-[30%] text-center font-montserrat">
+          Unfortunately, I did not find any teachers meeting the given criteria
+          in the database. Please try again with different data!
         </p>
       )}
     </main>

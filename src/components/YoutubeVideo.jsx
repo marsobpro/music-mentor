@@ -15,7 +15,7 @@ export default function YoutubeVideo({ url }) {
 
   return (
     <iframe
-      className="w-full border-4 border-green-400 h-[300px] md:h-[400px] mt-3 mb-12 rounded-3xl"
+      className="w-full h-[300px] md:h-[400px] border-4 mt-3 mb-12 rounded-3xl border-green-400"
       src={embedUrl}
       title="YouTube video player"
       allow="accelerometer; clipboard-write; encrypted-media; gyroscope; web-share"

@@ -15,24 +15,24 @@ export default function HowItWorks() {
 
       <section>
         <div className="grid grid-rows-3 gap-y-32">
-          <div className="grid items-center sm:grid-cols-2 border-2 space-y-10 sm:space-y-0 border-black rounded-2xl py-9 px-3">
+          <div className="step-container">
             <div
               style={{
                 backgroundImage: `url(${choose})`,
               }}
-              className="w-[220px] m-auto aspect-square bg-no-repeat bg-contain"
+              className="step-container__image"
             ></div>
-            <div className="text-center space-y-7">
-              <h2 className="mb-3 font-bold text-5xl tracking-wide font-pacifico">
+            <div className="step-container__description">
+              <h2 className="step-container__description-header">
                 1. <span className="text-green-500">Find</span> your mentor
               </h2>
               <p className="text-xl">There are over 10 000 in Poland alone!</p>
             </div>
           </div>
 
-          <div className="grid items-center sm:grid-cols-2 border-2 space-y-10 sm:space-y-0 border-black rounded-2xl py-9 px-3">
-            <div className="text-center space-y-7">
-              <h2 className="mb-3 font-bold text-5xl tracking-wide font-pacifico">
+          <div className="step-container">
+            <div className="step-container__description">
+              <h2 className="step-container__description-header">
                 2. <span className="text-green-500">Contact</span> your mentor
               </h2>
               <p className="text-xl">By phone or email.</p>
@@ -41,19 +41,19 @@ export default function HowItWorks() {
               style={{
                 backgroundImage: `url(${contact})`,
               }}
-              className="w-[220px] m-auto order-first sm:order-last aspect-square bg-no-repeat bg-contain"
+              className="step-container__image sm:order-last"
             ></div>
           </div>
 
-          <div className="grid items-center sm:grid-cols-2 border-2 space-y-10 sm:space-y-0 border-black rounded-2xl py-9 px-3">
+          <div className="step-container">
             <div
               style={{
                 backgroundImage: `url(${play})`,
               }}
-              className="w-[220px] m-auto aspect-square bg-no-repeat bg-contain"
+              className="step-container__image"
             ></div>
-            <div className="text-center space-y-7">
-              <h2 className="mb-3 font-bold text-5xl tracking-wide font-pacifico">
+            <div className="step-container__description">
+              <h2 className="step-container__description-header">
                 3. <span className="text-green-500">Learn</span> and play!
               </h2>
               <p className="text-xl">Just have fun!</p>

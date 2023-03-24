@@ -53,8 +53,12 @@ export default function SingleListing() {
           {" "}
           <ul className="flex items-center justify-around w-[90%] m-auto text-center">
             <li className="flex flex-col justify-center text-center">
-              <span className="font-semibold">{`${singleListingData?.yearsOfTeachingExperience} years`}</span>
-              <span className="text-xs">Experience</span>
+              <span className="font-semibold">
+                {+singleListingData?.yearsOfTeachingExperience === 1
+                  ? "1 year"
+                  : `${singleListingData?.yearsOfTeachingExperience} years`}
+              </span>
+              <span className="text-xs">of experience</span>
             </li>
             <li className="flex flex-col justify-center text-center">
               <span className="font-semibold">{`${singleListingData?.price} PLN`}</span>

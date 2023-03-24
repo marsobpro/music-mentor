@@ -76,27 +76,25 @@ export default function Profile() {
       <div>
         <h1 className="mt-28 text-center font-bold text-4xl">
           Hi,{" "}
-          <span className="underline underline-offset-4 decoration-dotted text-green-400">
-            {`${userName}`}{" "}
-          </span>
-          🥳
+          <span className="font-pacifico text-green-500">{`${userName}`} </span>
+          👋
         </h1>
         <div className="w-[20rem] py-6 m-auto mt-20 md:w-[30rem] shadow-2xl rounded-2xl bg-green-400">
-          <div className="flex flex-col items-center justify-between md:flex-row md:text-center">
-            <p className="md:ml-6 text-2xl font-semibold whitespace-nowrap text-center text-white">
+          <div className="flex flex-col items-center justify-between px-6 md:flex-row md:text-center">
+            <p className="text-2xl font-semibold whitespace-nowrap text-center text-white">
               Start teaching now!
             </p>
             <Link
               to="/create-listing"
-              className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap bg-white text-green-400"
+              className="py-2 px-5 mb-2 mt-4 md:mr-8 rounded-2xl font-bold whitespace-nowrap shadow-md hover:shadow-none transition duration-140 bg-white text-green-400"
             >
               Add a lesson
             </Link>
           </div>
         </div>
       </div>
-      <section className="mt-12 mb-6 m-auto md:mt-20">
-        <h2 className="mb-14 text-center text-2xl font-semibold">
+      <section className="mt-12 mb-8 m-auto md:mt-20">
+        <h2 className="mb-20 text-center text-2xl font-semibold">
           Lessons added by you
         </h2>
         <ul className="grid grid-cols-1 gap-x-4 gap-y-16 justify-items-center sm:grid-cols-2 lg:grid-cols-3">

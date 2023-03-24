@@ -39,21 +39,21 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed top-0 z-40 left-0 right-0 w-full max-w-[1300px] m-auto shadow-sm bg-white">
+    <div className="fixed top-0 left-0 right-0 z-40 w-full max-w-[1300px] m-auto shadow-sm bg-white">
       <div className="w-full m-auto px-7 py-4 items-center md:flex md:px-10 bg-white">
         <Link
           to="/"
-          className="text-3xl sm:text-4xl font-pacifico cursor-pointer transition duration-150 text-green-400 hover:text-green-600"
+          className="text-4xl font-pacifico cursor-pointer transition duration-150 text-green-400 hover:text-green-600"
         >
           MM
         </Link>
         <ul
-          className={`absolute left-0 w-full pb-12 pl-9 z-[-1] md:flex md:items-center md:pb-0 md:static md:z-auto md:w-auto md:pl-0 transition-all duration-500 ease-in bg-white ${
-            isMenuOpen ? "top-20 " : "top-[-490px]"
+          className={`absolute left-0 w-full pl-9 z-[-1] md:flex md:items-center md:pb-0 md:static md:z-auto md:w-auto md:pl-0 transition-all duration-500 ease-in bg-white ${
+            isMenuOpen ? "top-[4.5rem]" : "top-[-490px]"
           }`}
         >
           {links.map((link) => (
-            <li key={link.name} className="my-7 md:ml-8 md:my-0 text-[1rem]">
+            <li key={link.name} className="my-8 md:my-0 md:ml-8 text-[1rem]">
               <div className="relative">
                 {" "}
                 <Link
@@ -64,7 +64,7 @@ export default function Header() {
                   {link.name.toUpperCase()}
                 </Link>
                 {isCurrentRoute(link.link) ? (
-                  <div className="hidden md:block absolute bottom-[-.5rem] w-full left-0 border-b-4 transform rotate-3 border-green-400"></div>
+                  <div className="hidden md:block absolute left-0 bottom-[-.5rem] w-full border-b-4 transform rotate-3 border-green-400"></div>
                 ) : (
                   ""
                 )}
@@ -88,7 +88,6 @@ export default function Header() {
             >
               Profile
             </NavLink>
-            {/* className="text-sm hover:underline text-red-500 hover:text-red-700" */}
             <ImSwitch
               className="inline cursor-pointer text-black hover:text-red-500"
               onClick={handleLogout}
@@ -97,7 +96,7 @@ export default function Header() {
         ) : (
           <NavLink
             to="/sign-in"
-            className="px-4 py-2 duration-500 whitespace-nowrap cursor-pointer rounded border border-gray-300 text-gray-800 hover:text-gray-400"
+            className="px-4 py-2 duration-200 whitespace-nowrap cursor-pointer rounded border-2 border-gray-500 text-gray-800 hover:border-green-600"
           >
             SIGN IN
           </NavLink>
