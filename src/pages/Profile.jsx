@@ -40,7 +40,6 @@ export default function Profile() {
           });
         });
         setListingsList([...temporaryListings]);
-
         setUserName(auth.currentUser.displayName);
         setIsLoading(false);
       } catch (error) {

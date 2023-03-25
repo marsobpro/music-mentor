@@ -11,6 +11,10 @@ body {
     @apply relative left-[50%] translate-x-[50%] my-4 text-xs text-center text-red-700;
   }
 
+  .contact-form-error-message {
+    @apply absolute left-1 bottom-[-2.1rem] text-xs text-center text-red-700;
+  }
+
   /* Home */
   .mentor-photo {
     @apply relative flex justify-center w-[100px] h-full sm:w-[170px] rounded-[100px] bg-no-repeat bg-cover bg-center;
@@ -34,7 +38,7 @@ body {
 
   /* HowItWorks */
   .step-container {
-    @apply grid items-center sm:grid-cols-2 border-2 space-y-10 sm:space-y-0 border-black rounded-2xl py-9 px-3;
+    @apply grid items-center py-20 px-3 border-2 space-y-10 sm:grid-cols-2 rounded-2xl sm:space-y-0 hover:scale-105 transition duration-100 ease-in-out border-slate-600;
   }
 
   .step-container__image {
@@ -47,5 +51,25 @@ body {
 
   .step-container__description-header {
     @apply mb-3 font-bold text-5xl tracking-wide font-pacifico;
+  }
+
+  /* Create Listing/ Edit Listing */
+  .form__grid-container {
+    @apply grid grid-cols-2 items-center justify-center mb-4;
+  }
+  .form__grid-container > :nth-child(1) {
+    @apply pr-4;
+  }
+  .form__grid-container__checkbox-div {
+    @apply flex flex-col space-y-2;
+  }
+  .form__grid-container__checkbox-input {
+    @apply flex space-x-2 items-center;
+  }
+  .form__grid-container__text-input {
+    @apply w-[100%] h-10 rounded;
+  }
+  .form__grid-container__number-input {
+    @apply w-[25%] min-w-[3.5rem] h-10 rounded;
   }
 }

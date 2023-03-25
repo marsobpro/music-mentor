@@ -75,13 +75,9 @@ export default function CreateListing() {
     e.preventDefault();
     setIsLoading(true);
     const errors = validateFormData(addLessonFormData);
-    console.log(errors);
     delete errors["password"];
     delete errors["message"];
 
-    if (errors.hasOwnProperty("password")) {
-      delete errors["password"];
-    }
     if (Object.keys(errors).length) {
       setErrorsFound(errors);
       setIsLoading(false);
@@ -104,7 +100,7 @@ export default function CreateListing() {
       }
     }
 
-    //Create the formData copy, add and delete from it
+    //Create the formData copy and modify it
     const addLessonFormDataCopy = {
       ...addLessonFormData,
       createdAt: serverTimestamp(),
@@ -147,14 +143,14 @@ export default function CreateListing() {
   }
 
   return (
-    <main className="max-w-[1200px] mt-32 m-auto">
-      <div className="md:w-[700px] m-auto px-8 py-6 shadow-md rounded-2xl text-left sm:text-justify bg-green-300">
+    <main className="max-w-[1200px] mt-28 m-auto">
+      <div className="md:w-[700px] w-[95%] m-auto px-8 py-6 mb-2 shadow-md rounded-2xl text-left sm:text-justify text-white font-medium bg-green-600">
         {" "}
         <h1 className="mb-12 font-semibold text-5xl text-center font-mono">
           Add a lesson
         </h1>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="firstName" className="text-xl">
               Name:
             </label>
@@ -164,7 +160,7 @@ export default function CreateListing() {
               name="firstName"
               value={firstName}
               onChange={handleChange}
-              className={`w-[100%] h-10 rounded ${
+              className={`form__grid-container__text-input ${
                 errorsFound.firstName ? "border border-red-500" : ""
               }`}
             />
@@ -176,8 +172,8 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="lastName" className="text-xl ">
+          <div className="form__grid-container">
+            <label htmlFor="lastName" className="text-xl">
               Last name:
             </label>
             <input
@@ -186,7 +182,7 @@ export default function CreateListing() {
               name="lastName"
               value={lastName}
               onChange={handleChange}
-              className={`w-[100%] h-10 rounded ${
+              className={`form__grid-container__text-input ${
                 errorsFound.lastName ? "border border-red-500" : ""
               }`}
             />
@@ -198,7 +194,7 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="subject" className="text-xl ">
               Subject
             </label>
@@ -228,7 +224,7 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="city" className="text-xl">
               City
             </label>
@@ -257,7 +253,7 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="price" className="text-xl ">
               Price
             </label>
@@ -268,7 +264,7 @@ export default function CreateListing() {
                 name="price"
                 value={price}
                 onChange={handleChange}
-                className={`w-[25%] h-10 rounded ${
+                className={`form__grid-container__number-input ${
                   errorsFound.price ? "border border-red-500" : ""
                 }`}
               />
@@ -281,7 +277,7 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-8">
+          <div className="form__grid-container">
             <label htmlFor="lessonTime" className="text-xl">
               Lesson time
             </label>
@@ -294,7 +290,7 @@ export default function CreateListing() {
                 min="0"
                 step="5"
                 onChange={handleChange}
-                className={`w-[25%] h-10 rounded ${
+                className={`form__grid-container__number-input ${
                   errorsFound.lessonTime ? "border border-red-500" : ""
                 }`}
               />
@@ -307,12 +303,12 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="lessonLocation" className="text-xl">
               Lesson location
             </label>
-            <div className="flex flex-col space-y-2">
-              <div className="flex space-x-2 items-center">
+            <div className="form__grid-container__checkbox-div">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -323,7 +319,7 @@ export default function CreateListing() {
                 />
                 <label htmlFor="atMentorsPlace">At Mentors' place</label>
               </div>
-              <div className="flex space-x-2 items-center">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -335,7 +331,7 @@ export default function CreateListing() {
                 <label htmlFor="atStudentsPlace">At Students' place</label>
               </div>
 
-              <div className="flex space-x-2 items-center">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -355,8 +351,8 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="shortDescription" className="mr-4 text-xl">
+          <div className="form__grid-container">
+            <label htmlFor="shortDescription" className="text-xl">
               Short description{" "}
               <span className="text-xs font-normal whitespace-nowrap">
                 (50 - 250 letters)
@@ -382,8 +378,8 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="fullDescription" className="mr-4 text-xl">
+          <div className="form__grid-container">
+            <label htmlFor="fullDescription" className="text-xl">
               Full description{" "}
               <span className="text-xs font-normal whitespace-nowrap">
                 (100 - 700 letters)
@@ -409,10 +405,10 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-8">
-            <label className="mr-4 text-xl" htmlFor="videoLink">
+          <div className="form__grid-container">
+            <label className="text-xl" htmlFor="videoLink">
               Youtube link{" "}
-              <span className="text-xs font-normal whitespace-nowrap block pt-1">
+              <span className="text-xs font-normal block pt-1">
                 Show how you teach or how you play!
               </span>
             </label>
@@ -423,7 +419,7 @@ export default function CreateListing() {
               value={videoLink}
               onChange={handleChange}
               placeholder="https://youtube.com/..."
-              className={`w-[100%] h-10 rounded ${
+              className={`form__grid-container__text-input ${
                 errorsFound.videoLink ? "border border-red-500" : ""
               }`}
             />
@@ -435,12 +431,12 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="levelsOfTeaching" className="text-xl ">
+          <div className="form__grid-container">
+            <label htmlFor="levelsOfTeaching" className="text-xl">
               Levels Of Teaching
             </label>
-            <div className="flex flex-col space-y-2">
-              <div className="flex space-x-2 items-center">
+            <div className="form__grid-container__checkbox-div">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -449,9 +445,9 @@ export default function CreateListing() {
                   className="rounded"
                   onChange={handleChange}
                 />
-                <label htmlFor="elementarySchool">ElementarySchool</label>
+                <label htmlFor="elementarySchool">Elementary School</label>
               </div>
-              <div className="flex space-x-2 items-center">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -462,7 +458,7 @@ export default function CreateListing() {
                 />
                 <label htmlFor="highSchool">High School</label>
               </div>
-              <div className="flex space-x-2 items-center">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -473,7 +469,7 @@ export default function CreateListing() {
                 />
                 <label htmlFor="college">College</label>
               </div>
-              <div className="flex space-x-2 items-center">
+              <div className="form__grid-container__checkbox-input">
                 {" "}
                 <input
                   type="checkbox"
@@ -495,8 +491,8 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="yearsOfTeachingExperience" className="text-xl ">
+          <div className="form__grid-container">
+            <label htmlFor="yearsOfTeachingExperience" className="text-xl">
               Teaching experience
             </label>
             <span className="after:content-['__years']">
@@ -507,7 +503,7 @@ export default function CreateListing() {
                 value={yearsOfTeachingExperience}
                 min="0"
                 onChange={handleChange}
-                className={`w-[25%] h-10 rounded ${
+                className={`form__grid-container__number-input ${
                   errorsFound.shortDescription ? "border border-red-500" : ""
                 }`}
               />
@@ -522,7 +518,7 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="emailAddress" className="text-xl ">
               Email:
             </label>
@@ -533,7 +529,7 @@ export default function CreateListing() {
               name="emailAddress"
               value={emailAddress}
               onChange={handleChange}
-              className={`w-[100%] h-10 rounded ${
+              className={`form__grid-container__text-input ${
                 errorsFound.emailAddress ? "border border-red-500" : ""
               }`}
             />
@@ -545,8 +541,8 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
-            <label htmlFor="phoneNumber" className="text-xl ">
+          <div className="form__grid-container">
+            <label htmlFor="phoneNumber" className="text-xl">
               Phone number
             </label>
             <input
@@ -555,7 +551,7 @@ export default function CreateListing() {
               name="phoneNumber"
               value={phoneNumber}
               onChange={handleChange}
-              className={`w-[100%] h-10 rounded ${
+              className={`form__grid-container__text-input ${
                 errorsFound.phoneNumber ? "border border-red-500" : ""
               }`}
             />
@@ -567,7 +563,7 @@ export default function CreateListing() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 items-center justify-center mb-4">
+          <div className="form__grid-container">
             <label htmlFor="image" className="text-xl">
               Photo of yourself
             </label>

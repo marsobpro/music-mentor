@@ -21,6 +21,8 @@ export default function HowItWorks() {
                 backgroundImage: `url(${choose})`,
               }}
               className="step-container__image"
+              role="img"
+              aria-label="Graphics, a person makes a choice from the various options available."
             ></div>
             <div className="step-container__description">
               <h2 className="step-container__description-header">
@@ -42,6 +44,8 @@ export default function HowItWorks() {
                 backgroundImage: `url(${contact})`,
               }}
               className="step-container__image sm:order-last"
+              role="img"
+              aria-label="Graphics, a person is trying to contact the mentor via email."
             ></div>
           </div>
 
@@ -51,6 +55,8 @@ export default function HowItWorks() {
                 backgroundImage: `url(${play})`,
               }}
               className="step-container__image"
+              role="img"
+              aria-label="A man enjoys playing the guitar."
             ></div>
             <div className="step-container__description">
               <h2 className="step-container__description-header">

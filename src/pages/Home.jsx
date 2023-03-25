@@ -125,6 +125,8 @@ export default function Home() {
               backgroundImage: `url(src/assets/teacher1.jpg)`,
             }}
             className="mentor-photo"
+            role="img"
+            aria-label="A young woman, one of our mentors, looking at the camera and smiling."
           >
             <div className="mentor-photo__info bottom-[15%]">
               <h2 className="mentor-photo__info-header">Erin</h2>
@@ -141,6 +143,8 @@ export default function Home() {
               backgroundImage: `url(src/assets/teacher2.jpg)`,
             }}
             className="mentor-photo mt-20"
+            role="img"
+            aria-label="Another young woman, one of our mentors, looking at the camera and smiling."
           >
             <div className="mentor-photo__info top-[15%]">
               <h2 className="mentor-photo__info-header">Pam</h2>
@@ -160,6 +164,8 @@ export default function Home() {
               backgroundImage: `url(src/assets/teacher3.jpg)`,
             }}
             className="mentor-photo"
+            role="img"
+            aria-label="A middle-aged man, one of our mentors, looks into the camera and smiles"
           >
             <div className="mentor-photo__info bottom-[15%]">
               <h2 className="mentor-photo__info-header">Jim</h2>

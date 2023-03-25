@@ -48,7 +48,6 @@ export default function SignIn() {
       setErrorsFound({
         emailAddress: errors.emailAddress,
       });
-
       toast.error("Please check your email address.");
       return;
     }
@@ -87,8 +86,8 @@ export default function SignIn() {
             autoComplete="email"
             name="emailAddress"
             id="emailAddress"
-            value={emailAddress}
             placeholder="E-mail"
+            value={emailAddress}
             onChange={handleChange}
             className={`w-full h-14 mb-4 rounded border-none bg-gray-200 ${
               errorsFound.emailAddress ? "bg-red-200" : ""
@@ -107,8 +106,8 @@ export default function SignIn() {
               type={isPasswordVisible ? "text" : "password"}
               name="password"
               id="password"
-              value={password}
               placeholder="Password"
+              value={password}
               onChange={handleChange}
               className={"w-full h-14 mb-4 border-none rounded bg-gray-200"}
             />
@@ -124,6 +123,7 @@ export default function SignIn() {
               />
             )}
           </div>
+
           <div className="text-center">
             <button
               type="submit"

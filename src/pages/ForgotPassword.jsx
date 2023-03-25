@@ -20,13 +20,6 @@ export default function ForgotPassword() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  function handleChange(e) {
-    setResetFormData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }));
-  }
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -38,6 +31,13 @@ export default function ForgotPassword() {
       }
     });
   }, [navigate, auth]);
+
+  function handleChange(e) {
+    setResetFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();

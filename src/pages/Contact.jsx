@@ -32,28 +32,22 @@ export default function Contact() {
         message: errors.message,
       });
       toast.error("Please fill out the contact form correctly.");
-      console.log(errors.firstName);
-      console.log(errors.emailAddress);
-      console.log(errors.message);
       return;
     }
 
-    console.log("No errors found");
-
-    // try {
-    //   await emailjs.sendForm(
-    //     "service_potbq2f",
-    //     "template_bcsebnk",
-    //     form.current,
-    //     "9hRA9PusjCiOkc8QN"
-    //   );
-    //   toast.success("You've successfully sent the email!");
-    //   e.target.reset();
-    //   navigate("/");
-    // } catch (error) {
-    //   toast.error("Sorry, something went wrong. Please try again!");
-    //   console.log(error);
-    // }
+    try {
+      await sendForm(
+        "service_potbq2f",
+        "template_bcsebnk",
+        form.current,
+        "9hRA9PusjCiOkc8QN"
+      );
+      toast.success("You've successfully sent the email!");
+      e.target.reset();
+      navigate("/");
+    } catch (error) {
+      toast.error("Sorry, something went wrong. Please try again!");
+    }
   };
 
   return (
@@ -79,13 +73,14 @@ export default function Contact() {
                 }`}
               />
               {errorsFound.firstName ? (
-                <p className="absolute left-1 bottom-[-1.3rem] text-xs text-center text-red-700">
+                <p className="contact-form-error-message">
                   {errorsFound.firstName}
                 </p>
               ) : (
                 ""
               )}
             </div>
+
             <div className="relative w-full">
               <input
                 type="text"
@@ -98,7 +93,7 @@ export default function Contact() {
                 }`}
               />
               {errorsFound.emailAddress ? (
-                <p className="absolute left-0 bottom-[-1.3rem] text-xs text-center text-red-700">
+                <p className="contact-form-error-message">
                   {errorsFound.emailAddress}
                 </p>
               ) : (
@@ -121,7 +116,7 @@ export default function Contact() {
               }`}
             ></textarea>
             {errorsFound.message ? (
-              <p className="absolute left-0 bottom-[-1.3rem] text-xs text-center text-red-700">
+              <p className="contact-form-error-message">
                 {errorsFound.message}
               </p>
             ) : (
