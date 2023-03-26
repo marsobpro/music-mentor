@@ -144,7 +144,7 @@ export default function CreateListing() {
 
   return (
     <main className="max-w-[1200px] mt-28 m-auto">
-      <div className="md:w-[700px] w-[95%] m-auto px-8 py-6 mb-2 shadow-md rounded-2xl text-left sm:text-justify text-white font-medium bg-green-600">
+      <div className="md:w-[700px] w-[95%] m-auto px-8 py-6 mb-2 shadow-md rounded-2xl text-left sm:text-justify text-black font-medium bg-green-300">
         {" "}
         <h1 className="mb-12 font-semibold text-5xl text-center font-mono">
           Add a lesson
@@ -152,7 +152,7 @@ export default function CreateListing() {
         <form onSubmit={handleSubmit}>
           <div className="form__grid-container">
             <label htmlFor="firstName" className="text-xl">
-              Name:
+              Name
             </label>
             <input
               type="text"
@@ -174,7 +174,7 @@ export default function CreateListing() {
 
           <div className="form__grid-container">
             <label htmlFor="lastName" className="text-xl">
-              Last name:
+              Last name
             </label>
             <input
               type="text"
@@ -520,7 +520,7 @@ export default function CreateListing() {
 
           <div className="form__grid-container">
             <label htmlFor="emailAddress" className="text-xl ">
-              Email:
+              Email
             </label>
             <input
               type="text"

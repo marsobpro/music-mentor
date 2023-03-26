@@ -118,7 +118,7 @@ export default function Home() {
 
       {/* Pictures */}
 
-      <div className="flex justify-center mt-8 space-x-2">
+      <div className="flex justify-center mt-8 space-x-4">
         <div>
           <div
             style={{

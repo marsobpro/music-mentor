@@ -23,7 +23,7 @@ export default function SignIn() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
-        navigate("/profile");
+        navigate("/");
       } else {
         setIsLoggedIn(false);
         setIsLoading(false);

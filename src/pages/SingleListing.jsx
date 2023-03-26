@@ -7,6 +7,7 @@ import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { CiPhone, CiMail } from "react-icons/ci";
 import toast from "react-hot-toast";
 import YoutubeVideo from "../components/YoutubeVideo";
+import { HiOutlineStatusOnline } from "react-icons/hi";
 
 export default function SingleListing() {
   const params = useParams();
@@ -71,7 +72,7 @@ export default function SingleListing() {
           </ul>
         </div>
       </div>
-      <div className="flex space-x-4">
+      <div className="flex flex-col sm:flex-row sm:space-x-4 w-auto">
         {" "}
         <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
           <p>{singleListingData?.subject}</p>
@@ -79,6 +80,16 @@ export default function SingleListing() {
         <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
           <p className="capitalize">{singleListingData?.city}</p>
         </div>
+        {singleListingData?.online ? (
+          <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
+            <div className="capitalize flex items-center space-x-2">
+              <p>Online</p>
+              <HiOutlineStatusOnline />
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       {/* 50 words */}
@@ -179,19 +190,19 @@ export default function SingleListing() {
       </div>
 
       <div className="flex flex-col justify-around items-center mb-12 space-y-4 sm:flex-row sm:space-y-0">
-        <button className="flex items-center space-x-4 w-[230px] mx-2 py-4 px-6 md:w-auto shadow-lg rounded-full border border-slate-400">
+        <div className="flex items-center mx-2 py-4 px-3 md:w-auto shadow-lg text-xs md:text-md rounded-full border border-slate-400">
           <span className="inline-block mr-1">
             <CiPhone />
           </span>
           {singleListingData?.phoneNumber}
-        </button>
+        </div>
 
-        <button className="flex items-center space-x-4 w-[230px] mx-2 py-4 px-6 md:w-auto shadow-lg rounded-full border border-slate-400">
+        <div className="flex items-center mx-2 py-4 px-3 md:w-auto shadow-lg text-xs md:text-md rounded-full border border-slate-400">
           <span className="inline-block mr-1">
             <CiMail />
           </span>
           {singleListingData?.emailAddress}
-        </button>
+        </div>
       </div>
     </main>
   );

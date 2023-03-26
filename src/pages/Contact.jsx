@@ -3,6 +3,7 @@ import emailjs, { sendForm } from "@emailjs/browser";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import validateFormData from "../utils/validateFormData";
+import Loading from "../components/Loading";
 
 export default function Contact() {
   const form = useRef();
@@ -13,6 +14,7 @@ export default function Contact() {
     message: "",
   });
   const [errorsFound, setErrorsFound] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(e) {
     setContactFormData((prevState) => ({
@@ -23,6 +25,7 @@ export default function Contact() {
 
   const sendEmail = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const errors = validateFormData(contactFormData);
     if (errors.firstName || errors.emailAddress || errors.message) {
@@ -48,7 +51,13 @@ export default function Contact() {
     } catch (error) {
       toast.error("Sorry, something went wrong. Please try again!");
     }
+
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <main className="max-w-[1300px] px-8 mt-32 mb-4 m-auto">
@@ -125,7 +134,7 @@ export default function Contact() {
           </div>
           <button
             type="submit"
-            className="w-[40%] m-auto sm:px-10 sm:w-auto rounded-full cursor-pointer shadow-lg hover:shadow-sm bg-green-300 hover:bg-green-400"
+            className="w-[40%] m-auto sm:px-10 sm:w-auto rounded-full cursor-pointer shadow-md hover:shadow-sm bg-green-300 hover:bg-green-400"
           >
             Send
           </button>

@@ -31,13 +31,13 @@ export default function SignUp() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
-        navigate("/profile");
+        navigate("/");
       } else {
         setIsLoggedIn(false);
         setIsLoading(false);
       }
     });
-  }, [navigate, auth]);
+  }, []);
 
   function handleChange(e) {
     setSignUpFormData((prevState) => ({
@@ -48,6 +48,7 @@ export default function SignUp() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
     // Validate form
     const errors = validateFormData(signUpFormData);
@@ -63,6 +64,7 @@ export default function SignUp() {
         emailAddress: errors.emailAddress,
         password: errors.password,
       });
+      setIsLoading(false);
       toast.error("Check that you have filled out the form correctly.");
       return;
     }
@@ -73,6 +75,7 @@ export default function SignUp() {
       toast.error(
         "This email already exists in our database. Try to log in instead."
       );
+      setIsLoading(false);
       navigate("/sign-in");
       return;
     }
@@ -99,9 +102,11 @@ export default function SignUp() {
       toast.success("Your account has been successfully created", {
         icon: "🥳",
       });
+      setIsLoading(false);
       navigate("/");
     } catch (error) {
-      toast.error("Something went wrong", { icon: "😞" });
+      setIsLoading(false);
+      toast.error("Something went wrong, please try again!", { icon: "😞" });
     }
   }
 

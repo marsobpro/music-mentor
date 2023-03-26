@@ -38,7 +38,7 @@ body {
 
   /* HowItWorks */
   .step-container {
-    @apply grid items-center py-20 px-3 border-2 space-y-10 sm:grid-cols-2 rounded-2xl sm:space-y-0 hover:scale-105 transition duration-100 ease-in-out border-slate-600;
+    @apply grid items-center py-20 px-3 border border-dashed space-y-10 sm:grid-cols-2 rounded-2xl sm:space-y-0 hover:scale-105 transition duration-100 ease-in-out border-slate-600;
   }
 
   .step-container__image {
