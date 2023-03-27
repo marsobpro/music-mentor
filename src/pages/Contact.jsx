@@ -61,9 +61,11 @@ export default function Contact() {
 
   return (
     <main className="max-w-[1300px] px-8 mt-32 mb-4 m-auto">
-      <h1 className="text-center text-3xl font-semibold leading-6">Contact</h1>
+      <h1 className="text-center text-5xl font-semibold font-montserrat leading-6">
+        Contact us
+      </h1>
 
-      <div className="w-full m-auto mt-10">
+      <div className="w-full m-auto mt-14">
         <form
           ref={form}
           onSubmit={sendEmail}

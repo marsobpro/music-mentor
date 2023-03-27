@@ -15,12 +15,12 @@ export default function Home() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!subject) {
-      toast.error("Please tell us what do you want to learn!");
+      toast.error("Please tell us what you want to learn?");
       return;
     }
     if (isOnline) {
       navigate(`/online-lessons/${subject}`);
-      toast.success(`Lets find ${subject} mentors who teach online!`, {
+      toast.success(`Lets find online ${subject} mentors!`, {
         icon: "🥳",
       });
       return;

@@ -40,7 +40,7 @@ export default function Header() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-40 w-full max-w-[1300px] m-auto shadow-sm bg-white">
-      <div className="w-full m-auto px-7 py-4 items-center md:flex md:px-10 bg-white">
+      <div className="w-full m-auto px-7 py-4 items-center  md:flex md:px-10 bg-white">
         <Link
           to="/"
           className="text-4xl font-pacifico cursor-pointer transition duration-150 text-green-400 hover:text-green-600"

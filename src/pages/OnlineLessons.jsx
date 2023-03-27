@@ -78,11 +78,11 @@ export default function OnlineLessons() {
 
   return (
     <main className="max-w-[1100px] mt-28 text-2xl m-auto">
-      <h1 className="mx-4 text-center text-3xl">
+      <h1 className="mx-4 text-center text-5xl font-montserrat">
         Learn to play{" "}
         {subject ? (
           <span>
-            <span className="font-semibold underline decoration-dotted underline-offset-4 text-green-500">
+            <span className="font-semibold underline decoration-dotted underline-offset-4 font-pacifico text-green-500">
               {subject}
             </span>{" "}
             online!

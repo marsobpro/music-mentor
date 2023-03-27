@@ -5,11 +5,14 @@ import play from "../assets/play.svg";
 
 export default function HowItWorks() {
   return (
-    <main className="max-w-[1300px] mt-32 mb-4 px-4 m-auto">
+    <main className="max-w-[1300px] mt-28 mb-4 px-4 m-auto">
       <header>
-        <div className="mb-16 text-center">
+        <div className="mb-16 text-center font-montserrat">
           <h1 className="mb-2 font-semibold text-5xl">How it works?</h1>
-          <p>(you're just 3 steps from your dreams!)</p>
+          <p className="text-xl">
+            (you're just 3 steps from your{" "}
+            <span className="font-pacifico text-green-400">dreams</span>!)
+          </p>
         </div>
       </header>
 
@@ -28,7 +31,9 @@ export default function HowItWorks() {
               <h2 className="step-container__description-header">
                 1. <span className="text-green-500">Find</span> your mentor
               </h2>
-              <p className="text-xl">There are over 10 000 in Poland alone!</p>
+              <p className="text-xl font-montserrat">
+                There are over 10 000 in Poland alone!
+              </p>
             </div>
           </div>
 
@@ -37,7 +42,7 @@ export default function HowItWorks() {
               <h2 className="step-container__description-header">
                 2. <span className="text-green-500">Contact</span> your mentor
               </h2>
-              <p className="text-xl">By phone or email.</p>
+              <p className="text-xl font-montserrat">By phone or email.</p>
             </div>
             <div
               style={{
@@ -60,9 +65,9 @@ export default function HowItWorks() {
             ></div>
             <div className="step-container__description">
               <h2 className="step-container__description-header">
-                3. <span className="text-green-500">Learn</span> and play!
+                3. <span className="text-green-500 ">Learn</span> and play!
               </h2>
-              <p className="text-xl">Just have fun!</p>
+              <p className="text-xl font-montserrat">Just have fun!</p>
             </div>
           </div>
         </div>

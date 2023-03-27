@@ -37,7 +37,7 @@ export default function SignUp() {
         setIsLoading(false);
       }
     });
-  }, []);
+  }, [navigate, auth]);
 
   function handleChange(e) {
     setSignUpFormData((prevState) => ({

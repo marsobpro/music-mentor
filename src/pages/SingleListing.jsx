@@ -24,6 +24,7 @@ export default function SingleListing() {
         setSingleListingData(docSnap.data());
         setIsLoading(false);
       } else {
+        setIsLoading(false);
         toast.error(
           "Sorry, I could not download this lesson. Please try again."
         );
@@ -72,16 +73,16 @@ export default function SingleListing() {
           </ul>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row sm:space-x-4 w-auto">
+      <div className="flex flex-col items-start space-y-4 mb-7 sm:space-y-0 sm:flex-row sm:space-x-4 w-auto">
         {" "}
-        <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
+        <div className="px-6 leading-8 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
           <p>{singleListingData?.subject}</p>
         </div>
-        <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
+        <div className="px-6 leading-8 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
           <p className="capitalize">{singleListingData?.city}</p>
         </div>
         {singleListingData?.online ? (
-          <div className="px-6 leading-8 mb-12 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
+          <div className="px-6 leading-8 inline-block text-xl rounded-2xl font-semibold border-4 border-green-300 bg-white text-black">
             <div className="capitalize flex items-center space-x-2">
               <p>Online</p>
               <HiOutlineStatusOnline />
@@ -111,7 +112,11 @@ export default function SingleListing() {
         <h3 className="text-lg font-semibold">Where?</h3>
         <div className="flex text-sm">
           <span className="mr-4 inline-block text-xl">
-            {singleListingData?.atMentorsPlace ? <GiConfirmed /> : <GiCancel />}
+            {singleListingData?.atMentorsPlace ? (
+              <GiConfirmed className="text-green-500" />
+            ) : (
+              <GiCancel className="text-red-500" />
+            )}
           </span>
           <p className="inline-block">
             At Mentors' place{" "}
@@ -128,9 +133,9 @@ export default function SingleListing() {
         <div className="flex text-sm">
           <span className="mr-4 inline-block text-xl">
             {singleListingData?.atStudentsPlace ? (
-              <GiConfirmed />
+              <GiConfirmed className="text-green-500" />
             ) : (
-              <GiCancel />
+              <GiCancel className="text-red-500" />
             )}
           </span>
           <p className="inline-block">
@@ -147,7 +152,11 @@ export default function SingleListing() {
         </div>
         <div className="flex w-full text-sm">
           <span className="mr-4 inline-block text-xl">
-            {singleListingData?.online ? <GiConfirmed /> : <GiCancel />}
+            {singleListingData?.online ? (
+              <GiConfirmed className="text-green-500" />
+            ) : (
+              <GiCancel className="text-red-500" />
+            )}
           </span>
           <p className="inline-block">Online</p>
         </div>
@@ -162,28 +171,40 @@ export default function SingleListing() {
         <div className="flex text-sm">
           <span className="mr-4 inline-block text-xl">
             {singleListingData?.elementarySchool ? (
-              <GiConfirmed />
+              <GiConfirmed className="text-green-500" />
             ) : (
-              <GiCancel />
+              <GiCancel className="text-red-500" />
             )}
           </span>
           <p className="inline-block">Elementary school</p>
         </div>
         <div className="flex text-sm">
           <span className="mr-4 inline-block text-xl">
-            {singleListingData?.highSchool ? <GiConfirmed /> : <GiCancel />}
+            {singleListingData?.highSchool ? (
+              <GiConfirmed className="text-green-500" />
+            ) : (
+              <GiCancel className="text-red-500" />
+            )}
           </span>
           <p className="inline-block">High school</p>
         </div>
         <div className="flex w-full text-sm">
           <span className="mr-4 inline-block text-xl">
-            {singleListingData?.college ? <GiConfirmed /> : <GiCancel />}
+            {singleListingData?.college ? (
+              <GiConfirmed className="text-green-500" />
+            ) : (
+              <GiCancel className="text-red-500" />
+            )}
           </span>
           <p className="inline-block">College</p>
         </div>
         <div className="flex w-full text-sm">
           <span className="mr-4 inline-block text-xl">
-            {singleListingData?.adults ? <GiConfirmed /> : <GiCancel />}
+            {singleListingData?.adults ? (
+              <GiConfirmed className="text-green-500" />
+            ) : (
+              <GiCancel className="text-red-500" />
+            )}
           </span>
           <p className="inline-block">Adults</p>
         </div>

@@ -73,7 +73,7 @@ export default function Profile() {
   return (
     <main className="max-w-[1100px] m-auto">
       <div>
-        <h1 className="mt-28 text-center font-bold text-4xl">
+        <h1 className="mt-28 text-center font-bold font-montserrat text-4xl">
           Hi,{" "}
           <span className="font-pacifico text-green-500">{`${userName}`} </span>
           👋
@@ -93,7 +93,7 @@ export default function Profile() {
         </div>
       </div>
       <section className="mt-12 mb-8 m-auto md:mt-20">
-        <h2 className="mb-20 text-center text-2xl font-semibold">
+        <h2 className="mb-20 text-center text-2xl font-montserrat font-semibold">
           Lessons added by you
         </h2>
         <ul className="grid grid-cols-1 gap-x-4 gap-y-16 justify-items-center sm:grid-cols-2 lg:grid-cols-3">

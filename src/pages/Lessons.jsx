@@ -83,9 +83,11 @@ export default function Lessons() {
 
   return (
     <main className="max-w-[1100px] px-4 mt-28 m-auto text-2xl">
-      <h1 className="mx-4 text-center font-montserrat font-bold text-3xl">
-        Here are our{" "}
-        <span className="font-pacifico text-green-500">{subject}</span> mentors
+      <h1 className="mx-4 text-center font-montserrat font-bold text-5xl">
+        Meet our <span className="font-pacifico text-green-500">{subject}</span>{" "}
+        <span className={city ? "" : "font-pacifico text-green-400"}>
+          mentors
+        </span>
         {city ? (
           <span>
             {" "}
