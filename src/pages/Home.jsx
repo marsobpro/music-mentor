@@ -122,7 +122,7 @@ export default function Home() {
         <div>
           <div
             style={{
-              backgroundImage: `url(src/assets/teacher1.jpg)`,
+              backgroundImage: `url(assets/teacher1.jpg)`,
             }}
             className="mentor-photo"
             role="img"
@@ -140,7 +140,7 @@ export default function Home() {
         <div className="">
           <div
             style={{
-              backgroundImage: `url(src/assets/teacher2.jpg)`,
+              backgroundImage: `url(assets/teacher2.jpg)`,
             }}
             className="mentor-photo mt-20"
             role="img"
@@ -161,7 +161,7 @@ export default function Home() {
         <div className="flex justify-center">
           <div
             style={{
-              backgroundImage: `url(src/assets/teacher3.jpg)`,
+              backgroundImage: `url(assets/teacher3.jpg)`,
             }}
             className="mentor-photo"
             role="img"

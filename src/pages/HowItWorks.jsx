@@ -1,7 +1,4 @@
 import React from "react";
-import choose from "../assets/choose.svg";
-import contact from "../assets/contact.svg";
-import play from "../assets/play.svg";
 
 export default function HowItWorks() {
   return (
@@ -21,7 +18,7 @@ export default function HowItWorks() {
           <div className="step-container">
             <div
               style={{
-                backgroundImage: `url(${choose})`,
+                backgroundImage: "url(assets/choose.svg)",
               }}
               className="step-container__image"
               role="img"
@@ -46,7 +43,7 @@ export default function HowItWorks() {
             </div>
             <div
               style={{
-                backgroundImage: `url(${contact})`,
+                backgroundImage: "url(assets/contact.svg)",
               }}
               className="step-container__image sm:order-last"
               role="img"
@@ -57,7 +54,7 @@ export default function HowItWorks() {
           <div className="step-container">
             <div
               style={{
-                backgroundImage: `url(${play})`,
+                backgroundImage: "url(assets/play.svg)",
               }}
               className="step-container__image"
               role="img"

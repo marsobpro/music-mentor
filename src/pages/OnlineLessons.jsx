@@ -82,7 +82,7 @@ export default function OnlineLessons() {
         Learn to play{" "}
         {subject ? (
           <span>
-            <span className="font-semibold underline decoration-dotted underline-offset-4 font-pacifico text-green-500">
+            <span className="font-semibold font-pacifico text-green-500">
               {subject}
             </span>{" "}
             online!

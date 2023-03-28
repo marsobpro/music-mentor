@@ -85,7 +85,11 @@ export default function Lessons() {
     <main className="max-w-[1100px] px-4 mt-28 m-auto text-2xl">
       <h1 className="mx-4 text-center font-montserrat font-bold text-5xl">
         Meet our <span className="font-pacifico text-green-500">{subject}</span>{" "}
-        <span className={city ? "" : "font-pacifico text-green-400"}>
+        <span
+          className={
+            city || subject ? "font-montserrat" : "font-pacifico text-green-400"
+          }
+        >
           mentors
         </span>
         {city ? (
