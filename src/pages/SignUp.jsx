@@ -162,7 +162,6 @@ export default function SignUp() {
 
           <input
             type="text"
-            autoComplete="email"
             name="emailAddress"
             id="emailAddress"
             value={emailAddress}
