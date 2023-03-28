@@ -16,7 +16,7 @@ export default function NotFound() {
         </div>
         <div>
           <img
-            src="../src/assets/james.png"
+            src="assets/james.png"
             alt="A special agent with a very serious face, instead of a gun he holds a guitar."
             className="w-[400px] object-cover rounded-3xl aspect-square bg-white"
           />
